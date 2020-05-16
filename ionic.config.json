@@ -1,0 +1,7 @@
+{
+  "name": "App Filter This",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
