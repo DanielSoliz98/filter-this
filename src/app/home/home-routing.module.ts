@@ -1,16 +1,47 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { HomePage } from './home.page';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
+import { HomePage } from "./home.page";
 
 const routes: Routes = [
   {
-    path: '',
+    path: "tabs",
     component: HomePage,
-  }
+    children: [
+      {
+        path: "recommendations",
+        loadChildren: () =>
+          import("../recommendations/recommendations.module").then(
+            (m) => m.RecommendationsPageModule
+          ),
+      },
+      {
+        path: "categories",
+        loadChildren: () =>
+          import("../categories/categories.module").then(
+            (m) => m.CategoriesPageModule
+          ),
+      },
+      {
+        path: "search",
+        loadChildren: () =>
+          import("../search/search.module").then((m) => m.SearchPageModule),
+      },
+      {
+        path: "profile",
+        loadChildren: () =>
+          import("../profile/profile.module").then((m) => m.ProfilePageModule),
+      },
+    ],
+  },
+  {
+    path: "",
+    redirectTo: "/tabs/recommendations",
+    pathMatch: "full",
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class HomePageRoutingModule {}
