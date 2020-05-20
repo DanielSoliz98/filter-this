@@ -18,6 +18,14 @@ const routes: Routes = [
   {
     path: 'verify-email-address',
     loadChildren: () => import('./authentication/verify-email-address/verify-email-address.module').then( m => m.VerifyEmailAddressPageModule)
+  },
+  {
+    path: 'sign-up',
+    loadChildren: () => import('./authentication/sign-up/sign-up.module').then( m => m.SignUpPageModule)
+  },
+  {
+    path: 'sign-in',
+    loadChildren: () => import('./authentication/sign-in/sign-in.module').then( m => m.SignInPageModule)
   }
   // {
   //   path: 'recommendations',

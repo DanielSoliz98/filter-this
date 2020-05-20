@@ -1,7 +1,6 @@
 import { auth } from "firebase";
-import { AngularFireAuth } from "@angular/fire/auth/auth";
-import { AngularFirestore } from "@angular/fire/firestore/firestore";
-import { AngularFirestoreDocument } from "@angular/fire/firestore/public_api";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { Injectable, NgZone } from "@angular/core";
 import { NativeStorage } from "@ionic-native/native-storage/ngx";
 import { Router } from "@angular/router";

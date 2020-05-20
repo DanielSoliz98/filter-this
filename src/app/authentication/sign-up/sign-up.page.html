@@ -4,17 +4,13 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>Registrate</ion-title>
-    <ion-button (click)="closeClick()">
-      <ion-icon slot="start" name="close-circle"></ion-icon>
-      Close
-    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Create new account</ion-card-title>
+      <ion-card-title>Crear nueva cuenta</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -108,11 +104,11 @@
           type="submit"
           [disabled]="signupForm.invalid"
         >
-          Sign-up
+          Registrar
         </ion-button>
       </form>
       <br />
-      <ion-text color="primary" (click)="presentModal()">
+      <ion-text color="primary" (click)="goToSignIn()">
         <h6>Ya tiene una cuenta?</h6>
       </ion-text>
     </ion-card-content>

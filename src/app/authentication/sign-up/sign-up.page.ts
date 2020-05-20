@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 import { ToastController, ModalController } from "@ionic/angular";
-import { SignInPage } from '../sign-in/sign-in.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-sign-up",
@@ -33,7 +33,7 @@ export class SignUpPage implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private toastController: ToastController,
-    private modalController: ModalController
+    private router: Router
   ) {}
 
   ngOnInit() {}
@@ -65,11 +65,8 @@ export class SignUpPage implements OnInit {
     toast.present();
   }
 
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: SignInPage,
-    });
-    return await modal.present();
+  goToSignIn() {
+    this.router.navigate(["sign-in"])
   }
 
   get firstName() {

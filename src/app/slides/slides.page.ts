@@ -17,13 +17,8 @@ export class SlidesPage implements OnInit {
   ngOnInit() {}
 
   goToHome() {
-    this.router.navigateByUrl("/app/tabs/recommendations");
+    //this.router.navigateByUrl("/app/tabs/recommendations");
+    this.router.navigate(["sign-in"])
   }
 
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: SignInPage,
-    });
-    return await modal.present();
-  }
 }
