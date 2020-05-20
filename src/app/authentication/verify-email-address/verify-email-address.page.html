@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Gracias por registrarte en Filter This</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-text color="dark" **ngIf="authService.userData as user">
+        <h6>Te enviamos un correo de verifiacion a {{ user.email }}</h6>
+        <h6>
+          Entre su correo electrónico y haga clic en el enlace para verificar su
+          dirección de correo electrónico.
+        </h6>
+        <h6>Reviso tambien su correo no deseado o spam.</h6>
+      </ion-text>
+      <br />
+      <ion-button (click)="authService.sendVerificationMail()" color="success">
+        <ion-icon slot="start" name="send"></ion-icon>
+        Reenviar verificacion de correo
+      </ion-button>
+      <br />
+      <ion-button (click)="presentModal()">
+        <ion-icon slot="start" name="log-in"></ion-icon>
+        Iniciar Sesion
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
