@@ -15,6 +15,10 @@ const routes: Routes = [
     redirectTo: 'slides',
     pathMatch: 'full'
   },
+  {
+    path: 'verify-email-address',
+    loadChildren: () => import('./authentication/verify-email-address/verify-email-address.module').then( m => m.VerifyEmailAddressPageModule)
+  }
   // {
   //   path: 'recommendations',
   //   loadChildren: () => import('./recommendations/recommendations.module').then( m => m.RecommendationsPageModule)
