@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { ModalController } from "@ionic/angular";
+import { SignInPage } from "../authentication/sign-in/sign-in.page";
 
 @Component({
   selector: "app-slides",
@@ -7,11 +9,21 @@ import { Router } from "@angular/router";
   styleUrls: ["./slides.page.scss"],
 })
 export class SlidesPage implements OnInit {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {}
 
   goToHome() {
-    this.router.navigateByUrl("/app/tabs/recommendations")
+    this.router.navigateByUrl("/app/tabs/recommendations");
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: SignInPage,
+    });
+    return await modal.present();
   }
 }
