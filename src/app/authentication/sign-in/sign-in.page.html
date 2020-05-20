@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Empezemos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeClick()">
+        <ion-icon slot="start" name="close-circle"></ion-icon>
+        Close
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="!authenticationService.userData">
+    <ion-card-header>
+      <ion-card-title>Iniciar Sesion</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating"
+            >Correo <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input required formControlName="email" type="text"></ion-input>
+          <div
+            class="small form-text text-danger"
+            *ngIf="email.touched && email.invalid"
+          >
+            <div *ngIf="email.errors['required']">
+              <ion-text color="danger">
+                <h6>Correo es requerido</h6>
+              </ion-text>
+            </div>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating"
+            >Contrasena <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input
+            required
+            formControlName="password"
+            type="password"
+          ></ion-input>
+          <div
+            class="small form-text text-danger"
+            *ngIf="password.touched && password.invalid"
+          >
+            <div *ngIf="password.errors['required']">
+              <ion-text color="danger">
+                <h6>Contrasena</h6>
+              </ion-text>
+            </div>
+          </div>
+        </ion-item>
+        <br />
+        <ion-button
+          expand="block"
+          color="primary"
+          type="submit"
+          [disabled]="signinForm.invalid"
+        >
+          Iniciar Sesion
+        </ion-button>
+      </form>
+      <br />
+      <ion-text color="primary" (click)="presentModal()">
+        <h6>No tiene una cuenta?</h6>
+      </ion-text>
+      <br />
+      <ion-button
+        color="primary"
+        (click)="authenticationService.facebookAuth()"
+        expand="block"
+        size="small"
+      >
+        <ion-icon slot="start" name="logo-facebook"></ion-icon>
+        Continuar con Facebook
+      </ion-button>
+      <br />
+      <ion-button
+        color="light"
+        (click)="authenticationService.googleAuth()"
+        expand="block"
+        size="small"
+      >
+        <ion-icon slot="start" name="logo-google"></ion-icon>
+        Continuar con Google
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
