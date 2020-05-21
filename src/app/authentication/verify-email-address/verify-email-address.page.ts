@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
 import { ModalController } from '@ionic/angular';
 import { SignInPage } from '../sign-in/sign-in.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-verify-email-address',
@@ -10,16 +11,13 @@ import { SignInPage } from '../sign-in/sign-in.page';
 })
 export class VerifyEmailAddressPage implements OnInit {
 
-  constructor(public authService: AuthenticationService, private modalController: ModalController) { }
+  constructor(public authService: AuthenticationService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: SignInPage,
-    });
-    return await modal.present();
+  goToSignIn() {
+    this.router.navigate(["sign-in"]);
   }
 
 }

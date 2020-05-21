@@ -48,7 +48,7 @@ export class SignInPage implements OnInit {
     toast.present();
   }
 
-  presentModal() {
+  goToSignUp() {
     this.router.navigate(["sign-up"]);
   }
 

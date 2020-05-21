@@ -10,8 +10,8 @@
       <ion-card-title>Gracias por registrarte en Filter This</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-text color="dark" **ngIf="authService.userData as user">
-        <h6>Te enviamos un correo de verifiacion a {{ user.email }}</h6>
+      <ion-text color="dark" **ngIf="authService.userData as userData">
+        <h6>Te enviamos un correo de verifiacion a {{ userData.email }}</h6>
         <h6>
           Entre su correo electrónico y haga clic en el enlace para verificar su
           dirección de correo electrónico.
@@ -24,7 +24,7 @@
         Reenviar verificacion de correo
       </ion-button>
       <br />
-      <ion-button (click)="presentModal()">
+      <ion-button (click)="goToSignIn()">
         <ion-icon slot="start" name="log-in"></ion-icon>
         Iniciar Sesion
       </ion-button>
