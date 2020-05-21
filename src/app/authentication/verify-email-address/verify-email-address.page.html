@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title></ion-title>
+    <ion-title>Verifiacion de Correo</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,7 +10,7 @@
       <ion-card-title>Gracias por registrarte en Filter This</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-text color="dark" **ngIf="authService.userData as userData">
+      <ion-text color="dark" *ngIf="authService.userData as userData">
         <h6>Te enviamos un correo de verifiacion a {{ userData.email }}</h6>
         <h6>
           Entre su correo electrónico y haga clic en el enlace para verificar su
