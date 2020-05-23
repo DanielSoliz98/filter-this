@@ -9,16 +9,16 @@ import { SignInPage } from "../authentication/sign-in/sign-in.page";
   styleUrls: ["./slides.page.scss"],
 })
 export class SlidesPage implements OnInit {
-  constructor(
-    private router: Router,
-    private modalController: ModalController
-  ) {}
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400,
+  };
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
   goToHome() {
     //this.router.navigateByUrl("/app/tabs/recommendations");
-    this.router.navigate(["sign-in"])
+    this.router.navigate(["sign-in"]);
   }
-
 }
