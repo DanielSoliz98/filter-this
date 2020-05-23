@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "889829665149",
+    "firebase_url": "https://filther-this-app.firebaseio.com",
+    "project_id": "filther-this-app",
+    "storage_bucket": "filther-this-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889829665149:android:ee606591e8f04bf79d4414",
+        "android_client_info": {
+          "package_name": "com.filter_this"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889829665149-757n53flvfj7gg0m5ib3jotr2j3gtsd7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBikaDEHF86wdFlD8C2onU3Q8OmJtdcy84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "889829665149-757n53flvfj7gg0m5ib3jotr2j3gtsd7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
