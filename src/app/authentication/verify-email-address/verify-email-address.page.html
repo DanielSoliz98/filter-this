@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Verifiacion de Correo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
   <ion-card>
     <ion-card-header>
       <ion-card-title>Gracias por registrarte en Filter This</ion-card-title>
@@ -19,14 +19,16 @@
         <h6>Reviso tambien su correo no deseado o spam.</h6>
       </ion-text>
       <br />
-      <ion-button (click)="authService.sendVerificationMail()" color="success">
-        <ion-icon slot="start" name="send"></ion-icon>
-        Reenviar verificacion de correo
+      <ion-button
+        (click)="authService.sendVerificationMail()"
+        color="success"
+        expand="block"
+      >
+        Reenviar verificacion de correo <ion-icon name="send"></ion-icon>
       </ion-button>
       <br />
-      <ion-button (click)="goToSignIn()">
-        <ion-icon slot="start" name="log-in"></ion-icon>
-        Iniciar Sesion
+      <ion-button (click)="goToSignIn()" expand="block" color="primary">
+        Iniciar Sesion <ion-icon name="log-in"></ion-icon>
       </ion-button>
     </ion-card-content>
   </ion-card>
