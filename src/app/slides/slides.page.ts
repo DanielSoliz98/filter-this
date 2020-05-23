@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { ModalController } from "@ionic/angular";
-import { SignInPage } from "../authentication/sign-in/sign-in.page";
+import { AuthenticationService } from "../shared/services/authentication/authentication.service";
 
 @Component({
   selector: "app-slides",
@@ -13,12 +12,14 @@ export class SlidesPage implements OnInit {
     initialSlide: 1,
     speed: 400,
   };
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit() {}
 
   goToHome() {
-    //this.router.navigateByUrl("/app/tabs/recommendations");
     this.router.navigate(["sign-in"]);
   }
 }

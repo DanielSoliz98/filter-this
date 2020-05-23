@@ -1,9 +1,40 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>My Profile</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="showOptions($event)">
+        <ion-icon
+          slot="icon-only"
+          ios="ellipsis-horizontal"
+          md="ellipsis-vertical"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-avatar slot="start">
+            <img
+              *ngIf="authService.userData.photoURL"
+              [src]="authService.userData.photoURL"
+              alt=""
+            />
+            <img
+              *ngIf="!authService.userData.photoURL"
+              src="../../assets/user.png"
+            />
+          </ion-avatar>
+          <ion-label>
+            <h3>{{ authService.userData.displayName}}</h3>
+            <h3>{{ authService.userData.email}}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
