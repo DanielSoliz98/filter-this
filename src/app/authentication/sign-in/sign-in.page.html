@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -7,9 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="secondary">
   <ion-card>
-    <ion-card-header>
+    <img src="../../../assets/security.png" class="center" />
+    <ion-card-header class="ion-text-center" color="dark">
       <ion-card-title>Iniciar Sesion</ion-card-title>
     </ion-card-header>
     <ion-card-content>
@@ -45,7 +46,7 @@
           >
             <div *ngIf="password.errors['required']">
               <ion-text color="danger">
-                <h6>Contrasena</h6>
+                <h6>Contrasena es requerida</h6>
               </ion-text>
             </div>
           </div>
@@ -57,7 +58,7 @@
           type="submit"
           [disabled]="signinForm.invalid"
         >
-          Iniciar Sesion
+          Iniciar Sesion <ion-icon name="log-in"></ion-icon>
         </ion-button>
       </form>
       <br />
@@ -66,13 +67,12 @@
       </ion-text>
       <br />
       <ion-button
-        color="primary"
+        color="success"
         (click)="authenticationService.facebookAuth()"
         expand="block"
         size="small"
       >
-        <ion-icon slot="start" name="logo-facebook"></ion-icon>
-        Continuar con Facebook
+        Continuar con Facebook <ion-icon name="logo-facebook"></ion-icon>
       </ion-button>
       <br />
       <ion-button
@@ -81,8 +81,7 @@
         expand="block"
         size="small"
       >
-        <ion-icon slot="start" name="logo-google"></ion-icon>
-        Continuar con Google
+        Continuar con Google <ion-icon name="logo-google"></ion-icon>
       </ion-button>
     </ion-card-content>
   </ion-card>

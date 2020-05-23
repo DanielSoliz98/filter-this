@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -7,9 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content color="secondary">
   <ion-card>
-    <ion-card-header>
+    <img src="../../../assets/sign-out.png" class="center">
+    <ion-card-header class="ion-text-center" color="dark">
       <ion-card-title>Crear nueva cuenta</ion-card-title>
     </ion-card-header>
     <ion-card-content>
@@ -104,7 +105,7 @@
           type="submit"
           [disabled]="signupForm.invalid"
         >
-          Registrar
+          Registrar <ion-icon name="person-add"></ion-icon>
         </ion-button>
       </form>
       <br />
