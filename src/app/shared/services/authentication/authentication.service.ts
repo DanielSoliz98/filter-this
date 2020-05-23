@@ -1,6 +1,9 @@
 import { auth } from "firebase";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from "@angular/fire/firestore";
 import { Injectable, NgZone } from "@angular/core";
 import { NativeStorage } from "@ionic-native/native-storage/ngx";
 import { Router } from "@angular/router";
@@ -38,9 +41,13 @@ export class AuthenticationService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigateByUrl("/app/tabs/recommendations");
+          if (result.user.emailVerified) {
+            this.setUserData(result.user);
+            this.router.navigateByUrl("/app/tabs/recommendations");
+          } else {
+            this.router.navigate(["verify-email-address"]);
+          }
         });
-        this.setUserData(result.user);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -58,8 +65,8 @@ export class AuthenticationService {
           photoURL: result.user.photoURL,
           emailVerified: result.user.emailVerified,
         };
-        this.sendVerificationMail();
         this.setUserData(user);
+        this.sendVerificationMail();
       })
       .catch((error) => {
         window.alert(error.message);
