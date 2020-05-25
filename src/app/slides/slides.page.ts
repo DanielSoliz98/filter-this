@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { AuthenticationService } from "../shared/services/authentication/authentication.service";
+import { IonSlides } from "@ionic/angular";
 
 @Component({
   selector: "app-slides",
@@ -8,18 +9,15 @@ import { AuthenticationService } from "../shared/services/authentication/authent
   styleUrls: ["./slides.page.scss"],
 })
 export class SlidesPage implements OnInit {
-  slideOpts = {
-    initialSlide: 1,
-    speed: 400,
-  };
+  @ViewChild("slides", { static: true }) slides: IonSlides;
+  slideOpts: any;
+
   constructor(
     private router: Router,
     private authService: AuthenticationService
   ) {}
 
-  ngOnInit() {}
-
-  ionViewWillEnter() {
+  ngOnInit() {
     if (this.authService.userData) {
       if (this.authService.userData.emailVerified) {
         this.router.navigate(["/app/tabs/recommendations"]);
@@ -28,6 +26,15 @@ export class SlidesPage implements OnInit {
       }
     }
   }
+
+  ionViewWillEnter() {
+    this.slideOpts = {
+      initialSlide: 0,
+      speed: 400,
+    };
+    this.slides.slideTo(0);
+  }
+
   goToHome() {
     this.router.navigate(["sign-in"]);
   }

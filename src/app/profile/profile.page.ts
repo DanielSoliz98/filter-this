@@ -3,6 +3,7 @@ import { AuthenticationService } from "../shared/services/authentication/authent
 import { User } from "../shared/models/user";
 import { PopoverController } from "@ionic/angular";
 import { OptionsComponent } from "./options/options.component";
+import { AngularFireAuth } from "@angular/fire/auth";
 
 @Component({
   selector: "app-profile",
@@ -10,7 +11,6 @@ import { OptionsComponent } from "./options/options.component";
   styleUrls: ["./profile.page.scss"],
 })
 export class ProfilePage implements OnInit {
-  user: User;
   constructor(
     public authService: AuthenticationService,
     public popoverController: PopoverController

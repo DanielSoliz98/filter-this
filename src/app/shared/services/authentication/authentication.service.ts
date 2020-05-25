@@ -24,7 +24,8 @@ export class AuthenticationService {
     this.angularAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
-        this.nativeStorage.setItem("user", JSON.stringify(this.userData));
+        this.getUser(user.uid);
+        this.nativeStorage.setItem("user", this.userData);
         if (user.emailVerified) {
           this.router.navigateByUrl("/app/tabs/recommendations");
         } else {
@@ -42,7 +43,6 @@ export class AuthenticationService {
       .then((result) => {
         this.ngZone.run(() => {
           if (result.user.emailVerified) {
-            this.setUserData(result.user);
             this.router.navigateByUrl("/app/tabs/recommendations");
           } else {
             this.router.navigate(["verify-email-address"]);
@@ -127,6 +127,15 @@ export class AuthenticationService {
     };
     return userRef.set(userData, {
       merge: true,
+    });
+  }
+
+  getUser(id: string) {
+    let userRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
+      `users/${id}`
+    );
+    userRef.get().subscribe((user) => {
+      this.userData = user.data() as User;
     });
   }
 
