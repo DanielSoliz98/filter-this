@@ -19,6 +19,15 @@ export class SlidesPage implements OnInit {
 
   ngOnInit() {}
 
+  ionViewWillEnter() {
+    if (this.authService.userData) {
+      if (this.authService.userData.emailVerified) {
+        this.router.navigate(["/app/tabs/recommendations"]);
+      } else {
+        this.router.navigate(["verify-email-address"]);
+      }
+    }
+  }
   goToHome() {
     this.router.navigate(["sign-in"]);
   }
