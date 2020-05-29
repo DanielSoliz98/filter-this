@@ -27,6 +27,10 @@ export class CategoriesModalComponent implements OnInit {
     console.log("books");
   }
 
+  openMusicPage() {
+    console.log("music");
+  }
+
   openFoodPage() {
     console.log("food");
   }
