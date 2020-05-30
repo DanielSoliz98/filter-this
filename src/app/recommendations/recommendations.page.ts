@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ModalController } from "@ionic/angular";
-import { CategoriesModalComponent } from "./categories-modal/categories-modal.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-recommendations",
@@ -8,14 +7,11 @@ import { CategoriesModalComponent } from "./categories-modal/categories-modal.co
   styleUrls: ["./recommendations.page.scss"],
 })
 export class RecommendationsPage implements OnInit {
-  constructor(private modalController: ModalController) {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
-  async openCategories() {
-    const modal = await this.modalController.create({
-      component: CategoriesModalComponent,
-    });
-    return await modal.present();
+  goToCategories() {
+    this.router.navigateByUrl("/app/tabs/recommendations/categories");
   }
 }
