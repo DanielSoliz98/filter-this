@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+    <ion-title>Buscar Pelicula</ion-title>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-icon slot="end" name="close-circle"></ion-icon>
     </ion-buttons>
-    <ion-title size="large">Search Movie</ion-title>
   </ion-toolbar>
   <ion-toolbar color="secondary">
     <form [formGroup]="movieSearch" (ngSubmit)="onSubmit()">
@@ -14,7 +14,7 @@
               type="text"
               required
               formControlName="movie"
-              placeholder="Movie title"
+              placeholder="Titulo de pelicula"
             ></ion-input>
           </ion-col>
           <ion-col size="2">
@@ -31,4 +31,34 @@
     </form>
   </ion-toolbar>
 </ion-header>
-<ion-content> </ion-content>
+<ion-content fullscreen>
+  <ion-list lines="none">
+    <ng-container *ngFor="let movie of movies">
+      <ion-item button detail *ngIf="movie.poster_path">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="2">
+              <ion-thumbnail>
+                <ion-img
+                  src="{{'https://image.tmdb.org/t/p/w154/' + movie.poster_path}}"
+                ></ion-img>
+              </ion-thumbnail>
+            </ion-col>
+            <ion-col size="7">
+              <ion-text color="dark">
+                <h6>{{movie.title}}</h6>
+              </ion-text>
+            </ion-col>
+            <ion-col size="3">
+              <ion-text color="dark">
+                <h6>
+                  Fecha de Estreno: {{movie.release_date | date:'shortDate'}}
+                </h6>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

@@ -7,6 +7,7 @@ import { IonicModule } from "@ionic/angular";
 import { CategoriesPageRoutingModule } from "./categories-routing.module";
 
 import { CategoriesPage } from "./categories.page";
+import { SearchMoviePage } from './movie/search-movie/search-movie.page';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { CategoriesPage } from "./categories.page";
     CategoriesPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [CategoriesPage],
+  declarations: [CategoriesPage, SearchMoviePage],
+  entryComponents: [SearchMoviePage]
 })
 export class CategoriesPageModule {}

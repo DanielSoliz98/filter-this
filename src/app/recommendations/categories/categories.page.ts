@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { ModalController } from '@ionic/angular';
+import { SearchMoviePage } from './movie/search-movie/search-movie.page';
 
 @Component({
   selector: "app-categories",
@@ -7,12 +9,16 @@ import { Router } from "@angular/router";
   styleUrls: ["./categories.page.scss"],
 })
 export class CategoriesPage implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private modalController: ModalController) {}
 
   ngOnInit() {}
 
-  openMoviePage() {
-    this.router.navigateByUrl("/app/tabs/recommendations/categories/movies");
+  async openMoviePage() {
+    //this.router.navigateByUrl("/app/tabs/recommendations/categories/movies");
+    const modal = await this.modalController.create({
+      component: SearchMoviePage,
+    });
+    return await modal.present();
   }
 
   openSeriePage() {
