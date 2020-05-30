@@ -38,20 +38,7 @@ export class AuthenticationService {
   }
 
   signIn(email: string, password: string) {
-    return this.angularAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.ngZone.run(() => {
-          if (result.user.emailVerified) {
-            this.router.navigateByUrl("/app/tabs/recommendations");
-          } else {
-            this.router.navigate(["verify-email-address"]);
-          }
-        });
-      })
-      .catch((error) => {
-        window.alert(error.message);
-      });
+    return this.angularAuth.signInWithEmailAndPassword(email, password);
   }
 
   signUp(email: string, password: string, firstName: string, lastName: string) {

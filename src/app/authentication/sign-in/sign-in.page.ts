@@ -5,6 +5,7 @@ import {
   Validators,
   AbstractControl,
 } from "@angular/forms";
+import { NgZone } from "@angular/core";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 import { ToastController, ModalController } from "@ionic/angular";
 import { SignUpPage } from "../sign-up/sign-up.page";
@@ -23,7 +24,8 @@ export class SignInPage implements OnInit {
   constructor(
     public authenticationService: AuthenticationService,
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private ngZone: NgZone
   ) {}
 
   ngOnInit() {}
@@ -31,12 +33,25 @@ export class SignInPage implements OnInit {
   onSubmit() {
     this.authenticationService
       .signIn(this.email.value, this.password.value)
-      .then((res: any) => {
-        this.signinForm.reset();
-        this.presentToast("Se inicio sesion correctamente");
+      .then((result: any) => {
+        this.ngZone.run(() => {
+          if (result.user.emailVerified) {
+            this.signinForm.reset();
+            this.presentToast("Se inicio sesion correctamente");
+            this.router.navigateByUrl("/app/tabs/recommendations");
+          } else {
+            this.router.navigate(["verify-email-address"]);
+          }
+        });
       })
       .catch((error: any) => {
-        this.presentToast("Error al iniciar sesion");
+        this.password.setValue("");
+        if (error.code == "auth/wrong-password") {
+          this.presentToast("Error: Credenciales no validos");
+        } else {
+          this.presentToast("Error: Usuario no registrado");
+        }
+        console.log(error);
       });
   }
 
@@ -49,6 +64,7 @@ export class SignInPage implements OnInit {
   }
 
   goToSignUp() {
+    this.signinForm.reset();
     this.router.navigate(["sign-up"]);
   }
 
