@@ -14,6 +14,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AuthenticationService } from "./shared/services/authentication/authentication.service";
 import { environment } from "../environments/environment";
 import { NativeStorage } from "@ionic-native/native-storage/ngx";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { NativeStorage } from "@ionic-native/native-storage/ngx";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    HttpClientModule
   ],
   providers: [
     AuthenticationService,
