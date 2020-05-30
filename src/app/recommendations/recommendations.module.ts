@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { RecommendationsPageRoutingModule } from './recommendations-routing.module';
 
 import { RecommendationsPage } from './recommendations.page';
-import { CategoriesModalComponent } from './categories-modal/categories-modal.component';
 
 @NgModule({
   imports: [
@@ -16,7 +15,6 @@ import { CategoriesModalComponent } from './categories-modal/categories-modal.co
     IonicModule,
     RecommendationsPageRoutingModule
   ],
-  declarations: [RecommendationsPage, CategoriesModalComponent],
-  entryComponents: [CategoriesModalComponent]
+  declarations: [RecommendationsPage]
 })
 export class RecommendationsPageModule {}

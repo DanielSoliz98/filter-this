@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: RecommendationsPage
+  },
+  {
+    path: 'categories',
+    loadChildren: () => import('./categories/categories.module').then( m => m.CategoriesPageModule)
   }
 ];
 
