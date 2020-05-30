@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title size="large">Search Movie</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="secondary">
+    <form [formGroup]="movieSearch" (ngSubmit)="onSubmit()">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="10">
+            <ion-input
+              type="text"
+              required
+              formControlName="movie"
+              placeholder="Movie title"
+            ></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button
+              type="submit"
+              color="primary"
+              [disabled]="movieSearch.invalid"
+            >
+              <ion-icon name="search-circle"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-toolbar>
+</ion-header>
+<ion-content> </ion-content>
