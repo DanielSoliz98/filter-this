@@ -80,6 +80,16 @@
           <p>{{ comment.comment }}</p>
         </ion-label>
       </ion-item>
+      <ion-item *ngIf="!movieModel.comments.lenght > 0">
+        <ion-label>
+          <p>No hay comentarios aun</p>
+        </ion-label>
+      </ion-item>
     </ion-list>
   </ion-card>
+  <ion-fab *ngIf="!movieModel" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="saveMovieRecommendation()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

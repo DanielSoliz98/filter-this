@@ -6,6 +6,8 @@ import { Genre } from "src/app/shared/models/genre";
 import { MovieService } from "src/app/shared/services/movie/movie.service";
 import { UserService } from "src/app/shared/services/user/user.service";
 import { User } from "src/app/shared/models/user";
+import { NativeStorage } from "@ionic-native/native-storage/ngx";
+import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 
 @Component({
   selector: "app-movie-detail",
@@ -23,7 +25,8 @@ export class MovieDetailComponent implements OnInit {
     private toastController: ToastController,
     private genreService: GenreService,
     private movieService: MovieService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit() {}
@@ -42,6 +45,33 @@ export class MovieDetailComponent implements OnInit {
         });
       }
     });
+  }
+
+  saveMovieRecommendation() {
+    console.log("Saving Movie");
+    let movie: MovieModel = {
+      user_uid: this.authService.userData.uid,
+      id: this.movie.id,
+      comments: [],
+      ratings: [],
+    };
+    this.movieService.addMovie(movie).then(
+      () => {
+        this.dismiss();
+        this.presentToast("Recomendacion publicada");
+      },
+      (err) => {
+        this.presentToast("No se pudo publicar la recomendacion");
+      }
+    );
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+    });
+    toast.present();
   }
 
   dismiss() {
