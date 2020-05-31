@@ -9,7 +9,8 @@
 <ion-content>
   <ion-card>
     <ion-img
-      src="{{ 'https://image.tmdb.org/t/p/original/' + movie.backdrop_path }}" alt="Poster de fondo no disponible"
+      src="{{ 'https://image.tmdb.org/t/p/original/' + movie.backdrop_path }}"
+      alt="Poster de fondo no disponible"
     ></ion-img>
     <ion-card-header>
       <ion-card-subtitle
@@ -30,13 +31,20 @@
           </ion-col>
           <ion-col size="6">
             <ion-item>
-              <h6><b>Titulo Original:</b> {{ movie.original_title }}</h6>
+              <h6><b>Titulo Original:</b></h6>
+            </ion-item>
+            <ion-item>
+              <h6>{{ movie.original_title }}</h6>
             </ion-item>
             <ion-item>
               <h6><b>Generos:</b></h6>
-              <p *ngFor="let genre of movie.genre_ids">
-                {{ genre }}
-              </p>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h6 *ngFor="let genre of genres">
+                  {{ genre.name }}
+                </h6>
+              </ion-label>
             </ion-item>
           </ion-col>
         </ion-row>
