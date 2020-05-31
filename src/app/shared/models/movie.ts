@@ -1,3 +1,6 @@
+import { Rating } from "./rating";
+import { Comment } from './comment';
+
 export interface Movie {
   id: string;
   title: string;
@@ -7,4 +10,11 @@ export interface Movie {
   poster_path: string;
   backdrop_path: string;
   genre_ids: number[];
+}
+
+export interface MovieModel {
+  user_uid: string;
+  comments: Comment[];
+  ratings: Rating[];
+  id?: string;
 }
