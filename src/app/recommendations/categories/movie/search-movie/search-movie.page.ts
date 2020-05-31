@@ -29,7 +29,6 @@ export class SearchMoviePage implements OnInit {
   ngOnInit() {}
 
   onSubmit() {
-    console.log(this.movie.value);
     this.movieService.getMovies(this.movie.value).subscribe((data) => {
       this.movies = data.results;
       this.movie.setValue("");
