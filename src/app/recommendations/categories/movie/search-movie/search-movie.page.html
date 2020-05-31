@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-title>Buscar Pelicula</ion-title>
     <ion-buttons slot="end" (click)="dismiss()">
-      <ion-icon slot="end" name="close-circle"></ion-icon>
+      <ion-icon name="close-circle"></ion-icon>
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="secondary">
@@ -34,15 +34,18 @@
 <ion-content fullscreen>
   <ion-list lines="none">
     <ng-container *ngFor="let movie of movies">
-      <ion-item button detail *ngIf="movie.poster_path">
+      <ion-item
+        button
+        detail
+        *ngIf="movie.poster_path"
+        (click)="openMovieDetail(movie)"
+      >
         <ion-grid fixed>
-          <ion-row>
+          <ion-row class="ion-align-items-center">
             <ion-col size="2">
-              <ion-thumbnail>
-                <ion-img
-                  src="{{'https://image.tmdb.org/t/p/w154/' + movie.poster_path}}"
-                ></ion-img>
-              </ion-thumbnail>
+              <ion-img
+                src="{{'https://image.tmdb.org/t/p/original/' + movie.poster_path}}"
+              ></ion-img>
             </ion-col>
             <ion-col size="7">
               <ion-text color="dark">

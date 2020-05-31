@@ -8,6 +8,8 @@ import { SearchMoviePageRoutingModule } from './search-movie-routing.module';
 
 import { SearchMoviePage } from './search-movie.page';
 
+import { MovieDetailComponent } from "../movie-detail/movie-detail.component";
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,6 +18,7 @@ import { SearchMoviePage } from './search-movie.page';
     SearchMoviePageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [SearchMoviePage]
+  declarations: [SearchMoviePage, MovieDetailComponent],
+  entryComponents: [MovieDetailComponent]
 })
 export class SearchMoviePageModule {}

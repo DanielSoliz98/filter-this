@@ -8,6 +8,7 @@ import {
 import { MovieService } from "src/app/shared/services/movie/movie.service";
 import { Movie } from "src/app/shared/models/movie";
 import { ModalController, ToastController } from "@ionic/angular";
+import { MovieDetailComponent } from "../movie-detail/movie-detail.component";
 
 @Component({
   selector: "app-search-movie",
@@ -36,6 +37,16 @@ export class SearchMoviePage implements OnInit {
         this.presentToast("No hay peliculas");
       }
     });
+  }
+
+  async openMovieDetail(movie: Movie) {
+    const modal = await this.modalCtrl.create({
+      component: MovieDetailComponent,
+      componentProps: {
+        movie: movie,
+      },
+    });
+    return await modal.present();
   }
 
   async presentToast(message: string) {
