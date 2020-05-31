@@ -1,7 +1,11 @@
 import { Injectable } from "@angular/core";
 import { HttpHeaders, HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Movie } from "../../models/movie";
+import { Movie, MovieModel } from "../../models/movie";
+import {
+  AngularFirestoreDocument,
+  AngularFirestore,
+} from "@angular/fire/firestore";
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,9 +22,16 @@ const url: string =
   providedIn: "root",
 })
 export class MovieService {
-  constructor(private http: HttpClient) {}
+  movieDoc: AngularFirestoreDocument<MovieModel>;
+
+  constructor(private http: HttpClient, private afs: AngularFirestore) {}
 
   getMovies(name: string): Observable<any> {
     return this.http.get<any>(url + name, httpOptions);
+  }
+
+  getMovie(id: string) {
+    this.movieDoc = this.afs.doc<MovieModel>(`movies/${id}`);
+    return this.movieDoc.valueChanges();
   }
 }

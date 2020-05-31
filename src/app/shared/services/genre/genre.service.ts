@@ -9,12 +9,12 @@ import {
   providedIn: "root",
 })
 export class GenreService {
-  postDoc: AngularFirestoreDocument<Genre>;
+  genreDoc: AngularFirestoreDocument<Genre>;
 
   constructor(private afs: AngularFirestore) {}
 
   getGenre(id: number) {
-    this.postDoc = this.afs.doc<Genre>(`genres/${id}`);
-    return this.postDoc.valueChanges();
+    this.genreDoc = this.afs.doc<Genre>(`genres/${id}`);
+    return this.genreDoc.valueChanges();
   }
 }
