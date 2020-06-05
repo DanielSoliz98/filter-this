@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'movies',
     loadChildren: () => import('./movie/search-movie/search-movie.module').then( m => m.SearchMoviePageModule)
+  },
+  {
+    path: 'search-series',
+    loadChildren: () => import('./tv-series/search-series/search-series.module').then( m => m.SearchSeriesPageModule)
   }
 ];
 
