@@ -8,6 +8,7 @@ import { CategoriesPageRoutingModule } from "./categories-routing.module";
 
 import { CategoriesPage } from "./categories.page";
 import { SearchMoviePage } from './movie/search-movie/search-movie.page';
+import { SearchSeriesPage } from './tv-series/search-series/search-series.page';
 
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import { SearchMoviePage } from './movie/search-movie/search-movie.page';
     CategoriesPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [CategoriesPage, SearchMoviePage],
-  entryComponents: [SearchMoviePage]
+  declarations: [CategoriesPage, SearchMoviePage, SearchSeriesPage],
+  entryComponents: [SearchMoviePage, SearchSeriesPage]
 })
 export class CategoriesPageModule {}

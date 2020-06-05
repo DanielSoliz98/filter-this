@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { ModalController } from '@ionic/angular';
 import { SearchMoviePage } from './movie/search-movie/search-movie.page';
+import { SearchSeriesPage } from './tv-series/search-series/search-series.page';
 
 @Component({
   selector: "app-categories",
@@ -21,8 +22,11 @@ export class CategoriesPage implements OnInit {
     return await modal.present();
   }
 
-  openSeriePage() {
-    console.log("series");
+  async openSeriePage() {
+    const modal = await this.modalController.create({
+      component: SearchSeriesPage,
+    });
+    return await modal.present();
   }
 
   openGamePage() {
