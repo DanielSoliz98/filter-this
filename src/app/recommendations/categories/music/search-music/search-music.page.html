@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Buscar Musica</ion-title>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="secondary">
+    <form [formGroup]="musicSearch" (ngSubmit)="onSubmit()">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="10">
+            <ion-input
+              type="text"
+              required
+              formControlName="music"
+              placeholder="Titulo de cancion"
+            ></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button
+              type="submit"
+              color="primary"
+              [disabled]="musicSearch.invalid"
+            >
+              <ion-icon name="search-circle"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <ion-list lines="none">
+    <ng-container *ngFor="let music of musics">
+      <ion-item
+        button
+        detail
+        (click)="openMusicDetail(music)"
+      >
+        <ion-grid fixed>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="2">
+              <ion-img
+                src="{{music.artist.picture_medium}}"
+              ></ion-img>
+            </ion-col>
+            <ion-col size="10">
+              <ion-text color="dark">
+                <h6>{{music.title}}</h6>
+              </ion-text>
+              <ion-text color="dark">
+                <h6>{{music.artist.name}}</h6>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>
