@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { ModalController } from '@ionic/angular';
 import { SearchMoviePage } from './movie/search-movie/search-movie.page';
 import { SearchSeriesPage } from './tv-series/search-series/search-series.page';
+import { SearchMusicPage } from './music/search-music/search-music.page';
 
 @Component({
   selector: "app-categories",
@@ -37,8 +38,11 @@ export class CategoriesPage implements OnInit {
     console.log("books");
   }
 
-  openMusicPage() {
-    console.log("music");
+  async openMusicPage() {
+    const modal = await this.modalController.create({
+      component: SearchMusicPage,
+    });
+    return await modal.present();
   }
 
   openFoodPage() {

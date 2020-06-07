@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'search-series',
     loadChildren: () => import('./tv-series/search-series/search-series.module').then( m => m.SearchSeriesPageModule)
+  },
+  {
+    path: 'search-music',
+    loadChildren: () => import('./music/search-music/search-music.module').then( m => m.SearchMusicPageModule)
   }
 ];
 
