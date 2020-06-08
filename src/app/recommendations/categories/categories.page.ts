@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { ModalController } from '@ionic/angular';
-import { SearchMoviePage } from './movie/search-movie/search-movie.page';
-import { SearchSeriesPage } from './tv-series/search-series/search-series.page';
-import { SearchMusicPage } from './music/search-music/search-music.page';
+import { ModalController } from "@ionic/angular";
+import { SearchMoviePage } from "./movie/search-movie/search-movie.page";
+import { SearchSeriesPage } from "./tv-series/search-series/search-series.page";
+import { SearchMusicPage } from "./music/search-music/search-music.page";
+import { SearchGamePage } from "./games/search-game/search-game.page";
 
 @Component({
   selector: "app-categories",
@@ -11,7 +12,10 @@ import { SearchMusicPage } from './music/search-music/search-music.page';
   styleUrls: ["./categories.page.scss"],
 })
 export class CategoriesPage implements OnInit {
-  constructor(private router: Router, private modalController: ModalController) {}
+  constructor(
+    private router: Router,
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {}
 
@@ -30,8 +34,11 @@ export class CategoriesPage implements OnInit {
     return await modal.present();
   }
 
-  openGamePage() {
-    console.log("games");
+  async openGamePage() {
+    const modal = await this.modalController.create({
+      component: SearchGamePage,
+    });
+    return await modal.present();
   }
 
   openBookPage() {

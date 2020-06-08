@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Juego</ion-title>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-img
+      src="{{ game.background_image }}"
+      alt="Poster de fondo no disponible"
+    ></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle
+        >Fecha de Lanzamiento:
+        {{ game.released | date: "shortDate" }}</ion-card-subtitle
+      >
+      <ion-card-title>{{ game.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="6" class="ion-justify-content-center">
+            <ion-item>
+              <h6><b>En plataformas:</b></h6>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h6 *ngFor="let platform of game.platforms">
+                  {{ platform.platform.name }}
+                </h6>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item>
+              <h6><b>Disponible en:</b></h6>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h6 *ngFor="let store of game.stores">
+                  {{ store.store.name }}
+                </h6>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" class="ion-justify-content-center">
+            <ion-item>
+              <h6><b>Generos:</b></h6>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h6 *ngFor="let genre of game.genres">
+                  {{ genre.name }}
+                </h6>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngIf="gameModel">
+    <ion-item *ngIf="user">
+      <ion-avatar slot="start">
+        <img *ngIf="user.photoURL" [src]="user.photoURL" />
+        <img
+          *ngIf="!user.photoURL"
+          src=".../../../../../../../assets/user.png"
+        />
+      </ion-avatar>
+      <ion-label>
+        <h3>Recomendado por:</h3>
+        <h2>{{ user.displayName }}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-list>
+      <ion-list-header>
+        Comentarios
+      </ion-list-header>
+      <ion-item *ngFor="let comment of gameModel.comments">
+        <ion-label>
+          <h3>{{ comment.displayName }}</h3>
+          <p>{{ comment.comment }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngIf="!gameModel.comments.lenght > 0">
+        <ion-label>
+          <p>No hay comentarios aun</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-fab *ngIf="!gameModel" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="saveGameRecommendation()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

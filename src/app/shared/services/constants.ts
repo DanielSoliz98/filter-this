@@ -8,6 +8,13 @@ export const HEADERS = {
   }),
 };
 
+export const HEADERS_GAMES = {
+  headers: new HttpHeaders({
+    "Content-Type": "application/json",
+    Authorization: "Bearer 5ea0e5d918cb3fb2cb58ec2972cc4df3fc00098a",
+  }),
+};
+
 export const HEADERS_MUSIC = {
   headers: new HttpHeaders({
     "Content-Type": "application/json",
@@ -24,3 +31,6 @@ export const SERIES_URL: string =
 
 export const MUSIC_URL: string =
   "https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/track?q=";
+
+export const GAMES_URL: string =
+  "https://api.rawg.io/api/games?page_size=3&search=";

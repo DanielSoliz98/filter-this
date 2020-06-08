@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'search-music',
     loadChildren: () => import('./music/search-music/search-music.module').then( m => m.SearchMusicPageModule)
+  },
+  {
+    path: 'search-game',
+    loadChildren: () => import('./games/search-game/search-game.module').then( m => m.SearchGamePageModule)
   }
 ];
 
