@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'search-game',
     loadChildren: () => import('./games/search-game/search-game.module').then( m => m.SearchGamePageModule)
+  },
+  {
+    path: 'search-books',
+    loadChildren: () => import('./book/search-books/search-books.module').then( m => m.SearchBooksPageModule)
   }
 ];
 
