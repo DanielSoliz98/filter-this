@@ -5,6 +5,7 @@ import { SearchMoviePage } from "./movie/search-movie/search-movie.page";
 import { SearchSeriesPage } from "./tv-series/search-series/search-series.page";
 import { SearchMusicPage } from "./music/search-music/search-music.page";
 import { SearchGamePage } from "./games/search-game/search-game.page";
+import { SearchBooksPage } from "./book/search-books/search-books.page";
 
 @Component({
   selector: "app-categories",
@@ -41,8 +42,11 @@ export class CategoriesPage implements OnInit {
     return await modal.present();
   }
 
-  openBookPage() {
-    console.log("books");
+  async openBookPage() {
+    const modal = await this.modalController.create({
+      component: SearchBooksPage,
+    });
+    return await modal.present();
   }
 
   async openMusicPage() {

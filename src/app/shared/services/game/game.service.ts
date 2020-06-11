@@ -26,9 +26,9 @@ export class GameService {
   }
 
   addGame(data: Model): Promise<void> {
-    const musicRef: AngularFirestoreDocument<any> = this.afs.doc(
+    const gameRef: AngularFirestoreDocument<any> = this.afs.doc(
       `games/${data.id}`
     );
-    return musicRef.set(data);
+    return gameRef.set(data);
   }
 }

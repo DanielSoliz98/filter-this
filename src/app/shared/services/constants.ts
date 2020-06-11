@@ -34,3 +34,6 @@ export const MUSIC_URL: string =
 
 export const GAMES_URL: string =
   "https://api.rawg.io/api/games?page_size=3&search=";
+
+export const BOOK_URL: string =
+  "https://www.googleapis.com/books/v1/volumes?projection=lite&orderBy=relevance&maxResults=5&key=AIzaSyCIxVoabVr89uPs-z_ZhtpQxAUoVAu1jX4&q=";
