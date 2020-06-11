@@ -48,7 +48,6 @@ export class MovieDetailComponent implements OnInit {
   }
 
   saveMovieRecommendation() {
-    console.log("Saving Movie");
     let movie: MovieModel = {
       user_uid: this.authService.userData.uid,
       id: this.movie.id,

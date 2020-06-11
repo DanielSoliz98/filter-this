@@ -51,7 +51,6 @@ export class SignInPage implements OnInit {
         } else {
           this.presentToast("Error: Usuario no registrado");
         }
-        console.log(error);
       });
   }
 
