@@ -12,6 +12,7 @@ import { SearchSeriesPage } from "./tv-series/search-series/search-series.page";
 import { SearchMusicPage } from "./music/search-music/search-music.page";
 import { SearchGamePage } from "./games/search-game/search-game.page";
 import { SearchBooksPage } from './book/search-books/search-books.page';
+import { ProductFormPage } from './products/product-form/product-form.page';
 
 @NgModule({
   imports: [
@@ -27,14 +28,16 @@ import { SearchBooksPage } from './book/search-books/search-books.page';
     SearchSeriesPage,
     SearchMusicPage,
     SearchGamePage,
-    SearchBooksPage
+    SearchBooksPage,
+    ProductFormPage
   ],
   entryComponents: [
     SearchMoviePage,
     SearchSeriesPage,
     SearchMusicPage,
     SearchGamePage,
-    SearchBooksPage
+    SearchBooksPage,
+    ProductFormPage
   ],
 })
 export class CategoriesPageModule {}
