@@ -8,82 +8,121 @@
 </ion-header>
 
 <ion-content color="secondary">
-  <ion-card>
-    <img src="../../../assets/security.png" class="center" />
-    <ion-card-header class="ion-text-center" color="dark">
-      <ion-card-title>Iniciar Sesion</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-        <ion-item>
-          <ion-label position="floating"
-            >Correo <ion-text color="danger">*</ion-text></ion-label
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-align-self-center">
+
+        <ion-card class="card-browser center">
+          <img 
+            src="../../../assets/icon/logo.png" 
+            class="center" 
+          />
+          <ion-card-header 
+            class="ion-text-center" 
+            color="secondary"
           >
-          <ion-input required formControlName="email" type="text"></ion-input>
-          <div
-            class="small form-text text-danger"
-            *ngIf="email.touched && email.invalid"
-          >
-            <div *ngIf="email.errors['required']">
-              <ion-text color="danger">
-                <h6>Correo es requerido</h6>
-              </ion-text>
-            </div>
-          </div>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating"
-            >Contrasena <ion-text color="danger">*</ion-text></ion-label
-          >
-          <ion-input
-            required
-            formControlName="password"
-            type="password"
-          ></ion-input>
-          <div
-            class="small form-text text-danger"
-            *ngIf="password.touched && password.invalid"
-          >
-            <div *ngIf="password.errors['required']">
-              <ion-text color="danger">
-                <h6>Contrasena es requerida</h6>
-              </ion-text>
-            </div>
-          </div>
-        </ion-item>
-        <br />
-        <ion-button
-          expand="block"
-          color="primary"
-          type="submit"
-          [disabled]="signinForm.invalid"
-        >
-          Iniciar Sesion <ion-icon slot="end" name="log-in"></ion-icon>
-        </ion-button>
-      </form>
-      <br />
-      <ion-text color="primary" (click)="goToSignUp()">
-        <h6>No tiene una cuenta?</h6>
-      </ion-text>
-      <br />
-      <ion-button
-        color="success"
-        (click)="authenticationService.facebookAuth()"
-        expand="block"
-        size="small"
-      >
-        Continuar con Facebook
-        <ion-icon slot="end" name="logo-facebook"></ion-icon>
-      </ion-button>
-      <br />
-      <ion-button
-        color="light"
-        (click)="authenticationService.googleAuth()"
-        expand="block"
-        size="small"
-      >
-        Continuar con Google <ion-icon slot="end" name="logo-google"></ion-icon>
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
+            <ion-card-title>Iniciar Sesion</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form 
+              [formGroup]="signinForm" 
+              (ngSubmit)="onSubmit()"
+            >
+              <ion-item>
+                <ion-label position="floating">Correo <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input 
+                  required 
+                  formControlName="email" 
+                  type="text"
+                ></ion-input>
+                <div 
+                  class="small form-text text-danger" 
+                  *ngIf="email.touched && email.invalid"
+                >
+                  <div *ngIf="email.errors['required']">
+                    <ion-text color="danger">
+                      <h6>Correo es requerido</h6>
+                    </ion-text>
+                  </div>
+                </div>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Contrasena <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input 
+                  required 
+                  formControlName="password" 
+                  type="password"
+                ></ion-input>
+                <div 
+                  class="small form-text text-danger" 
+                  *ngIf="password.touched && password.invalid"
+                >
+                  <div *ngIf="password.errors['required']">
+                    <ion-text color="danger">
+                      <h6>Contrasena es requerida</h6>
+                    </ion-text>
+                  </div>
+                </div>
+              </ion-item>
+              <br/>
+              <ion-button 
+                expand="block" 
+                color="primary" 
+                type="submit" 
+                shape="round" 
+                [disabled]="signinForm.invalid"
+                class="ion-text-capitalize"
+              >
+                <h3> Iniciar Sesion </h3>
+                <ion-icon 
+                  slot="end" 
+                  name="log-in"
+                ></ion-icon>
+              </ion-button>
+            </form>
+            <br />
+            <ion-text 
+              color="dark" 
+              (click)="goToSignUp()"
+            >
+            <h6>Registrate con:</h6>
+            </ion-text>
+            <br />
+            <ion-button 
+              color="success" 
+              (click)="authenticationService.facebookAuth()" 
+              expand="block" 
+              size="small"
+              shape="round" 
+              class="ion-text-capitalize"
+            >
+              <h3>Facebook</h3>
+              <ion-icon 
+                slot="end" 
+                name="logo-facebook"
+              ></ion-icon>
+            </ion-button>
+            <br />
+            <ion-button 
+              color="danger" 
+              (click)="authenticationService.googleAuth()" 
+              expand="block" 
+              size="small"
+              shape="round" 
+              class="ion-text-capitalize"
+            >
+              <h3>Google</h3>
+              <ion-icon 
+                slot="end" 
+                name="logo-google"
+              ></ion-icon>
+            </ion-button>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

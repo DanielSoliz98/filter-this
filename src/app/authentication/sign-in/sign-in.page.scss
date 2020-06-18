@@ -1,6 +1,24 @@
+$size-browser-width: 560px;
+$size-browser-height: 736px;
+
+img {
+  width: 125px;
+  height: 125px;
+}
+
 .center {
-  display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  display: block;
+}
+
+@media (min-width: $size-browser-width) {
+  .card-browser {
+    max-width: 35rem;
+  }
+}
+@media (min-height: $size-browser-height) {
+  .card-browser {
+    margin-top: 4rem;
+  }
 }
