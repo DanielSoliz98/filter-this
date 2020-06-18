@@ -5,8 +5,15 @@ import {
   Validators,
   AbstractControl,
 } from "@angular/forms";
-import { ModalController, ToastController } from "@ionic/angular";
+import {
+  ModalController,
+  ToastController,
+  LoadingController,
+} from "@ionic/angular";
 import { Plugins, CameraResultType, CameraSource } from "@capacitor/core";
+import { ProductService } from "src/app/shared/services/product/product.service";
+import { Product } from "src/app/shared/models/product";
+import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 
 const { Camera } = Plugins;
 
@@ -35,24 +42,65 @@ export class ProductFormPage implements OnInit {
       Validators.min(1),
     ]),
     description: new FormControl("", Validators.required),
+    link: new FormControl("", Validators.required),
   });
   sliderConfig = {
     slidesPerView: 3,
   };
   images: string[] = [];
   constructor(
+    private loadingController: LoadingController,
     private modalCtrl: ModalController,
-    private toast: ToastController
+    private toast: ToastController,
+    private productService: ProductService,
+    private authService: AuthenticationService
   ) {}
 
   ngOnInit() {}
 
-  onSubmit() {
-    console.log(this.productName.value);
-    console.log(this.category.value);
-    console.log(this.price.value);
-    console.log(this.description.value);
-    console.log(this.images);
+  async onSubmit() {
+    this.loading();
+    let product: Product = {
+      productName: this.productName.value,
+      category: this.category.value,
+      description: this.description.value,
+      price: this.price.value,
+      link: this.link.value,
+      comments: [],
+      ratings: [],
+      user_uid: this.authService.userData.uid,
+    };
+
+    if (this.images.length > 0) {
+      product.imagesURL = await this.productService.uploadImages(
+        product.productName.replace(/\s/g, ""),
+        this.images
+      );
+    }
+    this.productService
+      .addProduct(product)
+      .then(() => {
+        this.dismissLoading();
+        this.presentToast("Producto recomendado");
+        this.dismiss();
+      })
+      .catch((error) => {
+        this.presentToast(error.message);
+      });
+  }
+
+  loading() {
+    this.loadingController
+      .create({
+        message: "Publicando producto...",
+      })
+      .then((loading) => {
+        loading.present();
+      });
+  }
+
+  dismissLoading() {
+    this.loadingController.dismiss();
   }
 
   uploadImage() {
@@ -65,7 +113,6 @@ export class ProductFormPage implements OnInit {
       resultType: CameraResultType.DataUrl,
     }).then(
       (cameraPhoto) => {
-        console.log(cameraPhoto.dataUrl);
         this.images.push(cameraPhoto.dataUrl);
       },
       (error) => {
@@ -73,15 +120,6 @@ export class ProductFormPage implements OnInit {
         console.log("ERROR -> " + JSON.stringify(error));
       }
     );
-  }
-
-  dataURItoBlob(dataURI) {
-    let binary = atob(dataURI.split(",")[1]);
-    let array = [];
-    for (let i = 0; i < binary.length; i++) {
-      array.push(binary.charCodeAt(i));
-    }
-    return new Blob([new Uint8Array(array)], { type: "image/jpeg" });
   }
 
   async presentToast(message: string) {
@@ -112,5 +150,9 @@ export class ProductFormPage implements OnInit {
 
   get description(): AbstractControl {
     return this.productForm.get("description");
+  }
+
+  get link(): AbstractControl {
+    return this.productForm.get("link");
   }
 }

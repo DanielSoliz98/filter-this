@@ -29,9 +29,7 @@
             Categoria <ion-text color="danger">*</ion-text></ion-label
           >
           <ion-select interface="popover" formControlName="category">
-            <ion-select-option
-              *ngFor="let cat of categories"
-              [value]="cat"
+            <ion-select-option *ngFor="let cat of categories" [value]="cat"
               >{{cat}}</ion-select-option
             >
           </ion-select>
@@ -46,26 +44,18 @@
           <ion-label position="floating"
             >Descripcion<ion-text color="danger">*</ion-text></ion-label
           >
-          <ion-textarea
-            required
-            formControlName="description"
-            rows="4"
-          ></ion-textarea>
+          <ion-textarea required formControlName="description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating"
+            >Link del Producto<ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input required formControlName="link" type="text"></ion-input>
         </ion-item>
         <ion-list>
           <ion-list-header>
-            <ion-label>Fotos</ion-label>
+            Imagenes del Producto
           </ion-list-header>
-          <ion-item>
-            <ion-button
-              (click)="uploadImage()"
-              expand="block"
-              fill="clear"
-              shape="round"
-            >
-              Subir imagen
-            </ion-button>
-          </ion-item>
           <ion-slides *ngIf="images.length > 0" [options]="sliderConfig">
             <ion-slide *ngFor="let image of images">
               <ion-row>
@@ -75,6 +65,15 @@
               </ion-row>
             </ion-slide>
           </ion-slides>
+          <ion-item>
+            <ion-grid>
+              <ion-row class="ion-justify-content-center">
+                <ion-button (click)="uploadImage()" color="secondary">
+                  Subir imagen
+                </ion-button>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
         </ion-list>
         <ion-button
           expand="block"
@@ -82,7 +81,7 @@
           type="submit"
           [disabled]="productForm.invalid"
         >
-          Registrar
+          Registrar Producto
         </ion-button>
       </form>
     </ion-card-content>
