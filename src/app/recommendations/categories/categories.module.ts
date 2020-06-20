@@ -13,6 +13,7 @@ import { SearchMusicPage } from "./music/search-music/search-music.page";
 import { SearchGamePage } from "./games/search-game/search-game.page";
 import { SearchBooksPage } from './book/search-books/search-books.page';
 import { ProductFormPage } from './products/product-form/product-form.page';
+import { RestaurantFormPage } from './restaurants/restaurant-form/restaurant-form.page';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ProductFormPage } from './products/product-form/product-form.page';
     SearchMusicPage,
     SearchGamePage,
     SearchBooksPage,
-    ProductFormPage
+    ProductFormPage,
+    RestaurantFormPage
   ],
   entryComponents: [
     SearchMoviePage,
@@ -37,7 +39,8 @@ import { ProductFormPage } from './products/product-form/product-form.page';
     SearchMusicPage,
     SearchGamePage,
     SearchBooksPage,
-    ProductFormPage
+    ProductFormPage,
+    RestaurantFormPage
   ],
 })
 export class CategoriesPageModule {}
