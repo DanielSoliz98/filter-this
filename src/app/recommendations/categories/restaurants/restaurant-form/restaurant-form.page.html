@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Restaurante</ion-title>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Anadir nuevo restaurante</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating"
+            >Nombre del Restaurant<ion-text color="danger"
+              >*</ion-text
+            ></ion-label
+          >
+          <ion-input
+            required
+            formControlName="restaurantName"
+            type="text"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            Comidas Disponibles <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-select
+            multiple="true"
+            interface="popover"
+            formControlName="foods"
+          >
+            <ion-select-option
+              *ngFor="let food of foodsAvailables"
+              [value]="food"
+              >{{food}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating"
+            >Descripcion<ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-textarea required formControlName="description"></ion-textarea>
+        </ion-item>
+
+        <ion-list>
+          <ion-input
+            required
+            formControlName="ubication"
+            type="hidden"
+            readonly
+          ></ion-input>
+          <app-map (ubication)="saveUbication($event)"></app-map>
+          <ion-list-header>
+            Imagenes
+          </ion-list-header>
+          <ion-slides *ngIf="images.length > 0" [options]="sliderConfig">
+            <ion-slide *ngFor="let image of images">
+              <ion-row>
+                <ion-col size="12">
+                  <ion-img [src]="image"></ion-img>
+                </ion-col>
+              </ion-row>
+            </ion-slide>
+          </ion-slides>
+          <ion-item>
+            <ion-grid>
+              <ion-row class="ion-justify-content-center">
+                <ion-button (click)="uploadImage()" color="secondary">
+                  Subir imagen
+                </ion-button>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+        <ion-button
+          expand="block"
+          color="primary"
+          type="submit"
+          [disabled]="restaurantForm.invalid"
+        >
+          Registrar Restaurante
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
