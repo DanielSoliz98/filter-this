@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Producto</ion-title>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Anadir nuevo producto</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating"
+            >Nombre del Producto<ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input
+            required
+            formControlName="productName"
+            type="text"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            Categoria <ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-select interface="popover" formControlName="category">
+            <ion-select-option *ngFor="let cat of categories" [value]="cat"
+              >{{cat}}</ion-select-option
+            >
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating"
+            >Precio<ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input required formControlName="price" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating"
+            >Descripcion<ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-textarea required formControlName="description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating"
+            >Link del Producto<ion-text color="danger">*</ion-text></ion-label
+          >
+          <ion-input required formControlName="link" type="text"></ion-input>
+        </ion-item>
+        <ion-list>
+          <ion-list-header>
+            Imagenes del Producto
+          </ion-list-header>
+          <ion-slides *ngIf="images.length > 0" [options]="sliderConfig">
+            <ion-slide *ngFor="let image of images">
+              <ion-row>
+                <ion-col size="12">
+                  <ion-img [src]="image"></ion-img>
+                </ion-col>
+              </ion-row>
+            </ion-slide>
+          </ion-slides>
+          <ion-item>
+            <ion-grid>
+              <ion-row class="ion-justify-content-center">
+                <ion-button (click)="uploadImage()" color="secondary">
+                  Subir imagen
+                </ion-button>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+        <ion-button
+          expand="block"
+          color="primary"
+          type="submit"
+          [disabled]="productForm.invalid"
+        >
+          Registrar Producto
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
