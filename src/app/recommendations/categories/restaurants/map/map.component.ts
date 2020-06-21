@@ -29,10 +29,11 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {}
 
-  loadMap() {
+  async loadMap() {
     this.showMap = true;
     // let position = await Geolocation.getCurrentPosition();
     let latLng = new google.maps.LatLng("-17.402812", "-66.107563");
+    //let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
     let mapOptions = {
       center: latLng,
@@ -41,6 +42,9 @@ export class MapComponent implements OnInit {
     };
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    const htmlElement = this.mapElement.nativeElement as HTMLElement;
+    htmlElement.setAttribute("style", "height: 30vh");
 
     google.maps.event.addListener(this.map, "click", (event) => {
       this.addMarker(event.latLng);

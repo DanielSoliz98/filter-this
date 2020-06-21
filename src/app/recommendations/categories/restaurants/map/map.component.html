@@ -3,9 +3,9 @@
     Ubicacion
   </ion-list-header>
   <div #map id="map"></div>
-  <ion-item>
+  <ion-item *ngIf="!showMap">
     <ion-grid>
-      <ion-row class="ion-justify-content-center" *ngIf="!showMap">
+      <ion-row class="ion-justify-content-center" >
         <ion-button (click)="loadMap()" color="secondary" [disabled]="shared">
           Compartir ubicacion
         </ion-button>
