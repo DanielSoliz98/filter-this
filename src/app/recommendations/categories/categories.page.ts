@@ -7,6 +7,7 @@ import { SearchMusicPage } from "./music/search-music/search-music.page";
 import { SearchGamePage } from "./games/search-game/search-game.page";
 import { SearchBooksPage } from "./book/search-books/search-books.page";
 import { ProductFormPage } from "./products/product-form/product-form.page";
+import { RestaurantFormPage } from './restaurants/restaurant-form/restaurant-form.page';
 
 @Component({
   selector: "app-categories",
@@ -57,12 +58,11 @@ export class CategoriesPage implements OnInit {
     return await modal.present();
   }
 
-  openFoodPage() {
-    console.log("food");
-  }
-
-  openRestaurantPage() {
-    console.log("restaurantes");
+  async openRestaurantPage() {
+    const modal = await this.modalController.create({
+      component: RestaurantFormPage,
+    });
+    return await modal.present();
   }
 
   async openProductPage() {

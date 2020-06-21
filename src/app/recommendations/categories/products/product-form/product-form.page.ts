@@ -106,7 +106,6 @@ export class ProductFormPage implements OnInit {
   uploadImage() {
     Camera.getPhoto({
       quality: 100,
-      allowEditing: true,
       saveToGallery: true,
       correctOrientation: true,
       source: CameraSource.Photos,
