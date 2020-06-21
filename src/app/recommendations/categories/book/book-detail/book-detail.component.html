@@ -9,6 +9,11 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
+      <ion-chip outline color="tertiary" *ngIf="bookModel">
+        <ion-label *ngIf="bookModel.user_uid === authService.userData.uid"
+          >Mi Recomendacion</ion-label
+        >
+      </ion-chip>
       <ion-card-subtitle
         >Fecha de Publicacion:
         {{
@@ -53,37 +58,6 @@
         </ion-row>
       </ion-grid>
     </ion-card-content>
-  </ion-card>
-  <ion-card *ngIf="bookModel">
-    <ion-item *ngIf="user">
-      <ion-avatar slot="start">
-        <img *ngIf="user.photoURL" [src]="user.photoURL" />
-        <img
-          *ngIf="!user.photoURL"
-          src=".../../../../../../../assets/user.png"
-        />
-      </ion-avatar>
-      <ion-label>
-        <h3>Recomendado por:</h3>
-        <h2>{{ user.displayName }}</h2>
-      </ion-label>
-    </ion-item>
-    <ion-list>
-      <ion-list-header>
-        Comentarios
-      </ion-list-header>
-      <ion-item *ngFor="let comment of bookModel.comments">
-        <ion-label>
-          <h3>{{ comment.displayName }}</h3>
-          <p>{{ comment.comment }}</p>
-        </ion-label>
-      </ion-item>
-      <ion-item *ngIf="!bookModel.comments.lenght > 0">
-        <ion-label>
-          <p>No hay comentarios aun</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
   </ion-card>
   <ion-fab *ngIf="!bookModel" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="saveBookRecommendation()">

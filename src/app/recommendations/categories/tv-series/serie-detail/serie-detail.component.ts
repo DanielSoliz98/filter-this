@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Serie, SerieModel } from 'src/app/shared/models/serie';
-import { Genre } from 'src/app/shared/models/genre';
-import { ModalController, ToastController } from '@ionic/angular';
-import { GenreService } from 'src/app/shared/services/genre/genre.service';
-import { SerieService } from 'src/app/shared/services/serie/serie.service';
-import { UserService } from 'src/app/shared/services/user/user.service';
-import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
-import { User } from 'src/app/shared/models/user';
+import { Serie, SerieModel } from "src/app/shared/models/serie";
+import { Genre } from "src/app/shared/models/genre";
+import { ModalController, ToastController } from "@ionic/angular";
+import { GenreService } from "src/app/shared/services/genre/genre.service";
+import { SerieService } from "src/app/shared/services/serie/serie.service";
+import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
+import { User } from "src/app/shared/models/user";
+import { UserService } from "src/app/shared/services/user/user.service";
 
 @Component({
   selector: "app-serie-detail",
@@ -23,8 +23,8 @@ export class SerieDetailComponent implements OnInit {
     private toastController: ToastController,
     private genreService: GenreService,
     private serieService: SerieService,
-    private userService: UserService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {}
@@ -37,11 +37,6 @@ export class SerieDetailComponent implements OnInit {
     });
     this.serieService.getSerie(this.serie.id).subscribe((data) => {
       this.serieModel = data;
-      if (data) {
-        this.userService.getUser(data.user_uid).subscribe((dataUser) => {
-          this.user = dataUser;
-        });
-      }
     });
   }
 
@@ -54,8 +49,11 @@ export class SerieDetailComponent implements OnInit {
     };
     this.serieService.addSerie(serie).then(
       () => {
-        this.dismiss();
-        this.presentToast("Recomendacion publicada");
+        let user: User = { uid: serie.user_uid, musics: [serie.id] };
+        this.userService.updateDataUser(user).then(() => {
+          this.dismiss();
+          this.presentToast("Recomendacion publicada");
+        });
       },
       (err) => {
         this.presentToast("No se pudo publicar la recomendacion");

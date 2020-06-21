@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { Book } from 'src/app/shared/models/book';
-import { Model } from 'src/app/shared/models/model';
-import { ModalController, ToastController } from '@ionic/angular';
-import { BookService } from 'src/app/shared/services/book/book.service';
-import { UserService } from 'src/app/shared/services/user/user.service';
-import { AuthenticationService } from 'src/app/shared/services/authentication/authentication.service';
-import { User } from 'src/app/shared/models/user';
+import { Book } from "src/app/shared/models/book";
+import { Model } from "src/app/shared/models/model";
+import { ModalController, ToastController } from "@ionic/angular";
+import { BookService } from "src/app/shared/services/book/book.service";
+import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
+import { User } from "src/app/shared/models/user";
+import { UserService } from "src/app/shared/services/user/user.service";
 
 @Component({
   selector: "app-book-detail",
@@ -21,8 +21,8 @@ export class BookDetailComponent implements OnInit {
     private modalController: ModalController,
     private toastController: ToastController,
     private bookService: BookService,
-    private userService: UserService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {}
@@ -30,11 +30,6 @@ export class BookDetailComponent implements OnInit {
   ionViewWillEnter() {
     this.bookService.getBook(this.book.id).subscribe((data) => {
       this.bookModel = data;
-      if (data) {
-        this.userService.getUser(data.user_uid).subscribe((dataUser) => {
-          this.user = dataUser;
-        });
-      }
     });
   }
 
@@ -47,8 +42,11 @@ export class BookDetailComponent implements OnInit {
     };
     this.bookService.addBook(book).then(
       () => {
-        this.dismiss();
-        this.presentToast("Recomendacion publicada");
+        let user: User = { uid: book.user_uid, books: [book.id] };
+        this.userService.updateDataUser(user).then(() => {
+          this.dismiss();
+          this.presentToast("Recomendacion publicada");
+        });
       },
       (err) => {
         this.presentToast("No se pudo publicar la recomendacion");

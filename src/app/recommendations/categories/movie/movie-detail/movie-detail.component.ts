@@ -4,10 +4,9 @@ import { ModalController, ToastController } from "@ionic/angular";
 import { GenreService } from "src/app/shared/services/genre/genre.service";
 import { Genre } from "src/app/shared/models/genre";
 import { MovieService } from "src/app/shared/services/movie/movie.service";
-import { UserService } from "src/app/shared/services/user/user.service";
 import { User } from "src/app/shared/models/user";
-import { NativeStorage } from "@ionic-native/native-storage/ngx";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
+import { UserService } from "src/app/shared/services/user/user.service";
 
 @Component({
   selector: "app-movie-detail",
@@ -25,8 +24,8 @@ export class MovieDetailComponent implements OnInit {
     private toastController: ToastController,
     private genreService: GenreService,
     private movieService: MovieService,
-    private userService: UserService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {}
@@ -39,11 +38,6 @@ export class MovieDetailComponent implements OnInit {
     });
     this.movieService.getMovie(this.movie.id).subscribe((data) => {
       this.movieModel = data;
-      if (data) {
-        this.userService.getUser(data.user_uid).subscribe((dataUser) => {
-          this.user = dataUser;
-        });
-      }
     });
   }
 
@@ -56,8 +50,11 @@ export class MovieDetailComponent implements OnInit {
     };
     this.movieService.addMovie(movie).then(
       () => {
-        this.dismiss();
-        this.presentToast("Recomendacion publicada");
+        let user: User = { uid: movie.user_uid, movies: [movie.id] };
+        this.userService.updateDataUser(user).then(() => {
+          this.dismiss();
+          this.presentToast("Recomendacion publicada");
+        });
       },
       (err) => {
         this.presentToast("No se pudo publicar la recomendacion");

@@ -111,6 +111,13 @@ export class AuthenticationService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified,
+      books: [],
+      games: [],
+      movies: [],
+      musics: [],
+      products: [],
+      restaurants: [],
+      series: [],
     };
     return userRef.set(userData, {
       merge: true,

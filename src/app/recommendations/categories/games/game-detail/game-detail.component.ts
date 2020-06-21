@@ -3,9 +3,9 @@ import { Game } from "src/app/shared/models/game";
 import { Model } from "src/app/shared/models/model";
 import { ModalController, ToastController } from "@ionic/angular";
 import { GameService } from "src/app/shared/services/game/game.service";
-import { UserService } from "src/app/shared/services/user/user.service";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 import { User } from "src/app/shared/models/user";
+import { UserService } from "src/app/shared/services/user/user.service";
 
 @Component({
   selector: "app-game-detail",
@@ -21,8 +21,8 @@ export class GameDetailComponent implements OnInit {
     private modalController: ModalController,
     private toastController: ToastController,
     private gameService: GameService,
-    private userService: UserService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {}
@@ -30,11 +30,6 @@ export class GameDetailComponent implements OnInit {
   ionViewWillEnter() {
     this.gameService.getGame(this.game.id).subscribe((data) => {
       this.gameModel = data;
-      if (data) {
-        this.userService.getUser(data.user_uid).subscribe((dataUser) => {
-          this.user = dataUser;
-        });
-      }
     });
   }
 
@@ -47,8 +42,11 @@ export class GameDetailComponent implements OnInit {
     };
     this.gameService.addGame(game).then(
       () => {
-        this.dismiss();
-        this.presentToast("Recomendacion publicada");
+        let user: User = { uid: game.user_uid, games: [game.id] };
+        this.userService.updateDataUser(user).then(() => {
+          this.dismiss();
+          this.presentToast("Recomendacion publicada");
+        });
       },
       (err) => {
         this.presentToast("No se pudo publicar la recomendacion");
