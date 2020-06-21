@@ -2,13 +2,11 @@
   <ion-list-header>
     Ubicacion
   </ion-list-header>
-  <ion-item>
-    
-  </ion-item>
+  <div #map id="map"></div>
   <ion-item>
     <ion-grid>
-      <ion-row class="ion-justify-content-center">
-        <ion-button (click)="openMaps()" color="secondary" [disabled]="shared">
+      <ion-row class="ion-justify-content-center" *ngIf="!showMap">
+        <ion-button (click)="loadMap()" color="secondary" [disabled]="shared">
           Compartir ubicacion
         </ion-button>
       </ion-row>

@@ -13,7 +13,7 @@ import { SearchMusicPage } from "./music/search-music/search-music.page";
 import { SearchGamePage } from "./games/search-game/search-game.page";
 import { SearchBooksPage } from './book/search-books/search-books.page';
 import { ProductFormPage } from './products/product-form/product-form.page';
-import { RestaurantFormPage } from './restaurants/restaurant-form/restaurant-form.page';
+import { RestaurantFormPageModule } from './restaurants/restaurant-form/restaurant-form.module';
 
 @NgModule({
   imports: [
@@ -22,6 +22,7 @@ import { RestaurantFormPage } from './restaurants/restaurant-form/restaurant-for
     IonicModule,
     CategoriesPageRoutingModule,
     ReactiveFormsModule,
+    RestaurantFormPageModule
   ],
   declarations: [
     CategoriesPage,
@@ -30,8 +31,7 @@ import { RestaurantFormPage } from './restaurants/restaurant-form/restaurant-for
     SearchMusicPage,
     SearchGamePage,
     SearchBooksPage,
-    ProductFormPage,
-    RestaurantFormPage
+    ProductFormPage
   ],
   entryComponents: [
     SearchMoviePage,
@@ -39,8 +39,7 @@ import { RestaurantFormPage } from './restaurants/restaurant-form/restaurant-for
     SearchMusicPage,
     SearchGamePage,
     SearchBooksPage,
-    ProductFormPage,
-    RestaurantFormPage
-  ],
+    ProductFormPage
+  ]
 })
 export class CategoriesPageModule {}

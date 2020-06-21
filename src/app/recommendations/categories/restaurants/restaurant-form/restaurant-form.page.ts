@@ -88,8 +88,8 @@ export class RestaurantFormPage implements OnInit {
       });
   }
 
-  saveUbication(coord: Coordinates) {
-    this.ubication.setValue([coord.latitude, coord.longitude]);
+  saveUbication(coords: string[]) {
+    this.ubication.setValue(coords);
   }
 
   uploadImage() {

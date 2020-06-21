@@ -17,7 +17,7 @@ import { MapComponent } from '../map/map.component';
     RestaurantFormPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [RestaurantFormPage, MapComponent],
-  entryComponents: [MapComponent],
+  exports: [MapComponent],
+  declarations: [RestaurantFormPage, MapComponent]
 })
 export class RestaurantFormPageModule {}
