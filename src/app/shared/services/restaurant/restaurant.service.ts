@@ -1,15 +1,18 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Restaurant } from '../../models/restaurant';
-import { AngularFirestoreCollection, AngularFirestore, DocumentReference } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { map, finalize } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Restaurant } from "../../models/restaurant";
+import {
+  AngularFirestoreCollection,
+  AngularFirestore,
+  DocumentReference,
+} from "@angular/fire/firestore";
+import { AngularFireStorage } from "@angular/fire/storage";
+import { map, finalize } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class RestaurantService {
-
   private restaurant: Observable<Restaurant[]>;
   private restaurantCollection: AngularFirestoreCollection<Restaurant>;
   constructor(
@@ -67,5 +70,11 @@ export class RestaurantService {
 
   addRestaurant(restaurant: Restaurant): Promise<DocumentReference> {
     return this.restaurantCollection.add(restaurant);
+  }
+
+  getRestaurants(user_uid: string): Observable<Restaurant[]> {
+    return this.db
+      .collection<Restaurant>("restaurants", (ref) => ref.where("user_uid", "==", user_uid))
+      .valueChanges();
   }
 }

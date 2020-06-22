@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { SERIES_URL, HEADERS } from "../constants";
+import { SERIES_URL, HEADERS, SEARCH_SERIE } from "../constants";
 import { Observable } from "rxjs";
-import { SerieModel } from "../../models/serie";
+import { SerieModel, Serie } from "../../models/serie";
 import {
   AngularFirestoreDocument,
   AngularFirestore,
@@ -23,6 +23,10 @@ export class SerieService {
   getSerie(id: string): Observable<SerieModel> {
     this.serieDoc = this.afs.doc<SerieModel>(`series/${id}`);
     return this.serieDoc.valueChanges();
+  }
+
+  searchSerie(id: string): Observable<Serie> {
+    return this.http.get<any>(`${SEARCH_SERIE}${id}?language=es`, HEADERS);
   }
 
   addSerie(data: SerieModel): Promise<void> {

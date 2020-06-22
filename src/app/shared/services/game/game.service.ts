@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { GAMES_URL, HEADERS_GAMES } from "../constants";
+import { GAMES_URL, HEADERS_GAMES, SEARCH_GAME } from "../constants";
 import {
   AngularFirestoreDocument,
   AngularFirestore,
@@ -7,6 +7,7 @@ import {
 import { Model } from "../../models/model";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { Game } from '../../models/game';
 
 @Injectable({
   providedIn: "root",
@@ -23,6 +24,10 @@ export class GameService {
   getGame(id: string): Observable<Model> {
     this.gameDoc = this.afs.doc<Model>(`games/${id}`);
     return this.gameDoc.valueChanges();
+  }
+
+  searchGame(id: string): Observable<Game> {
+    return this.http.get<any>(`${SEARCH_GAME}${id}`, HEADERS_GAMES);
   }
 
   addGame(data: Model): Promise<void> {

@@ -1,5 +1,6 @@
 import { Rating } from "./rating";
-import { Comment } from './comment';
+import { Comment } from "./comment";
+import { Genre } from "./genre";
 
 export interface Serie {
   id: string;
@@ -10,7 +11,8 @@ export interface Serie {
   first_air_date: Date;
   poster_path: string;
   backdrop_path: string;
-  genre_ids: number[];
+  genre_ids?: number[];
+  genres?: Genre[];
 }
 
 export interface SerieModel {

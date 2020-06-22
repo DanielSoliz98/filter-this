@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { MovieModel } from "../../models/movie";
+import { MovieModel, Movie } from "../../models/movie";
 import {
   AngularFirestoreDocument,
   AngularFirestore,
   AngularFirestoreCollection,
 } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
-import { HEADERS, MOVIES_URL } from "../constants";
+import { HEADERS, MOVIES_URL, SEARCH_MOVIE } from "../constants";
 
 @Injectable({
   providedIn: "root",
@@ -39,6 +39,13 @@ export class MovieService {
           return { id, ...data };
         })
       )
+    );
+  }
+
+  searchMovie(id: string): Observable<Movie> {
+    return this.http.get<any>(
+      `${SEARCH_MOVIE}${id}?language=es`,
+      HEADERS
     );
   }
 

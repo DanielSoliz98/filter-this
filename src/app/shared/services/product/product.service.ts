@@ -31,10 +31,6 @@ export class ProductService {
     );
   }
 
-  getproducts(): Observable<Product[]> {
-    return this.products;
-  }
-
   uploadImages(productName: string, images: string[]): Promise<string[]> {
     return new Promise((resolve, reject) => {
       const urls: string[] = [];
@@ -70,5 +66,11 @@ export class ProductService {
 
   addProduct(product: Product): Promise<DocumentReference> {
     return this.productCollection.add(product);
+  }
+
+  getProducts(user_uid: string): Observable<Product[]> {
+    return this.db
+      .collection<Product>("products", (ref) => ref.where("user_uid", "==", user_uid))
+      .valueChanges();
   }
 }
