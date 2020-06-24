@@ -43,6 +43,7 @@ export class SearchGamePage implements OnInit {
       component: GameDetailComponent,
       componentProps: {
         game: game as Game,
+        showComments: false,
       },
     });
     return await modal.present();

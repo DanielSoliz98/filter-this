@@ -70,6 +70,9 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
+  <ng-container *ngIf="musicModel && showComments">
+    <app-comments [comments]="musicModel.comments" [user]="user"></app-comments>
+  </ng-container>
   <ion-fab *ngIf="!musicModel" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="saveMusicRecommendation()">
       <ion-icon name="add"></ion-icon>

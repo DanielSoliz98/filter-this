@@ -15,6 +15,7 @@ import { UserService } from "src/app/shared/services/user/user.service";
 })
 export class MovieDetailComponent implements OnInit {
   @Input() movie: Movie;
+  @Input() showComments: boolean;
   genres: Genre[] = [];
   movieModel: MovieModel;
   user: User;
@@ -38,6 +39,11 @@ export class MovieDetailComponent implements OnInit {
     });
     this.movieService.getMovie(this.movie.id).subscribe((data) => {
       this.movieModel = data;
+      if (data && this.showComments) {
+        this.userService.getUser(data.user_uid).subscribe((dataUser) => {
+          this.user = dataUser;
+        });
+      }
     });
   }
 

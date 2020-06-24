@@ -14,6 +14,7 @@ import { UserService } from "src/app/shared/services/user/user.service";
 })
 export class BookDetailComponent implements OnInit {
   @Input() book: Book;
+  @Input() showComments: boolean;
   bookModel: Model;
   user: User;
 
@@ -30,6 +31,11 @@ export class BookDetailComponent implements OnInit {
   ionViewWillEnter() {
     this.bookService.getBook(this.book.id).subscribe((data) => {
       this.bookModel = data;
+      if (data && this.showComments) {
+        this.userService.getUser(data.user_uid).subscribe((dataUser) => {
+          this.user = dataUser;
+        });
+      }
     });
   }
 

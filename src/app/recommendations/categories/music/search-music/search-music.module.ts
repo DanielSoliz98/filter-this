@@ -8,6 +8,7 @@ import { SearchMusicPageRoutingModule } from './search-music-routing.module';
 
 import { SearchMusicPage } from './search-music.page';
 import { MusicDetailComponent } from '../music-detail/music-detail.component';
+import { CommentsComponent } from 'src/app/shared/components/comments/comments.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { MusicDetailComponent } from '../music-detail/music-detail.component';
     SearchMusicPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [SearchMusicPage, MusicDetailComponent],
+  exports: [CommentsComponent],
+  declarations: [SearchMusicPage, MusicDetailComponent, CommentsComponent],
   entryComponents: [MusicDetailComponent]
 })
 export class SearchMusicPageModule {}

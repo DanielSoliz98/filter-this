@@ -39,6 +39,7 @@ export class SearchSeriesPage implements OnInit {
       component: SerieDetailComponent,
       componentProps: {
         serie: serie,
+        showComments: false,
       },
     });
     return await modal.present();

@@ -8,6 +8,7 @@ import { SearchSeriesPageRoutingModule } from "./search-series-routing.module";
 
 import { SearchSeriesPage } from "./search-series.page";
 import { SerieDetailComponent } from "../serie-detail/serie-detail.component";
+import { CommentsComponent } from 'src/app/shared/components/comments/comments.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { SerieDetailComponent } from "../serie-detail/serie-detail.component";
     SearchSeriesPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [SearchSeriesPage, SerieDetailComponent],
+  exports: [CommentsComponent],
+  declarations: [SearchSeriesPage, SerieDetailComponent, CommentsComponent],
   entryComponents: [SerieDetailComponent],
 })
 export class SearchSeriesPageModule {}

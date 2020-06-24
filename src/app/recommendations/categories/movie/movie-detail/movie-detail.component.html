@@ -61,7 +61,10 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
-  <ion-fab *ngIf="!movieModel" vertical="bottom" horizontal="end" slot="fixed">
+  <ng-container *ngIf="movieModel && showComments">
+    <app-comments [comments]="movieModel.comments" [user]="user"></app-comments>
+  </ng-container>
+  <ion-fab *ngIf="!movieModel && !showComments" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="saveMovieRecommendation()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

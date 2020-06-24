@@ -14,6 +14,7 @@ import { UserService } from "src/app/shared/services/user/user.service";
 })
 export class GameDetailComponent implements OnInit {
   @Input() game: Game;
+  @Input() showComments: boolean;
   gameModel: Model;
   user: User;
 
@@ -30,6 +31,11 @@ export class GameDetailComponent implements OnInit {
   ionViewWillEnter() {
     this.gameService.getGame(this.game.id).subscribe((data) => {
       this.gameModel = data;
+      if (data && this.showComments) {
+        this.userService.getUser(data.user_uid).subscribe((dataUser) => {
+          this.user = dataUser;
+        });
+      }
     });
   }
 

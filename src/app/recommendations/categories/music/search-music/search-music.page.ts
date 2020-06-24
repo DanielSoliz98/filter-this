@@ -39,6 +39,7 @@ export class SearchMusicPage implements OnInit {
       component: MusicDetailComponent,
       componentProps: {
         music: music,
+        showComments: false,
       },
     });
     return await modal.present();

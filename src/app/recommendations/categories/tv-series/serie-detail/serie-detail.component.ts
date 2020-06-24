@@ -15,6 +15,7 @@ import { UserService } from "src/app/shared/services/user/user.service";
 })
 export class SerieDetailComponent implements OnInit {
   @Input() serie: Serie;
+  @Input() showComments: boolean;
   genres: Genre[] = [];
   serieModel: SerieModel;
   user: User;
@@ -37,6 +38,11 @@ export class SerieDetailComponent implements OnInit {
     });
     this.serieService.getSerie(this.serie.id).subscribe((data) => {
       this.serieModel = data;
+      if (data && this.showComments) {
+        this.userService.getUser(data.user_uid).subscribe((dataUser) => {
+          this.user = dataUser;
+        });
+      }
     });
   }
 

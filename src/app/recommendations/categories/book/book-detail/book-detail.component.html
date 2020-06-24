@@ -59,7 +59,15 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
-  <ion-fab *ngIf="!bookModel" vertical="bottom" horizontal="end" slot="fixed">
+  <ng-container *ngIf="bookModel && showComments">
+    <app-comments [comments]="bookModel.comments" [user]="user"></app-comments>
+  </ng-container>
+  <ion-fab
+    *ngIf="!bookModel && !showComments"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
     <ion-fab-button (click)="saveBookRecommendation()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

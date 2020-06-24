@@ -38,6 +38,7 @@ export class SearchBooksPage implements OnInit {
       component: BookDetailComponent,
       componentProps: {
         book: book,
+        showComments: false,
       },
     });
     return await modal.present();

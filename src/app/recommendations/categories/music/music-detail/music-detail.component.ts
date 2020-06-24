@@ -14,6 +14,7 @@ import { UserService } from "src/app/shared/services/user/user.service";
 })
 export class MusicDetailComponent implements OnInit {
   @Input() music: Music;
+  @Input() showComments: boolean;
   musicModel: Model;
   user: User;
 
@@ -30,6 +31,11 @@ export class MusicDetailComponent implements OnInit {
   ionViewWillEnter() {
     this.musicService.getMusic(this.music.id).subscribe((data) => {
       this.musicModel = data;
+      if (data && this.showComments) {
+        this.userService.getUser(data.user_uid).subscribe((dataUser) => {
+          this.user = dataUser;
+        });
+      }
     });
   }
 
