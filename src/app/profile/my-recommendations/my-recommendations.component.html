@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mis Recomendaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <ion-list *ngIf="recommendations">
+        <ion-list-header *ngIf="recommendations.movies">
+          <ion-text color="tertiary">
+            <h1>Peliculas</h1>
+          </ion-text>
+        </ion-list-header>
+        <ion-item button *ngFor="let movie of movies">
+          {{ movie.title }}
+        </ion-item>
+        <ion-list-header *ngIf="recommendations.series">
+          <ion-text color="tertiary">
+            <h1>Series</h1>
+          </ion-text>
+        </ion-list-header>
+        <ion-item button *ngFor="let serie of series">
+          {{ serie.name }}
+        </ion-item>
+        <ion-list-header *ngIf="recommendations.games">
+          <ion-text color="tertiary">
+            <h1>Juegos</h1>
+          </ion-text>
+        </ion-list-header>
+        <ion-item button *ngFor="let game of games">
+          {{ game.name }}
+        </ion-item>
+        <ion-list-header *ngIf="recommendations.musics">
+          <ion-text color="tertiary">
+            <h1>Musicas</h1>
+          </ion-text>
+        </ion-list-header>
+        <ion-item button *ngFor="let music of musics">
+          {{ music.title }} - {{ music.artist.name }}
+        </ion-item>
+        <ion-list-header *ngIf="recommendations.books">
+          <ion-text color="tertiary">
+            <h1>Libros</h1>
+          </ion-text>
+        </ion-list-header>
+        <ion-item button *ngFor="let book of books">
+          {{ book.volumeInfo.title }} - {{ book.volumeInfo.authors[0] }}
+        </ion-item>
+        <ion-list-header *ngIf="recommendations.restaurants">
+          <ion-text color="tertiary">
+            <h1>Restaurantes</h1>
+          </ion-text>
+        </ion-list-header>
+        <ion-item button *ngFor="let restaurant of restaurants">
+          {{ restaurant.restaurantName }}
+        </ion-item>
+        <ion-list-header *ngIf="recommendations.products">
+          <ion-text color="tertiary">
+            <h1>Productos</h1>
+          </ion-text>
+        </ion-list-header>
+        <ion-item button *ngFor="let product of products">
+          {{ product.productName }} - {{ product.category }}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
