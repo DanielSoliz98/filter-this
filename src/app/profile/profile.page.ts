@@ -20,6 +20,7 @@ import { Restaurant } from "../shared/models/restaurant";
 import { ProductService } from "../shared/services/product/product.service";
 import { RestaurantService } from "../shared/services/restaurant/restaurant.service";
 import { MyRecommendations } from "../shared/models/my-recommendations";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-profile",
@@ -27,100 +28,22 @@ import { MyRecommendations } from "../shared/models/my-recommendations";
   styleUrls: ["./profile.page.scss"],
 })
 export class ProfilePage implements OnInit {
-  books: Book[] = [];
-  movies: Movie[] = [];
-  series: Serie[] = [];
-  games: Game[] = [];
-  musics: Music[] = [];
-  products: Product[] = [];
-  restaurants: Restaurant[] = [];
-  recommendations: MyRecommendations;
   constructor(
     private authService: AuthenticationService,
-    private bookService: BookService,
-    private gameService: GameService,
-    private movieService: MovieService,
-    private musicService: MusicService,
-    private serieService: SerieService,
-    private productService: ProductService,
-    private restaurantService: RestaurantService,
-    private userService: UserService,
+    private router: Router,
     private popoverController: PopoverController
   ) {}
 
   ngOnInit() {}
 
-  ionViewWillLeave() {
-    this.books = [];
-    this.movies = [];
-    this.series = [];
-    this.games = [];
-    this.musics = [];
-    this.products = [];
-    this.restaurants = [];
+  ionViewWillEnter() {}
+
+  goMyRecommendations() {
+    this.router.navigateByUrl("/app/tabs/profile/my-recommendations");
   }
 
-  ionViewWillEnter() {
-    this.userService
-      .getMyRecommendations(this.authService.userData.uid)
-      .subscribe((data) => {
-        this.recommendations = data;
-        if (this.recommendations.books) {
-          this.recommendations.books.forEach((bookId) => {
-            this.bookService.getBooks(bookId).subscribe((res) => {
-              this.books.push(res.items[0]);
-            });
-          });
-        }
-
-        if (this.recommendations.movies) {
-          this.recommendations.movies.forEach((movieId) => {
-            this.movieService.searchMovie(movieId).subscribe((movie) => {
-              this.movies.push(movie);
-            });
-          });
-        }
-
-        if (this.recommendations.series) {
-          this.recommendations.series.forEach((serieId) => {
-            this.serieService.searchSerie(serieId).subscribe((serie) => {
-              this.series.push(serie);
-            });
-          });
-        }
-
-        if (this.recommendations.games) {
-          this.recommendations.games.forEach((gameId) => {
-            this.gameService.searchGame(gameId).subscribe((game) => {
-              this.games.push(game);
-            });
-          });
-        }
-
-        if (this.recommendations.musics) {
-          this.recommendations.musics.forEach((musicId) => {
-            this.musicService.searchMusic(musicId).subscribe((music) => {
-              this.musics.push(music);
-            });
-          });
-        }
-
-        if (this.recommendations.restaurants) {
-          this.restaurantService
-            .getRestaurants(this.authService.userData.uid)
-            .subscribe((data) => {
-              this.restaurants = data;
-            });
-        }
-
-        if (this.recommendations.products) {
-          this.productService
-            .getProducts(this.authService.userData.uid)
-            .subscribe((data) => {
-              this.products = data;
-            });
-        }
-      });
+  goMyCollection() {
+    this.router.navigateByUrl("/app/tabs/profile/my-collection");
   }
 
   async showOptions(ev) {
