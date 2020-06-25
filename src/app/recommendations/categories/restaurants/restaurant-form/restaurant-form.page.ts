@@ -15,6 +15,8 @@ import { Plugins, CameraResultType, CameraSource } from "@capacitor/core";
 import { RestaurantService } from "src/app/shared/services/restaurant/restaurant.service";
 import { Restaurant } from "src/app/shared/models/restaurant";
 import { Coordinates } from "src/app/shared/models/coordinates";
+import { UserService } from "src/app/shared/services/user/user.service";
+import { MyRecommendations } from "src/app/shared/models/my-recommendations";
 
 const { Camera } = Plugins;
 
@@ -53,7 +55,8 @@ export class RestaurantFormPage implements OnInit {
     private modalCtrl: ModalController,
     private toast: ToastController,
     private restaurantService: RestaurantService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {}
@@ -78,10 +81,20 @@ export class RestaurantFormPage implements OnInit {
     }
     this.restaurantService
       .addRestaurant(restaurant)
-      .then(() => {
-        this.dismissLoading();
-        this.presentToast("Restaurante recomendado");
-        this.dismiss();
+      .then((restaurantData) => {
+        this.userService
+          .getMyRecommendations(restaurant.user_uid)
+          .subscribe((data) => {
+            let recommendations = data as MyRecommendations;
+            recommendations.restaurants.push(restaurantData.id);
+            this.userService
+              .updateMyRecommendations(restaurant.user_uid, recommendations)
+              .then(() => {
+                this.dismissLoading();
+                this.presentToast("Restaurante recomendado");
+                this.dismiss();
+              });
+          });
       })
       .catch((error) => {
         this.presentToast(error.message);

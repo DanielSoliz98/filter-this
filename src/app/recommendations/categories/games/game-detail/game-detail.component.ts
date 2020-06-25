@@ -6,6 +6,7 @@ import { GameService } from "src/app/shared/services/game/game.service";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 import { User } from "src/app/shared/models/user";
 import { UserService } from "src/app/shared/services/user/user.service";
+import { MyRecommendations } from "src/app/shared/models/my-recommendations";
 
 @Component({
   selector: "app-game-detail",
@@ -48,11 +49,18 @@ export class GameDetailComponent implements OnInit {
     };
     this.gameService.addGame(game).then(
       () => {
-        let user: User = { uid: game.user_uid, games: [game.id] };
-        this.userService.updateDataUser(user).then(() => {
-          this.dismiss();
-          this.presentToast("Recomendacion publicada");
-        });
+        this.userService
+          .getMyRecommendations(game.user_uid)
+          .subscribe((data) => {
+            let recommendations = data as MyRecommendations;
+            recommendations.games.push(game.id);
+            this.userService
+              .updateMyRecommendations(game.user_uid, recommendations)
+              .then(() => {
+                this.dismiss();
+                this.presentToast("Recomendacion publicada");
+              });
+          });
       },
       (err) => {
         this.presentToast("No se pudo publicar la recomendacion");

@@ -3,12 +3,5 @@ export interface User {
   email?: string;
   displayName?: string;
   photoURL?: string;
-  emailVerified?: boolean;
-  books?: string[];
-  games?: string[];
-  movies?: string[];
-  musics?: string[];
-  products?: string[];
-  restaurants?: string[];
-  series?: string[];
+  emailVerified?: boolean
 }

@@ -8,7 +8,6 @@ import { SearchBooksPageRoutingModule } from "./search-books-routing.module";
 
 import { SearchBooksPage } from "./search-books.page";
 import { BookDetailComponent } from "../book-detail/book-detail.component";
-import { CommentsComponent } from 'src/app/shared/components/comments/comments.component';
 
 @NgModule({
   imports: [
@@ -18,8 +17,7 @@ import { CommentsComponent } from 'src/app/shared/components/comments/comments.c
     SearchBooksPageRoutingModule,
     ReactiveFormsModule
   ],
-  exports: [CommentsComponent],
-  declarations: [SearchBooksPage, BookDetailComponent, CommentsComponent],
+  declarations: [SearchBooksPage, BookDetailComponent],
   entryComponents: [BookDetailComponent],
 })
 export class SearchBooksPageModule {}

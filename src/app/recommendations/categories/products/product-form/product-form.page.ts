@@ -14,6 +14,8 @@ import { Plugins, CameraResultType, CameraSource } from "@capacitor/core";
 import { ProductService } from "src/app/shared/services/product/product.service";
 import { Product } from "src/app/shared/models/product";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
+import { UserService } from "src/app/shared/services/user/user.service";
+import { MyRecommendations } from "src/app/shared/models/my-recommendations";
 
 const { Camera } = Plugins;
 
@@ -53,7 +55,8 @@ export class ProductFormPage implements OnInit {
     private modalCtrl: ModalController,
     private toast: ToastController,
     private productService: ProductService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private userService: UserService
   ) {}
 
   ngOnInit() {}
@@ -79,10 +82,20 @@ export class ProductFormPage implements OnInit {
     }
     this.productService
       .addProduct(product)
-      .then(() => {
-        this.dismissLoading();
-        this.presentToast("Producto recomendado");
-        this.dismiss();
+      .then((dataProduct) => {
+        this.userService
+          .getMyRecommendations(product.user_uid)
+          .subscribe((data) => {
+            let recommendations = data as MyRecommendations;
+            recommendations.products.push(dataProduct.id);
+            this.userService
+              .updateMyRecommendations(product.user_uid, recommendations)
+              .then(() => {
+                this.dismissLoading();
+                this.presentToast("Producto recomendado");
+                this.dismiss();
+              });
+          });
       })
       .catch((error) => {
         this.presentToast(error.message);

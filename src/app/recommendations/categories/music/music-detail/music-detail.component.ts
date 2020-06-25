@@ -6,6 +6,7 @@ import { ModalController, ToastController } from "@ionic/angular";
 import { MusicService } from "src/app/shared/services/music/music.service";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 import { UserService } from "src/app/shared/services/user/user.service";
+import { MyRecommendations } from "src/app/shared/models/my-recommendations";
 
 @Component({
   selector: "app-music-detail",
@@ -48,11 +49,18 @@ export class MusicDetailComponent implements OnInit {
     };
     this.musicService.addMusic(music).then(
       () => {
-        let user: User = { uid: music.user_uid, musics: [music.id] };
-        this.userService.updateDataUser(user).then(() => {
-          this.dismiss();
-          this.presentToast("Recomendacion publicada");
-        });
+        this.userService
+          .getMyRecommendations(music.user_uid)
+          .subscribe((data) => {
+            let recommendations = data as MyRecommendations;
+            recommendations.musics.push(music.id);
+            this.userService
+              .updateMyRecommendations(music.user_uid, recommendations)
+              .then(() => {
+                this.dismiss();
+                this.presentToast("Recomendacion publicada");
+              });
+          });
       },
       (err) => {
         this.presentToast("No se pudo publicar la recomendacion");

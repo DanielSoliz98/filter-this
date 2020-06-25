@@ -19,6 +19,7 @@ import { SearchGamePageModule } from './games/search-game/search-game.module';
 import { SearchMoviePageModule } from './movie/search-movie/search-movie.module';
 import { SearchMusicPageModule } from './music/search-music/search-music.module';
 import { SearchSeriesPageModule } from './tv-series/search-series/search-series.module';
+import { CommentsComponent } from 'src/app/shared/components/comments/comments.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import { SearchSeriesPageModule } from './tv-series/search-series/search-series.
     SearchSeriesPageModule,
     SearchMusicPageModule
   ],
+  exports: [CommentsComponent],
   declarations: [
     CategoriesPage,
     SearchMoviePage,
@@ -41,7 +43,8 @@ import { SearchSeriesPageModule } from './tv-series/search-series/search-series.
     SearchMusicPage,
     SearchGamePage,
     SearchBooksPage,
-    ProductFormPage
+    ProductFormPage,
+    CommentsComponent
   ],
   entryComponents: [
     SearchMoviePage,

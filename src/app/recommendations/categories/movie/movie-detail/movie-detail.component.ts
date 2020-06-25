@@ -7,6 +7,7 @@ import { MovieService } from "src/app/shared/services/movie/movie.service";
 import { User } from "src/app/shared/models/user";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 import { UserService } from "src/app/shared/services/user/user.service";
+import { MyRecommendations } from "src/app/shared/models/my-recommendations";
 
 @Component({
   selector: "app-movie-detail",
@@ -56,11 +57,18 @@ export class MovieDetailComponent implements OnInit {
     };
     this.movieService.addMovie(movie).then(
       () => {
-        let user: User = { uid: movie.user_uid, movies: [movie.id] };
-        this.userService.updateDataUser(user).then(() => {
-          this.dismiss();
-          this.presentToast("Recomendacion publicada");
-        });
+        this.userService
+          .getMyRecommendations(movie.user_uid)
+          .subscribe((data) => {
+            let recommendations = data as MyRecommendations;
+            recommendations.movies.push(movie.id);
+            this.userService
+              .updateMyRecommendations(movie.user_uid, recommendations)
+              .then(() => {
+                this.dismiss();
+                this.presentToast("Recomendacion publicada");
+              });
+          });
       },
       (err) => {
         this.presentToast("No se pudo publicar la recomendacion");

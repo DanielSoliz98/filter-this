@@ -6,6 +6,7 @@ import { BookService } from "src/app/shared/services/book/book.service";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 import { User } from "src/app/shared/models/user";
 import { UserService } from "src/app/shared/services/user/user.service";
+import { MyRecommendations } from "src/app/shared/models/my-recommendations";
 
 @Component({
   selector: "app-book-detail",
@@ -48,11 +49,18 @@ export class BookDetailComponent implements OnInit {
     };
     this.bookService.addBook(book).then(
       () => {
-        let user: User = { uid: book.user_uid, books: [book.id] };
-        this.userService.updateDataUser(user).then(() => {
-          this.dismiss();
-          this.presentToast("Recomendacion publicada");
-        });
+        this.userService
+          .getMyRecommendations(book.user_uid)
+          .subscribe((data) => {
+            let recommendations = data as MyRecommendations;
+            recommendations.books.push(book.id);
+            this.userService
+              .updateMyRecommendations(book.user_uid, recommendations)
+              .then(() => {
+                this.dismiss();
+                this.presentToast("Recomendacion publicada");
+              });
+          });
       },
       (err) => {
         this.presentToast("No se pudo publicar la recomendacion");

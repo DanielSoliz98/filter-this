@@ -8,7 +8,6 @@ import { SearchGamePageRoutingModule } from './search-game-routing.module';
 
 import { SearchGamePage } from './search-game.page';
 import { GameDetailComponent } from '../game-detail/game-detail.component';
-import { CommentsComponent } from 'src/app/shared/components/comments/comments.component';
 
 @NgModule({
   imports: [
@@ -18,8 +17,7 @@ import { CommentsComponent } from 'src/app/shared/components/comments/comments.c
     SearchGamePageRoutingModule,
     ReactiveFormsModule
   ],
-  exports: [CommentsComponent],
-  declarations: [SearchGamePage, GameDetailComponent, CommentsComponent],
+  declarations: [SearchGamePage, GameDetailComponent],
   entryComponents: [GameDetailComponent]
 })
 export class SearchGamePageModule {}

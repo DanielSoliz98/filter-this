@@ -9,7 +9,6 @@ import { SearchMoviePageRoutingModule } from './search-movie-routing.module';
 import { SearchMoviePage } from './search-movie.page';
 
 import { MovieDetailComponent } from "../movie-detail/movie-detail.component";
-import { CommentsComponent } from 'src/app/shared/components/comments/comments.component';
 
 @NgModule({
   imports: [
@@ -19,8 +18,7 @@ import { CommentsComponent } from 'src/app/shared/components/comments/comments.c
     SearchMoviePageRoutingModule,
     ReactiveFormsModule
   ],
-  exports: [CommentsComponent],
-  declarations: [SearchMoviePage, MovieDetailComponent, CommentsComponent],
+  declarations: [SearchMoviePage, MovieDetailComponent],
   entryComponents: [MovieDetailComponent]
 })
 export class SearchMoviePageModule {}

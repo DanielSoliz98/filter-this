@@ -7,6 +7,7 @@ import { SerieService } from "src/app/shared/services/serie/serie.service";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 import { User } from "src/app/shared/models/user";
 import { UserService } from "src/app/shared/services/user/user.service";
+import { MyRecommendations } from "src/app/shared/models/my-recommendations";
 
 @Component({
   selector: "app-serie-detail",
@@ -55,11 +56,18 @@ export class SerieDetailComponent implements OnInit {
     };
     this.serieService.addSerie(serie).then(
       () => {
-        let user: User = { uid: serie.user_uid, musics: [serie.id] };
-        this.userService.updateDataUser(user).then(() => {
-          this.dismiss();
-          this.presentToast("Recomendacion publicada");
-        });
+        this.userService
+          .getMyRecommendations(serie.user_uid)
+          .subscribe((data) => {
+            let recommendations = data as MyRecommendations;
+            recommendations.series.push(serie.id);
+            this.userService
+              .updateMyRecommendations(serie.user_uid, recommendations)
+              .then(() => {
+                this.dismiss();
+                this.presentToast("Recomendacion publicada");
+              });
+          });
       },
       (err) => {
         this.presentToast("No se pudo publicar la recomendacion");
