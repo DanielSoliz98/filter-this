@@ -15,27 +15,27 @@
 
 <ion-content>
   <ion-card color="secondary">
-    <ion-card-content *ngIf="user" color="secondary">
+    <ion-card-content *ngIf="authService.userData" color="secondary">
       <ion-list color="secondary">
         <ion-item>
           <ion-avatar slot="start">
-            <img *ngIf="user.photoURL" [src]="user.photoURL" alt="" />
-            <img *ngIf="!user.photoURL" src="../../assets/user.png" />
+            <img *ngIf="authService.userData.photoURL" [src]="authService.userData.photoURL" alt="" />
+            <img *ngIf="!authService.userData.photoURL" src="../../assets/user.png" />
           </ion-avatar>
           <ion-label>
-            <h2>{{ user.displayName}}</h2>
-            <h3>{{ user.email}}</h3>
+            <h2>{{ authService.userData.displayName}}</h2>
+            <h3>{{ authService.userData.email}}</h3>
           </ion-label>
         </ion-item>
       </ion-list>
       <br />
-      <ion-list *ngIf="user">
+      <ion-list *ngIf="recommendations">
         <ion-list-header>
           <ion-text color="primary">
             Mis Recomendaciones
           </ion-text>
         </ion-list-header>
-        <ion-list-header *ngIf="user.movies">
+        <ion-list-header *ngIf="recommendations.movies">
           <ion-text color="tertiary">
             <h2>Peliculas</h2>
           </ion-text>
@@ -43,7 +43,7 @@
         <ion-item button *ngFor="let movie of movies">
           {{movie.title}}
         </ion-item>
-        <ion-list-header *ngIf="user.series">
+        <ion-list-header *ngIf="recommendations.series">
           <ion-text color="tertiary">
             <h2>Series</h2>
           </ion-text>
@@ -51,7 +51,7 @@
         <ion-item button *ngFor="let serie of series">
           {{serie.name}}
         </ion-item>
-        <ion-list-header *ngIf="user.games">
+        <ion-list-header *ngIf="recommendations.games">
           <ion-text color="tertiary">
             <h2>Juegos</h2>
           </ion-text>
@@ -59,7 +59,7 @@
         <ion-item button *ngFor="let game of games">
           {{game.name}}
         </ion-item>
-        <ion-list-header *ngIf="user.musics">
+        <ion-list-header *ngIf="recommendations.musics">
           <ion-text color="tertiary">
             <h2>Musicas</h2>
           </ion-text>
@@ -67,7 +67,7 @@
         <ion-item button *ngFor="let music of musics">
           {{music.title}} - {{music.artist.name}}
         </ion-item>
-        <ion-list-header *ngIf="user.books">
+        <ion-list-header *ngIf="recommendations.books">
           <ion-text color="tertiary">
             <h2>Libros</h2>
           </ion-text>
@@ -75,7 +75,7 @@
         <ion-item button *ngFor="let book of books">
           {{book.volumeInfo.title}} - {{book.volumeInfo.authors[0]}}
         </ion-item>
-        <ion-list-header *ngIf="user.restaurants">
+        <ion-list-header *ngIf="recommendations.restaurants">
           <ion-text color="tertiary">
             <h2>Restaurantes</h2>
           </ion-text>
@@ -83,7 +83,7 @@
         <ion-item button *ngFor="let restaurant of restaurants">
           {{restaurant.restaurantName}}
         </ion-item>
-        <ion-list-header *ngIf="user.products">
+        <ion-list-header *ngIf="recommendations.products">
           <ion-text color="tertiary">
             <h2>Productos</h2>
           </ion-text>

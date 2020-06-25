@@ -19,6 +19,7 @@ import { Product } from "../shared/models/product";
 import { Restaurant } from "../shared/models/restaurant";
 import { ProductService } from "../shared/services/product/product.service";
 import { RestaurantService } from "../shared/services/restaurant/restaurant.service";
+import { MyRecommendations } from "../shared/models/my-recommendations";
 
 @Component({
   selector: "app-profile",
@@ -33,7 +34,7 @@ export class ProfilePage implements OnInit {
   musics: Music[] = [];
   products: Product[] = [];
   restaurants: Restaurant[] = [];
-  user: User;
+  recommendations: MyRecommendations;
   constructor(
     private authService: AuthenticationService,
     private bookService: BookService,
@@ -61,61 +62,65 @@ export class ProfilePage implements OnInit {
 
   ionViewWillEnter() {
     this.userService
-      .getUser(this.authService.userData.uid)
+      .getMyRecommendations(this.authService.userData.uid)
       .subscribe((data) => {
-        this.user = data;
-      });
-    if (this.user.books) {
-      this.user.books.forEach((bookId) => {
-        this.bookService.getBooks(bookId).subscribe((res) => {
-          this.books.push(res.items[0]);
-        });
-      });
-    }
+        this.recommendations = data;
+        if (this.recommendations.books) {
+          this.recommendations.books.forEach((bookId) => {
+            this.bookService.getBooks(bookId).subscribe((res) => {
+              this.books.push(res.items[0]);
+            });
+          });
+        }
 
-    if (this.user.movies) {
-      this.user.movies.forEach((movieId) => {
-        this.movieService.searchMovie(movieId).subscribe((movie) => {
-          this.movies.push(movie);
-        });
-      });
-    }
+        if (this.recommendations.movies) {
+          this.recommendations.movies.forEach((movieId) => {
+            this.movieService.searchMovie(movieId).subscribe((movie) => {
+              this.movies.push(movie);
+            });
+          });
+        }
 
-    if (this.user.series) {
-      this.user.series.forEach((serieId) => {
-        this.serieService.searchSerie(serieId).subscribe((serie) => {
-          this.series.push(serie);
-        });
-      });
-    }
+        if (this.recommendations.series) {
+          this.recommendations.series.forEach((serieId) => {
+            this.serieService.searchSerie(serieId).subscribe((serie) => {
+              this.series.push(serie);
+            });
+          });
+        }
 
-    if (this.user.games) {
-      this.user.games.forEach((gameId) => {
-        this.gameService.searchGame(gameId).subscribe((game) => {
-          this.games.push(game);
-        });
-      });
-    }
+        if (this.recommendations.games) {
+          this.recommendations.games.forEach((gameId) => {
+            this.gameService.searchGame(gameId).subscribe((game) => {
+              this.games.push(game);
+            });
+          });
+        }
 
-    if (this.user.musics) {
-      this.user.musics.forEach((musicId) => {
-        this.musicService.searchMusic(musicId).subscribe((music) => {
-          this.musics.push(music);
-        });
-      });
-    }
+        if (this.recommendations.musics) {
+          this.recommendations.musics.forEach((musicId) => {
+            this.musicService.searchMusic(musicId).subscribe((music) => {
+              this.musics.push(music);
+            });
+          });
+        }
 
-    if (this.user.restaurants) {
-      this.restaurantService.getRestaurants(this.user.uid).subscribe((data) => {
-        this.restaurants = data;
-      });
-    }
+        if (this.recommendations.restaurants) {
+          this.restaurantService
+            .getRestaurants(this.authService.userData.uid)
+            .subscribe((data) => {
+              this.restaurants = data;
+            });
+        }
 
-    if (this.user.products) {
-      this.productService.getProducts(this.user.uid).subscribe((data) => {
-        this.products = data;
+        if (this.recommendations.products) {
+          this.productService
+            .getProducts(this.authService.userData.uid)
+            .subscribe((data) => {
+              this.products = data;
+            });
+        }
       });
-    }
   }
 
   async showOptions(ev) {
