@@ -15,7 +15,7 @@
             <h1>Peliculas</h1>
           </ion-text>
         </ion-list-header>
-        <ion-item button *ngFor="let movie of movies">
+        <ion-item button *ngFor="let movie of movies" (click)="openMovie(movie)">
           {{ movie.title }}
         </ion-item>
         <ion-list-header *ngIf="recommendations.series">

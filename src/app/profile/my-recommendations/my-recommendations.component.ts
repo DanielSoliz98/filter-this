@@ -16,6 +16,8 @@ import { SerieService } from "src/app/shared/services/serie/serie.service";
 import { ProductService } from "src/app/shared/services/product/product.service";
 import { RestaurantService } from "src/app/shared/services/restaurant/restaurant.service";
 import { UserService } from "src/app/shared/services/user/user.service";
+import { ModalController } from "@ionic/angular";
+import { MovieDetailComponent } from "src/app/recommendations/categories/movie/movie-detail/movie-detail.component";
 
 @Component({
   selector: "app-my-recommendations",
@@ -40,7 +42,8 @@ export class MyRecommendationsComponent implements OnInit {
     private serieService: SerieService,
     private productService: ProductService,
     private restaurantService: RestaurantService,
-    private userService: UserService
+    private userService: UserService,
+    private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {}
@@ -116,5 +119,16 @@ export class MyRecommendationsComponent implements OnInit {
     this.musics = [];
     this.products = [];
     this.restaurants = [];
+  }
+
+  async openMovie(movie: Movie) {
+    const modal = await this.modalCtrl.create({
+      component: MovieDetailComponent,
+      componentProps: {
+        movie: movie,
+        showComments: true,
+      },
+    });
+    return await modal.present();
   }
 }
