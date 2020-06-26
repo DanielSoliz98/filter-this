@@ -14,9 +14,7 @@
     ></ion-img>
     <ion-card-header>
       <ion-chip outline color="tertiary" *ngIf="serieModel">
-        <ion-label *ngIf="serieModel.user_uid === authService.userData.uid"
-          >Mi Recomendacion</ion-label
-        >
+        <ion-label *ngIf="myRecommendation">Mi Recomendacion</ion-label>
       </ion-chip>
       <ion-card-subtitle
         >Fecha de Emision:
@@ -50,13 +48,22 @@
             <ion-item>
               <h6><b>Generos:</b></h6>
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="genres.length > 0; else genreBlock">
               <ion-label>
                 <h6 *ngFor="let genre of genres">
                   {{ genre.name }}
                 </h6>
               </ion-label>
             </ion-item>
+            <ng-template #genreBlock>
+              <ion-item>
+                <ion-label>
+                  <h6 *ngFor="let genre of serie.genres">
+                    {{ genre["name"] }}
+                  </h6>
+                </ion-label>
+              </ion-item>
+            </ng-template>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -73,6 +80,16 @@
   <ion-fab *ngIf="!serieModel" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="saveSerieRecommendation()">
       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab
+    *ngIf="showComments && !myRecommendation"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="saveToMyCollection()" *ngIf="!saved">
+      <ion-icon name="bookMark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

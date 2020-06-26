@@ -23,7 +23,7 @@
             <h1>Series</h1>
           </ion-text>
         </ion-list-header>
-        <ion-item button *ngFor="let serie of series">
+        <ion-item button *ngFor="let serie of series" (click)="openSerie(serie)">
           {{ serie.name }}
         </ion-item>
         <ion-list-header *ngIf="recommendations.games">
@@ -31,7 +31,7 @@
             <h1>Juegos</h1>
           </ion-text>
         </ion-list-header>
-        <ion-item button *ngFor="let game of games">
+        <ion-item button *ngFor="let game of games" (click)="openGame(game)">
           {{ game.name }}
         </ion-item>
         <ion-list-header *ngIf="recommendations.musics">
@@ -39,7 +39,7 @@
             <h1>Musicas</h1>
           </ion-text>
         </ion-list-header>
-        <ion-item button *ngFor="let music of musics">
+        <ion-item button *ngFor="let music of musics" (click)="openMusic(music)">
           {{ music.title }} - {{ music.artist.name }}
         </ion-item>
         <ion-list-header *ngIf="recommendations.books">
@@ -47,7 +47,7 @@
             <h1>Libros</h1>
           </ion-text>
         </ion-list-header>
-        <ion-item button *ngFor="let book of books">
+        <ion-item button *ngFor="let book of books" (click)="openBook(book)">
           {{ book.volumeInfo.title }} - {{ book.volumeInfo.authors[0] }}
         </ion-item>
         <ion-list-header *ngIf="recommendations.restaurants">
@@ -56,7 +56,7 @@
           </ion-text>
         </ion-list-header>
         <ion-item button *ngFor="let restaurant of restaurants">
-          {{ restaurant.restaurantName }}
+          {{ restaurant.restaurantName }} 
         </ion-item>
         <ion-list-header *ngIf="recommendations.products">
           <ion-text color="tertiary">

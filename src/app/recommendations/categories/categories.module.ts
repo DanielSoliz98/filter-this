@@ -35,17 +35,6 @@ import { CommentsComponent } from 'src/app/shared/components/comments/comments.c
     SearchSeriesPageModule,
     SearchMusicPageModule
   ],
-  exports: [CommentsComponent],
-  declarations: [
-    CategoriesPage,
-    SearchMoviePage,
-    SearchSeriesPage,
-    SearchMusicPage,
-    SearchGamePage,
-    SearchBooksPage,
-    ProductFormPage,
-    CommentsComponent
-  ],
   entryComponents: [
     SearchMoviePage,
     SearchSeriesPage,

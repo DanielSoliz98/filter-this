@@ -18,6 +18,8 @@ export class MusicDetailComponent implements OnInit {
   @Input() showComments: boolean;
   musicModel: Model;
   user: User;
+  saved: boolean;
+  myRecommendation: boolean;
 
   constructor(
     private modalController: ModalController,
@@ -33,11 +35,27 @@ export class MusicDetailComponent implements OnInit {
     this.musicService.getMusic(this.music.id).subscribe((data) => {
       this.musicModel = data;
       if (data && this.showComments) {
+        this.myRecommendation =
+          data.user_uid === this.authService.userData.uid ? true : false;
         this.userService.getUser(data.user_uid).subscribe((dataUser) => {
           this.user = dataUser;
         });
       }
     });
+    if (this.showComments) {
+      this.userService
+        .getMyCollection(this.authService.userData.uid)
+        .subscribe((data) => {
+          let inCollection = data.musics.find(
+            (music) => music === this.music.id
+          );
+          if (!this.myRecommendation) {
+            this.saved = inCollection ? true : false;
+          } else {
+            this.saved = false;
+          }
+        });
+    }
   }
 
   saveMusicRecommendation() {
@@ -66,6 +84,20 @@ export class MusicDetailComponent implements OnInit {
         this.presentToast("No se pudo publicar la recomendacion");
       }
     );
+  }
+
+  saveToMyCollection() {
+    this.userService
+      .getMyCollection(this.authService.userData.uid)
+      .subscribe((data) => {
+        let collection = data;
+        collection.musics.push(this.music.id);
+        this.userService
+          .updateMyCollection(this.authService.userData.uid, collection)
+          .then(() => {
+            this.presentToast("Recomendacion guardada");
+          });
+      });
   }
 
   async presentToast(message: string) {

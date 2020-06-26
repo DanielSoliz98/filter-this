@@ -18,6 +18,10 @@ import { RestaurantService } from "src/app/shared/services/restaurant/restaurant
 import { UserService } from "src/app/shared/services/user/user.service";
 import { ModalController } from "@ionic/angular";
 import { MovieDetailComponent } from "src/app/recommendations/categories/movie/movie-detail/movie-detail.component";
+import { MusicDetailComponent } from 'src/app/recommendations/categories/music/music-detail/music-detail.component';
+import { SerieDetailComponent } from 'src/app/recommendations/categories/tv-series/serie-detail/serie-detail.component';
+import { BookDetailComponent } from 'src/app/recommendations/categories/book/book-detail/book-detail.component';
+import { GameDetailComponent } from 'src/app/recommendations/categories/games/game-detail/game-detail.component';
 
 @Component({
   selector: "app-my-recommendations",
@@ -126,6 +130,50 @@ export class MyRecommendationsComponent implements OnInit {
       component: MovieDetailComponent,
       componentProps: {
         movie: movie,
+        showComments: true,
+      },
+    });
+    return await modal.present();
+  }
+
+  async openMusic(music: Music) {
+    const modal = await this.modalCtrl.create({
+      component: MusicDetailComponent,
+      componentProps: {
+        music: music,
+        showComments: true,
+      },
+    });
+    return await modal.present();
+  }
+
+  async openSerie(serie: Serie) {
+    const modal = await this.modalCtrl.create({
+      component: SerieDetailComponent,
+      componentProps: {
+        serie: serie,
+        showComments: true,
+      },
+    });
+    return await modal.present();
+  }
+
+  async openBook(book: Book) {
+    const modal = await this.modalCtrl.create({
+      component: BookDetailComponent,
+      componentProps: {
+        book: book,
+        showComments: true,
+      },
+    });
+    return await modal.present();
+  }
+
+  async openGame(game: Game) {
+    const modal = await this.modalCtrl.create({
+      component: GameDetailComponent,
+      componentProps: {
+        game: game,
         showComments: true,
       },
     });

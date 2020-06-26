@@ -18,6 +18,8 @@ export class BookDetailComponent implements OnInit {
   @Input() showComments: boolean;
   bookModel: Model;
   user: User;
+  saved: boolean;
+  myRecommendation: boolean;
 
   constructor(
     private modalController: ModalController,
@@ -33,11 +35,28 @@ export class BookDetailComponent implements OnInit {
     this.bookService.getBook(this.book.id).subscribe((data) => {
       this.bookModel = data;
       if (data && this.showComments) {
+        this.myRecommendation =
+          data.user_uid === this.authService.userData.uid ? true : false;
         this.userService.getUser(data.user_uid).subscribe((dataUser) => {
           this.user = dataUser;
         });
       }
     });
+
+    if (this.showComments) {
+      this.userService
+        .getMyCollection(this.authService.userData.uid)
+        .subscribe((data) => {
+          let inCollection = data.books.find(
+            (book) => book === this.book.id
+          );
+          if (!this.myRecommendation) {
+            this.saved = inCollection ? true : false;
+          } else {
+            this.saved = false;
+          }
+        });
+    }
   }
 
   saveBookRecommendation() {
@@ -66,6 +85,20 @@ export class BookDetailComponent implements OnInit {
         this.presentToast("No se pudo publicar la recomendacion");
       }
     );
+  }
+
+  saveToMyCollection() {
+    this.userService
+      .getMyCollection(this.authService.userData.uid)
+      .subscribe((data) => {
+        let collection = data;
+        collection.books.push(this.book.id);
+        this.userService
+          .updateMyCollection(this.authService.userData.uid, collection)
+          .then(() => {
+            this.presentToast("Recomendacion guardada");
+          });
+      });
   }
 
   async presentToast(message: string) {

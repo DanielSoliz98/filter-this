@@ -20,6 +20,8 @@ export class MovieDetailComponent implements OnInit {
   genres: Genre[] = [];
   movieModel: MovieModel;
   user: User;
+  saved: boolean;
+  myRecommendation: boolean;
 
   constructor(
     private modalController: ModalController,
@@ -33,19 +35,37 @@ export class MovieDetailComponent implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    this.movie.genre_ids.forEach((value) => {
-      this.genreService.getGenre(value).subscribe((data) => {
-        this.genres.push(data as Genre);
+    if (this.movie.genre_ids) {
+      this.movie.genre_ids.forEach((value) => {
+        this.genreService.getGenre(value).subscribe((data) => {
+          this.genres.push(data as Genre);
+        });
       });
-    });
+    }
     this.movieService.getMovie(this.movie.id).subscribe((data) => {
       this.movieModel = data;
       if (data && this.showComments) {
+        this.myRecommendation =
+          data.user_uid === this.authService.userData.uid ? true : false;
         this.userService.getUser(data.user_uid).subscribe((dataUser) => {
           this.user = dataUser;
         });
       }
     });
+    if (this.showComments) {
+      this.userService
+        .getMyCollection(this.authService.userData.uid)
+        .subscribe((data) => {
+          let inCollection = data.movies.find(
+            (movie) => movie === this.movie.id
+          );
+          if (!this.myRecommendation) {
+            this.saved = inCollection ? true : false;
+          } else {
+            this.saved = false;
+          }
+        });
+    }
   }
 
   saveMovieRecommendation() {
@@ -74,6 +94,20 @@ export class MovieDetailComponent implements OnInit {
         this.presentToast("No se pudo publicar la recomendacion");
       }
     );
+  }
+
+  saveToMyCollection() {
+    this.userService
+      .getMyCollection(this.authService.userData.uid)
+      .subscribe((data) => {
+        let collection = data;
+        collection.movies.push(this.movie.id);
+        this.userService
+          .updateMyCollection(this.authService.userData.uid, collection)
+          .then(() => {
+            this.presentToast("Recomendacion guardada");
+          });
+      });
   }
 
   async presentToast(message: string) {

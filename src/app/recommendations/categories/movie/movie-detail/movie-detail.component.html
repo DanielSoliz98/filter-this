@@ -14,9 +14,7 @@
     ></ion-img>
     <ion-card-header>
       <ion-chip outline color="tertiary" *ngIf="movieModel">
-        <ion-label *ngIf="movieModel.user_uid === authService.userData.uid"
-          >Mi Recomendacion</ion-label
-        >
+        <ion-label *ngIf="myRecommendation">Mi Recomendacion</ion-label>
       </ion-chip>
       <ion-card-subtitle
         >Fecha de Estreno:
@@ -44,13 +42,22 @@
             <ion-item>
               <h6><b>Generos:</b></h6>
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="genres.length > 0; else genreBlock">
               <ion-label>
                 <h6 *ngFor="let genre of genres">
                   {{ genre.name }}
                 </h6>
               </ion-label>
             </ion-item>
+            <ng-template #genreBlock>
+              <ion-item>
+                <ion-label>
+                  <h6 *ngFor="let genre of movie.genres">
+                    {{ genre["name"] }}
+                  </h6>
+                </ion-label>
+              </ion-item>
+            </ng-template>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -64,9 +71,24 @@
   <ng-container *ngIf="movieModel && showComments">
     <app-comments [comments]="movieModel.comments" [user]="user"></app-comments>
   </ng-container>
-  <ion-fab *ngIf="!movieModel && !showComments" vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab
+    *ngIf="!movieModel && !showComments"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
     <ion-fab-button (click)="saveMovieRecommendation()">
       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab
+    *ngIf="showComments && !myRecommendation"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="saveToMyCollection()" *ngIf="!saved">
+      <ion-icon name="bookMark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
