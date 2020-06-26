@@ -44,7 +44,7 @@ export class MovieDetailComponent implements OnInit {
     }
     this.movieService.getMovie(this.movie.id).subscribe((data) => {
       this.movieModel = data;
-      if (data && this.showComments) {
+      if (data) {
         this.myRecommendation =
           data.user_uid === this.authService.userData.uid ? true : false;
         this.userService.getUser(data.user_uid).subscribe((dataUser) => {
@@ -52,10 +52,10 @@ export class MovieDetailComponent implements OnInit {
         });
       }
     });
-    if (this.showComments) {
-      this.userService
-        .getMyCollection(this.authService.userData.uid)
-        .subscribe((data) => {
+    this.userService
+      .getMyCollection(this.authService.userData.uid)
+      .subscribe((data) => {
+        if (data) {
           let inCollection = data.movies.find(
             (movie) => movie === this.movie.id
           );
@@ -64,8 +64,10 @@ export class MovieDetailComponent implements OnInit {
           } else {
             this.saved = false;
           }
-        });
-    }
+        } else {
+          this.saved = false;
+        }
+      });
   }
 
   saveMovieRecommendation() {

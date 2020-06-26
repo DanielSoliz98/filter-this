@@ -14,7 +14,21 @@
     ></ion-img>
     <ion-card-header>
       <ion-chip outline color="tertiary" *ngIf="gameModel">
-        <ion-label *ngIf="myRecommendation">Mi Recomendacion</ion-label>
+        <ion-label *ngIf="myRecommendation; else noMyRecommendation"
+          >Mi Recomendacion</ion-label
+        >
+        <ng-template #noMyRecommendation>
+          <ion-label *ngIf="user"
+            >Recomendado por: {{ user.displayName }}</ion-label
+          >
+        </ng-template>
+      </ion-chip>
+      <ion-chip
+        color="tertiary"
+        outline="true"
+        *ngIf="saved && !myRecommendation"
+      >
+        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
       </ion-chip>
       <ion-card-subtitle
         >Fecha de Lanzamiento:
@@ -76,7 +90,7 @@
     </ion-fab-button>
   </ion-fab>
   <ion-fab
-    *ngIf="showComments && !myRecommendation"
+    *ngIf="!myRecommendation && gameModel"
     vertical="bottom"
     horizontal="end"
     slot="fixed"

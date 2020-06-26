@@ -51,20 +51,16 @@ export class SerieDetailComponent implements OnInit {
         });
       }
     });
-    if (this.showComments) {
-      this.userService
-        .getMyCollection(this.authService.userData.uid)
-        .subscribe((data) => {
-          let inCollection = data.series.find(
-            (serie) => serie === this.serie.id
-          );
-          if (!this.myRecommendation) {
-            this.saved = inCollection ? true : false;
-          } else {
-            this.saved = false;
-          }
-        });
-    }
+    this.userService
+      .getMyCollection(this.authService.userData.uid)
+      .subscribe((data) => {
+        let inCollection = data.series.find((serie) => serie === this.serie.id);
+        if (!this.myRecommendation) {
+          this.saved = inCollection ? true : false;
+        } else {
+          this.saved = false;
+        }
+      });
   }
 
   saveSerieRecommendation() {
@@ -104,6 +100,7 @@ export class SerieDetailComponent implements OnInit {
         this.userService
           .updateMyCollection(this.authService.userData.uid, collection)
           .then(() => {
+            this.dismiss();
             this.presentToast("Recomendacion guardada");
           });
       });

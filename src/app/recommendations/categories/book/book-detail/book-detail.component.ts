@@ -43,20 +43,16 @@ export class BookDetailComponent implements OnInit {
       }
     });
 
-    if (this.showComments) {
-      this.userService
-        .getMyCollection(this.authService.userData.uid)
-        .subscribe((data) => {
-          let inCollection = data.books.find(
-            (book) => book === this.book.id
-          );
-          if (!this.myRecommendation) {
-            this.saved = inCollection ? true : false;
-          } else {
-            this.saved = false;
-          }
-        });
-    }
+    this.userService
+      .getMyCollection(this.authService.userData.uid)
+      .subscribe((data) => {
+        let inCollection = data.books.find((book) => book === this.book.id);
+        if (!this.myRecommendation) {
+          this.saved = inCollection ? true : false;
+        } else {
+          this.saved = false;
+        }
+      });
   }
 
   saveBookRecommendation() {
@@ -96,6 +92,7 @@ export class BookDetailComponent implements OnInit {
         this.userService
           .updateMyCollection(this.authService.userData.uid, collection)
           .then(() => {
+            this.dismiss();
             this.presentToast("Recomendacion guardada");
           });
       });

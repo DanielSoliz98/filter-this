@@ -10,7 +10,21 @@
   <ion-card>
     <ion-card-header class="ion-text-center">
       <ion-chip outline color="tertiary" *ngIf="musicModel">
-        <ion-label *ngIf="myRecommendation">Mi Recomendacion</ion-label>
+        <ion-label *ngIf="myRecommendation; else noMyRecommendation"
+          >Mi Recomendacion</ion-label
+        >
+        <ng-template #noMyRecommendation>
+          <ion-label *ngIf="user"
+            >Recomendado por: {{ user.displayName }}</ion-label
+          >
+        </ng-template>
+      </ion-chip>
+      <ion-chip
+        color="tertiary"
+        outline="true"
+        *ngIf="saved && !myRecommendation"
+      >
+        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
       </ion-chip>
       <ion-card-title>Cancion: {{ music.title }}</ion-card-title>
     </ion-card-header>
@@ -77,7 +91,7 @@
     </ion-fab-button>
   </ion-fab>
   <ion-fab
-    *ngIf="showComments && !myRecommendation"
+    *ngIf="!myRecommendation && musicModel"
     vertical="bottom"
     horizontal="end"
     slot="fixed"

@@ -7,8 +7,6 @@ import { IonicModule } from "@ionic/angular";
 import { SearchMusicPageRoutingModule } from "./search-music-routing.module";
 
 import { SearchMusicPage } from "./search-music.page";
-import { MusicDetailComponent } from "../music-detail/music-detail.component";
-import { CommentsComponent } from "src/app/shared/components/comments/comments.component";
 
 @NgModule({
   imports: [
@@ -18,8 +16,6 @@ import { CommentsComponent } from "src/app/shared/components/comments/comments.c
     SearchMusicPageRoutingModule,
     ReactiveFormsModule,
   ],
-  exports: [CommentsComponent],
-  declarations: [SearchMusicPage, MusicDetailComponent, CommentsComponent],
-  entryComponents: [MusicDetailComponent],
+  declarations: [SearchMusicPage],
 })
 export class SearchMusicPageModule {}

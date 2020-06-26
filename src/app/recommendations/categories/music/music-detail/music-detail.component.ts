@@ -42,20 +42,17 @@ export class MusicDetailComponent implements OnInit {
         });
       }
     });
-    if (this.showComments) {
-      this.userService
-        .getMyCollection(this.authService.userData.uid)
-        .subscribe((data) => {
-          let inCollection = data.musics.find(
-            (music) => music === this.music.id
-          );
-          if (!this.myRecommendation) {
-            this.saved = inCollection ? true : false;
-          } else {
-            this.saved = false;
-          }
-        });
-    }
+
+    this.userService
+      .getMyCollection(this.authService.userData.uid)
+      .subscribe((data) => {
+        let inCollection = data.musics.find((music) => music === this.music.id);
+        if (!this.myRecommendation) {
+          this.saved = inCollection ? true : false;
+        } else {
+          this.saved = false;
+        }
+      });
   }
 
   saveMusicRecommendation() {
@@ -95,6 +92,7 @@ export class MusicDetailComponent implements OnInit {
         this.userService
           .updateMyCollection(this.authService.userData.uid, collection)
           .then(() => {
+            this.dismiss();
             this.presentToast("Recomendacion guardada");
           });
       });

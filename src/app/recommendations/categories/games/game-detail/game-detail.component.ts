@@ -43,18 +43,16 @@ export class GameDetailComponent implements OnInit {
       }
     });
 
-    if (this.showComments) {
-      this.userService
-        .getMyCollection(this.authService.userData.uid)
-        .subscribe((data) => {
-          let inCollection = data.games.find((game) => game === this.game.id);
-          if (!this.myRecommendation) {
-            this.saved = inCollection ? true : false;
-          } else {
-            this.saved = false;
-          }
-        });
-    }
+    this.userService
+      .getMyCollection(this.authService.userData.uid)
+      .subscribe((data) => {
+        let inCollection = data.games.find((game) => game === this.game.id);
+        if (!this.myRecommendation) {
+          this.saved = inCollection ? true : false;
+        } else {
+          this.saved = false;
+        }
+      });
   }
 
   saveGameRecommendation() {
@@ -94,6 +92,7 @@ export class GameDetailComponent implements OnInit {
         this.userService
           .updateMyCollection(this.authService.userData.uid, collection)
           .then(() => {
+            this.dismiss();
             this.presentToast("Recomendacion guardada");
           });
       });
