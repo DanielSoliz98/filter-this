@@ -14,6 +14,8 @@ import { SerieDetailComponent } from "../recommendations/categories/tv-series/se
 import { BookDetailComponent } from "../recommendations/categories/book/book-detail/book-detail.component";
 import { GameDetailComponent } from "../recommendations/categories/games/game-detail/game-detail.component";
 import { CommentsComponent } from "../shared/components/comments/comments.component";
+import { RestaurantDetailComponent } from '../shared/components/restaurant-detail/restaurant-detail.component';
+import { ProductDetailComponent } from '../shared/components/product-detail/product-detail.component';
 
 @NgModule({
   imports: [
@@ -34,6 +36,8 @@ import { CommentsComponent } from "../shared/components/comments/comments.compon
     BookDetailComponent,
     GameDetailComponent,
     CommentsComponent,
+    RestaurantDetailComponent,
+    ProductDetailComponent,
   ],
   entryComponents: [
     MovieDetailComponent,
@@ -41,6 +45,8 @@ import { CommentsComponent } from "../shared/components/comments/comments.compon
     SerieDetailComponent,
     BookDetailComponent,
     GameDetailComponent,
+    RestaurantDetailComponent,
+    ProductDetailComponent,
   ],
 })
 export class HomePageModule {}
