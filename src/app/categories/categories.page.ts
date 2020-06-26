@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-categories",
@@ -6,35 +7,35 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./categories.page.scss"],
 })
 export class CategoriesPage implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {}
 
   openMovies() {
-    console.log("series");
+    this.router.navigateByUrl("/app/tabs/categories/movies");
   }
 
   openSeries() {
-    console.log("series");
+    this.router.navigateByUrl("/app/tabs/categories/series");
   }
 
   openMusics() {
-    console.log("series");
+    this.router.navigateByUrl("/app/tabs/categories/musics");
   }
 
   openGames() {
-    console.log("series");
+    this.router.navigateByUrl("/app/tabs/categories/games");
   }
 
   openBooks() {
-    console.log("series");
+    this.router.navigateByUrl("/app/tabs/categories/books");
   }
 
   openRestaurants() {
-    console.log("series");
+    this.router.navigateByUrl("/app/tabs/categories/restaurants");
   }
 
   openProducts() {
-    console.log("series");
+    this.router.navigateByUrl("/app/tabs/categories/products");
   }
 }
