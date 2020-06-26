@@ -7,7 +7,7 @@ import {
   DocumentReference,
 } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
-import { map, finalize } from "rxjs/operators";
+import { map, finalize, take } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -72,5 +72,17 @@ export class ProductService {
     return this.db
       .collection<Product>("products", (ref) => ref.where("user_uid", "==", user_uid))
       .valueChanges();
+  }
+
+  searchProduct(uid: string): Observable<Product> {
+    let productDoc = this.db.doc<Product>(
+      `products/${uid}`
+    );
+    return productDoc.valueChanges().pipe(
+      take(1),
+      map((collection) => {
+        return collection;
+      })
+    );
   }
 }
