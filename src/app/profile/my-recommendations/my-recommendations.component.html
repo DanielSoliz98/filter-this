@@ -67,7 +67,7 @@
             <h1>Restaurantes</h1>
           </ion-text>
         </ion-list-header>
-        <ion-item button *ngFor="let restaurant of restaurants">
+        <ion-item button *ngFor="let restaurant of restaurants" (click)="openRestaurant(restaurant)">
           {{ restaurant.restaurantName }}
         </ion-item>
         <ion-list-header *ngIf="recommendations.products.length > 0">

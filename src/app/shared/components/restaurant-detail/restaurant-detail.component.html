@@ -1,3 +1,82 @@
-<p>
-  restaurant-detail works!
-</p>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Restaurante</ion-title>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header class="ion-text-center">
+      <ion-chip outline color="tertiary" *ngIf="restaurant">
+        <ion-label *ngIf="myRecommendation; else noMyRecommendation"
+          >Mi Recomendacion</ion-label
+        >
+        <ng-template #noMyRecommendation>
+          <ion-label *ngIf="user"
+            >Recomendado por: {{ user.displayName }}</ion-label
+          >
+        </ng-template>
+      </ion-chip>
+      <ion-chip
+        color="tertiary"
+        outline="true"
+        *ngIf="saved && !myRecommendation"
+      >
+        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
+      </ion-chip>
+      <ion-card-title>Restaurante: {{ restaurant.restaurantName }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="5">
+            <ion-item class="ion-text-center">
+              <h6><b>Comidas Disponibles:</b></h6>
+            </ion-item>
+          </ion-col>
+          <ion-col size="7">
+            <ion-item *ngFor="let food of restaurant.foods" class="ion-text-center">
+              <h6>{{ food }}</h6>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <h6><b>Descripcion: </b>{{ restaurant.description }}</h6>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-list *ngIf="restaurant.imagesURL">
+        <ion-list-header>
+          Imagenes del Restaurante
+        </ion-list-header>
+        <ion-slides pager="true" [options]="sliderConfig">
+          <ion-slide *ngFor="let image of restaurant.imagesURL">
+            <ion-row>
+              <ion-col size="12">
+                <ion-img [src]="image"></ion-img>
+              </ion-col>
+            </ion-row>
+          </ion-slide>
+        </ion-slides>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ng-container *ngIf="showComments">
+    <app-comments [comments]="restaurant.comments" [user]="user"></app-comments>
+  </ng-container>
+  <ion-fab
+    *ngIf="!myRecommendation"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="saveToMyCollection()" *ngIf="!saved">
+      <ion-icon name="bookMark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
