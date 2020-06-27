@@ -30,7 +30,6 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    console.log(this.product);
     if (this.product && this.showComments) {
       this.myRecommendation =
         this.product.user_uid === this.authService.userData.uid ? true : false;
@@ -42,7 +41,9 @@ export class ProductDetailComponent implements OnInit {
     this.userService
       .getMyCollection(this.authService.userData.uid)
       .subscribe((data) => {
-        let inCollection = data.products.find((product) => product === this.product.id);
+        let inCollection = data.products.find(
+          (product) => product === this.product.id
+        );
         if (!this.myRecommendation) {
           this.saved = inCollection ? true : false;
         } else {

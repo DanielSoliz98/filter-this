@@ -26,7 +26,9 @@
       >
         <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
       </ion-chip>
-      <ion-card-title>Restaurante: {{ restaurant.restaurantName }}</ion-card-title>
+      <ion-card-title
+        >Restaurante: {{ restaurant.restaurantName }}</ion-card-title
+      >
     </ion-card-header>
     <ion-card-content>
       <ion-grid fixed>
@@ -37,7 +39,10 @@
             </ion-item>
           </ion-col>
           <ion-col size="7">
-            <ion-item *ngFor="let food of restaurant.foods" class="ion-text-center">
+            <ion-item
+              *ngFor="let food of restaurant.foods"
+              class="ion-text-center"
+            >
               <h6>{{ food }}</h6>
             </ion-item>
           </ion-col>
@@ -64,6 +69,7 @@
           </ion-slide>
         </ion-slides>
       </ion-list>
+      <app-map-view [coords]="coords"></app-map-view>
     </ion-card-content>
   </ion-card>
   <ng-container *ngIf="showComments">

@@ -1,14 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
-import { AuthenticationService } from '../../services/authentication/authentication.service';
-import { UserService } from '../../services/user/user.service';
-import { Restaurant } from '../../models/restaurant';
-import { User } from '../../models/user';
+import { Component, OnInit, Input } from "@angular/core";
+import { ModalController, ToastController } from "@ionic/angular";
+import { AuthenticationService } from "../../services/authentication/authentication.service";
+import { UserService } from "../../services/user/user.service";
+import { Restaurant } from "../../models/restaurant";
+import { User } from "../../models/user";
+import { Coordinates } from "../../models/coordinates";
 
 @Component({
-  selector: 'app-restaurant-detail',
-  templateUrl: './restaurant-detail.component.html',
-  styleUrls: ['./restaurant-detail.component.scss'],
+  selector: "app-restaurant-detail",
+  templateUrl: "./restaurant-detail.component.html",
+  styleUrls: ["./restaurant-detail.component.scss"],
 })
 export class RestaurantDetailComponent implements OnInit {
   @Input() restaurant: Restaurant;
@@ -19,6 +20,7 @@ export class RestaurantDetailComponent implements OnInit {
   sliderConfig = {
     slidesPerView: 1,
   };
+  coords: Coordinates;
   constructor(
     private modalController: ModalController,
     private toastController: ToastController,
@@ -31,16 +33,26 @@ export class RestaurantDetailComponent implements OnInit {
   ionViewWillEnter() {
     if (this.restaurant && this.showComments) {
       this.myRecommendation =
-        this.restaurant.user_uid === this.authService.userData.uid ? true : false;
-      this.userService.getUser(this.restaurant.user_uid).subscribe((dataUser) => {
-        this.user = dataUser;
-      });
+        this.restaurant.user_uid === this.authService.userData.uid
+          ? true
+          : false;
+      this.userService
+        .getUser(this.restaurant.user_uid)
+        .subscribe((dataUser) => {
+          this.user = dataUser;
+        });
+      this.coords = {
+        latitude: this.restaurant.ubication[0],
+        longitude: this.restaurant.ubication[1],
+      };
     }
 
     this.userService
       .getMyCollection(this.authService.userData.uid)
       .subscribe((data) => {
-        let inCollection = data.restaurants.find((restaurant) => restaurant === this.restaurant.id);
+        let inCollection = data.restaurants.find(
+          (restaurant) => restaurant === this.restaurant.id
+        );
         if (!this.myRecommendation) {
           this.saved = inCollection ? true : false;
         } else {

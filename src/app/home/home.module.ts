@@ -16,6 +16,7 @@ import { GameDetailComponent } from "../recommendations/categories/games/game-de
 import { CommentsComponent } from "../shared/components/comments/comments.component";
 import { RestaurantDetailComponent } from '../shared/components/restaurant-detail/restaurant-detail.component';
 import { ProductDetailComponent } from '../shared/components/product-detail/product-detail.component';
+import { MapViewComponent } from '../shared/components/map-view/map-view.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,7 @@ import { ProductDetailComponent } from '../shared/components/product-detail/prod
     CategoriesPageModule,
     ProfilePageModule,
   ],
-  exports: [CommentsComponent],
+  exports: [CommentsComponent, MapViewComponent],
   declarations: [
     HomePage,
     MovieDetailComponent,
@@ -36,6 +37,7 @@ import { ProductDetailComponent } from '../shared/components/product-detail/prod
     BookDetailComponent,
     GameDetailComponent,
     CommentsComponent,
+    MapViewComponent,
     RestaurantDetailComponent,
     ProductDetailComponent,
   ],
