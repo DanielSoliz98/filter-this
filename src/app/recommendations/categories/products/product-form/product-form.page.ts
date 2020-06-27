@@ -47,7 +47,7 @@ export class ProductFormPage implements OnInit {
     link: new FormControl("", Validators.required),
   });
   sliderConfig = {
-    slidesPerView: 3,
+    slidesPerView: 2,
   };
   images: string[] = [];
   constructor(

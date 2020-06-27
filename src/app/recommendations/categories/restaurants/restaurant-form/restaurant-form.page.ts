@@ -47,7 +47,7 @@ export class RestaurantFormPage implements OnInit {
     ubication: new FormControl("", Validators.required),
   });
   sliderConfig = {
-    slidesPerView: 3,
+    slidesPerView: 2,
   };
   images: string[] = [];
   constructor(
