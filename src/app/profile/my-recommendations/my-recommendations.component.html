@@ -75,7 +75,7 @@
             <h1>Productos</h1>
           </ion-text>
         </ion-list-header>
-        <ion-item button *ngFor="let product of products">
+        <ion-item button *ngFor="let product of products" (click)="openProduct(product)">
           {{ product.productName }} - {{ product.category }}
         </ion-item>
       </ion-list>

@@ -36,7 +36,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating"
-            >Precio<ion-text color="danger">*</ion-text></ion-label
+            >Precio (Bs.)<ion-text color="danger">*</ion-text></ion-label
           >
           <ion-input required formControlName="price" type="number"></ion-input>
         </ion-item>
@@ -56,7 +56,7 @@
           <ion-list-header>
             Imagenes del Producto
           </ion-list-header>
-          <ion-slides *ngIf="images.length > 0" [options]="sliderConfig">
+          <ion-slides *ngIf="images.length > 0" pager="true" [options]="sliderConfig">
             <ion-slide *ngFor="let image of images">
               <ion-row>
                 <ion-col size="12">

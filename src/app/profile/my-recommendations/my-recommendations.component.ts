@@ -22,6 +22,7 @@ import { MusicDetailComponent } from 'src/app/recommendations/categories/music/m
 import { SerieDetailComponent } from 'src/app/recommendations/categories/tv-series/serie-detail/serie-detail.component';
 import { BookDetailComponent } from 'src/app/recommendations/categories/book/book-detail/book-detail.component';
 import { GameDetailComponent } from 'src/app/recommendations/categories/games/game-detail/game-detail.component';
+import { ProductDetailComponent } from 'src/app/shared/components/product-detail/product-detail.component';
 
 @Component({
   selector: "app-my-recommendations",
@@ -174,6 +175,17 @@ export class MyRecommendationsComponent implements OnInit {
       component: GameDetailComponent,
       componentProps: {
         game: game,
+        showComments: true,
+      },
+    });
+    return await modal.present();
+  }
+
+  async openProduct(product: Product) {
+    const modal = await this.modalCtrl.create({
+      component: ProductDetailComponent,
+      componentProps: {
+        product: product,
         showComments: true,
       },
     });
