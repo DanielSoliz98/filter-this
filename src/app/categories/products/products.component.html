@@ -10,7 +10,27 @@
   <ion-card>
     <img src="../../../assets/products-banner.jpg" alt="" />
     <ion-card-content>
-      Awesome content
+      <ion-item
+        button
+        detail
+        *ngFor="let product of products"
+        (click)="openProductDetail(product)"
+      >
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="8">
+              <ion-text color="dark">
+                <h6>{{ product.productName }}</h6>
+              </ion-text>
+            </ion-col>
+            <ion-col size="4" class="ion-no-padding">
+              <ion-text color="dark">
+                <h6>Precio: {{ product.price }} Bs.</h6>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>

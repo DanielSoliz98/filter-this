@@ -10,7 +10,37 @@
   <ion-card>
     <img src="../../../assets/series-banner.jpg" alt="" />
     <ion-card-content>
-      Awesome content
+      <ion-item
+        button
+        detail
+        *ngFor="let serie of series"
+        (click)="openSerieDetail(serie)"
+      >
+        <ion-grid fixed>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="2" *ngIf="serie.poster_path" class="ion-no-padding">
+              <ion-img
+                src="{{
+                  'https://image.tmdb.org/t/p/original/' + serie.poster_path
+                }}"
+              ></ion-img>
+            </ion-col>
+            <ion-col size="7">
+              <ion-text color="dark">
+                <h6>{{ serie.name }}</h6>
+              </ion-text>
+            </ion-col>
+            <ion-col size="3" class="ion-no-padding">
+              <ion-text color="dark">
+                <h6>
+                  Fecha de emisión:
+                  {{ serie.first_air_date | date: "shortDate" }}
+                </h6>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>

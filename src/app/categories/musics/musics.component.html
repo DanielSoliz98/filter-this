@@ -10,7 +10,28 @@
   <ion-card>
     <img src="../../../assets/musics-banner.jpg" alt="" />
     <ion-card-content>
-      Awesome content
+      <ion-item
+        button
+        detail
+        *ngFor="let music of musics"
+        (click)="openMusicDetail(music)"
+      >
+        <ion-grid fixed>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="2" class="ion-no-padding">
+              <ion-img src="{{ music.artist.picture_medium }}"></ion-img>
+            </ion-col>
+            <ion-col size="10">
+              <ion-text color="dark">
+                <h6>{{ music.title }}</h6>
+              </ion-text>
+              <ion-text color="dark">
+                <h6>{{ music.artist.name }}</h6>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>
