@@ -7,6 +7,7 @@ import {
 import { Model } from "../../models/model";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { take, map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -22,7 +23,12 @@ export class BookService {
 
   getBook(id: string): Observable<Model> {
     this.bookDoc = this.afs.doc<Model>(`books/${id}`);
-    return this.bookDoc.valueChanges();
+    return this.bookDoc.valueChanges().pipe(
+      take(1),
+      map((book) => {
+        return book;
+      })
+    );
   }
 
   addBook(data: Model): Promise<void> {

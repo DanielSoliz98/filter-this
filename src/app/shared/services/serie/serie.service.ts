@@ -7,6 +7,7 @@ import {
   AngularFirestoreDocument,
   AngularFirestore,
 } from "@angular/fire/firestore";
+import { take, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root",
@@ -22,7 +23,12 @@ export class SerieService {
 
   getSerie(id: string): Observable<SerieModel> {
     this.serieDoc = this.afs.doc<SerieModel>(`series/${id}`);
-    return this.serieDoc.valueChanges();
+    return this.serieDoc.valueChanges().pipe(
+      take(1),
+      map((book) => {
+        return book;
+      })
+    );
   }
 
   searchSerie(id: string): Observable<Serie> {
