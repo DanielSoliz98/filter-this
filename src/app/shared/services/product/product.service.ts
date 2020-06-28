@@ -70,19 +70,23 @@ export class ProductService {
 
   getProducts(user_uid: string): Observable<Product[]> {
     return this.db
-      .collection<Product>("products", (ref) => ref.where("user_uid", "==", user_uid))
+      .collection<Product>("products", (ref) =>
+        ref.where("user_uid", "==", user_uid)
+      )
       .valueChanges();
   }
 
   searchProduct(uid: string): Observable<Product> {
-    let productDoc = this.db.doc<Product>(
-      `products/${uid}`
-    );
+    let productDoc = this.db.doc<Product>(`products/${uid}`);
     return productDoc.valueChanges().pipe(
       take(1),
       map((collection) => {
         return collection;
       })
     );
+  }
+
+  getAllProducts(): Observable<Product[]> {
+    return this.products;
   }
 }

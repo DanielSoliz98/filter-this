@@ -13,14 +13,14 @@ import { map, finalize, take } from "rxjs/operators";
   providedIn: "root",
 })
 export class RestaurantService {
-  private restaurant: Observable<Restaurant[]>;
+  private restaurants: Observable<Restaurant[]>;
   private restaurantCollection: AngularFirestoreCollection<Restaurant>;
   constructor(
     private storage: AngularFireStorage,
     private db: AngularFirestore
   ) {
     this.restaurantCollection = this.db.collection<Restaurant>("restaurants");
-    this.restaurant = this.restaurantCollection.snapshotChanges().pipe(
+    this.restaurants = this.restaurantCollection.snapshotChanges().pipe(
       map((actions) => {
         return actions.map((a) => {
           const data = a.payload.doc.data();
@@ -31,8 +31,8 @@ export class RestaurantService {
     );
   }
 
-  getRestaurant(): Observable<Restaurant[]> {
-    return this.restaurant;
+  getAllRestaurant(): Observable<Restaurant[]> {
+    return this.restaurants;
   }
 
   uploadImages(restaurantName: string, images: string[]): Promise<string[]> {
