@@ -5,6 +5,7 @@ import {
   AngularFirestoreCollection,
   AngularFirestore,
   DocumentReference,
+  AngularFirestoreDocument,
 } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
 import { map, finalize, take } from "rxjs/operators";
@@ -88,5 +89,14 @@ export class ProductService {
 
   getAllProducts(): Observable<Product[]> {
     return this.products;
+  }
+
+  updateProduct(id: string, data: Product) {
+    const productRef: AngularFirestoreDocument<Product> = this.db.doc(
+      `products/${id}`
+    );
+    return productRef.set(data, {
+      merge: true,
+    });
   }
 }

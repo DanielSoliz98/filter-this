@@ -5,6 +5,7 @@ import {
   AngularFirestoreCollection,
   AngularFirestore,
   DocumentReference,
+  AngularFirestoreDocument,
 } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
 import { map, finalize, take } from "rxjs/operators";
@@ -74,19 +75,28 @@ export class RestaurantService {
 
   getRestaurants(user_uid: string): Observable<Restaurant[]> {
     return this.db
-      .collection<Restaurant>("restaurants", (ref) => ref.where("user_uid", "==", user_uid))
+      .collection<Restaurant>("restaurants", (ref) =>
+        ref.where("user_uid", "==", user_uid)
+      )
       .valueChanges();
   }
 
   searchRestaurant(uid: string): Observable<Restaurant> {
-    let restaurantDoc = this.db.doc<Restaurant>(
-      `restaurants/${uid}`
-    );
+    let restaurantDoc = this.db.doc<Restaurant>(`restaurants/${uid}`);
     return restaurantDoc.valueChanges().pipe(
       take(1),
       map((collection) => {
         return collection;
       })
     );
+  }
+
+  updateRestaurant(id: string, data: Restaurant) {
+    const restaurantRef: AngularFirestoreDocument<Restaurant> = this.db.doc(
+      `restaurants/${id}`
+    );
+    return restaurantRef.set(data, {
+      merge: true,
+    });
   }
 }

@@ -1,13 +1,17 @@
 import { Injectable } from "@angular/core";
-import { AngularFirestore } from "@angular/fire/firestore";
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import { Model } from "../../models/model";
-import { map } from "rxjs/operators";
+import { map, take } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
 })
 export class ModelService {
+  modelDoc: AngularFirestoreDocument<Model>;
   constructor(private afs: AngularFirestore) {}
 
   getCollection(collectionName: string): Observable<Model[]> {
@@ -21,5 +25,24 @@ export class ModelService {
         });
       })
     );
+  }
+
+  getModel(category: string, id: string): Observable<Model> {
+    this.modelDoc = this.afs.doc<Model>(`${category}/${id}`);
+    return this.modelDoc.valueChanges().pipe(
+      take(1),
+      map((modelData) => {
+        return modelData;
+      })
+    );
+  }
+
+  updateModel(id: string, data: Model, category: string) {
+    const modelRef: AngularFirestoreDocument<Model> = this.afs.doc(
+      `${category}/${id}`
+    );
+    return modelRef.set(data, {
+      merge: true,
+    });
   }
 }
