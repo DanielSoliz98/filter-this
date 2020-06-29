@@ -15,6 +15,7 @@ import { AuthenticationService } from "./shared/services/authentication/authenti
 import { environment } from "../environments/environment";
 import { NativeStorage } from "@ionic-native/native-storage/ngx";
 import { HttpClientModule } from '@angular/common/http';
+import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    InAppBrowser
   ],
   bootstrap: [AppComponent],
 })

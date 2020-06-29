@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit {
 
   ngOnInit() {}
 
-  async openMovieDetail(product: Product) {
+  async openProductDetail(product: Product) {
     const modal = await this.modalController.create({
       component: ProductDetailComponent,
       componentProps: {

@@ -56,7 +56,11 @@
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center">
-          <ion-button [href]="product.link" expand="block" color="secondary">
+          <ion-button
+            (click)="openLink(product.link)"
+            expand="block"
+            color="secondary"
+          >
             Link del Producto
           </ion-button>
         </ion-row>
