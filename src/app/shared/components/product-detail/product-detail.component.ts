@@ -4,7 +4,7 @@ import { User } from "../../models/user";
 import { ModalController, ToastController } from "@ionic/angular";
 import { AuthenticationService } from "../../services/authentication/authentication.service";
 import { UserService } from "../../services/user/user.service";
-import { ProductService } from "../../services/product/product.service";
+import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
 
 @Component({
   selector: "app-product-detail",
@@ -24,7 +24,8 @@ export class ProductDetailComponent implements OnInit {
     private modalController: ModalController,
     private toastController: ToastController,
     private authService: AuthenticationService,
-    private userService: UserService
+    private userService: UserService,
+    private iab: InAppBrowser
   ) {}
 
   ngOnInit() {}
@@ -65,6 +66,9 @@ export class ProductDetailComponent implements OnInit {
             this.presentToast("Recomendacion guardada");
           });
       });
+  }
+  openLink(link: string) {
+    this.iab.create(link, "_blank");
   }
 
   async presentToast(message: string) {

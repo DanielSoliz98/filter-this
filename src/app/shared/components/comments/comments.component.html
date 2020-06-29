@@ -13,44 +13,47 @@
     <ion-list-header>
       Comentarios
     </ion-list-header>
-    <ion-item *ngFor="let comment of comments">
-      <ion-label>
-        <h3>{{ comment.displayName }}</h3>
-        <p>{{ comment.comment }}</p>
-      </ion-label>
-    </ion-item>
-    <ion-item>
-      <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-        <ion-grid fixed>
-          <ion-row>
-            <ion-col size="10" class="ion-no-padding">
+
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="10" class="ion-no-padding">
+            <ion-item>
               <ion-label position="floating">
                 <ion-text color="tertiary">
-                  Escribir comentario
-                </ion-text>
-                <ion-text color="danger">*</ion-text></ion-label
+                  <h6>Escribir comentario</h6>
+                </ion-text></ion-label
               >
               <ion-input
                 required
                 formControlName="comment"
                 type="text"
               ></ion-input>
-            </ion-col>
-            <ion-col size="2" class="ion-align-self-end ion-no-padding">
-              <ion-button
-                block
-                color="primary"
-                type="submit"
-                [disabled]="commentForm.invalid"
-              >
+            </ion-item>
+          </ion-col>
+          <ion-col
+            size="2"
+            class="ion-align-self-end ion-text-center ion-no-padding"
+          >
+            <ion-button
+              block
+              color="primary"
+              type="submit"
+              [disabled]="commentForm.invalid"
+            >
               <ion-icon name="send-outline"></ion-icon>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </form>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+    <ion-item *ngFor="let comment of comments">
+      <ion-label>
+        <h3>{{ comment.displayName }}</h3>
+        <p>{{ comment.comment }}</p>
+      </ion-label>
     </ion-item>
-    <ion-item *ngIf="!comments.lenght > 0">
+    <ion-item *ngIf="!comments.length > 0">
       <ion-label>
         <p>No hay comentarios aun</p>
       </ion-label>

@@ -119,7 +119,6 @@ export class RestaurantFormPage implements OnInit {
         this.images.push(cameraPhoto.dataUrl);
       },
       (error) => {
-        this.presentToast(JSON.stringify(error));
         console.log("ERROR -> " + JSON.stringify(error));
       }
     );

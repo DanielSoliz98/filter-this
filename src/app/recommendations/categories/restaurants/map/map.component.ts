@@ -32,9 +32,9 @@ export class MapComponent implements OnInit {
   async loadMap() {
     this.showMap = true;
     this.shared = true;
-    // let position = await Geolocation.getCurrentPosition();
-    let latLng = new google.maps.LatLng("-17.402812", "-66.107563");
-    //let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    let position = await Geolocation.getCurrentPosition();
+    //let latLng = new google.maps.LatLng("-17.402812", "-66.107563");
+    let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
     let mapOptions = {
       center: latLng,
