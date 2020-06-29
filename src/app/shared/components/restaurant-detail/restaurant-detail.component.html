@@ -73,7 +73,12 @@
     </ion-card-content>
   </ion-card>
   <ng-container *ngIf="showComments">
-    <app-comments [comments]="restaurant.comments" [user]="user"></app-comments>
+    <app-comments
+      [comments]="restaurant.comments"
+      [user]="user"
+      category="restaurants"
+      [idCategory]="restaurant.id"
+    ></app-comments>
   </ng-container>
   <ion-fab
     *ngIf="!myRecommendation"

@@ -82,7 +82,12 @@
     </ion-card-content>
   </ion-card>
   <ng-container *ngIf="gameModel && showComments">
-    <app-comments [comments]="gameModel.comments" [user]="user"></app-comments>
+    <app-comments
+      [comments]="gameModel.comments"
+      [user]="user"
+      category="games"
+      [idCategory]="gameModel.id"
+    ></app-comments>
   </ng-container>
   <ion-fab *ngIf="!gameModel" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="saveGameRecommendation()">

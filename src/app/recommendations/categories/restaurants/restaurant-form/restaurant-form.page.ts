@@ -82,6 +82,8 @@ export class RestaurantFormPage implements OnInit {
     this.restaurantService
       .addRestaurant(restaurant)
       .then((restaurantData) => {
+        restaurant.id = restaurantData.id;
+        this.restaurantService.updateRestaurant(restaurantData.id, restaurant);
         this.userService
           .getMyRecommendations(restaurant.user_uid)
           .subscribe((data) => {

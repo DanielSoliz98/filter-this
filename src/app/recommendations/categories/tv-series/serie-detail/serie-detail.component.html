@@ -89,7 +89,12 @@
     </ion-card-content>
   </ion-card>
   <ng-container *ngIf="serieModel && showComments">
-    <app-comments [comments]="serieModel.comments" [user]="user"></app-comments>
+    <app-comments
+      [comments]="serieModel.comments"
+      [user]="user"
+      category="series"
+      [idCategory]="serieModel.id"
+    ></app-comments>
   </ng-container>
   <ion-fab *ngIf="!serieModel" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="saveSerieRecommendation()">

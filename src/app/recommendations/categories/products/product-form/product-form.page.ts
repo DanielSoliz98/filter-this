@@ -83,6 +83,8 @@ export class ProductFormPage implements OnInit {
     this.productService
       .addProduct(product)
       .then((dataProduct) => {
+        product.id = dataProduct.id;
+        this.productService.updateProduct(dataProduct.id, product);
         this.userService
           .getMyRecommendations(product.user_uid)
           .subscribe((data) => {
