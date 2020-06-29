@@ -7,7 +7,6 @@ import { IonicModule } from "@ionic/angular";
 import { SearchSeriesPageRoutingModule } from "./search-series-routing.module";
 
 import { SearchSeriesPage } from "./search-series.page";
-import { SerieDetailComponent } from "../serie-detail/serie-detail.component";
 
 @NgModule({
   imports: [
@@ -15,9 +14,8 @@ import { SerieDetailComponent } from "../serie-detail/serie-detail.component";
     FormsModule,
     IonicModule,
     SearchSeriesPageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [SearchSeriesPage, SerieDetailComponent],
-  entryComponents: [SerieDetailComponent],
+  declarations: [SearchSeriesPage],
 })
 export class SearchSeriesPageModule {}

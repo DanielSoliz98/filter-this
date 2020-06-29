@@ -8,6 +8,7 @@ import { Injectable, NgZone } from "@angular/core";
 import { NativeStorage } from "@ionic-native/native-storage/ngx";
 import { Router } from "@angular/router";
 import { User } from "../../models/user";
+import { MyRecommendations } from "../../models/my-recommendations";
 
 @Injectable({
   providedIn: "root",
@@ -105,12 +106,7 @@ export class AuthenticationService {
     const userRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
       `users/${user.uid}`
     );
-    let userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
+    let recommendations: MyRecommendations = {
       books: [],
       games: [],
       movies: [],
@@ -118,6 +114,23 @@ export class AuthenticationService {
       products: [],
       restaurants: [],
       series: [],
+    };
+    const collectionRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
+      `my-collection/${user.uid}`
+    );
+    collectionRef.set(recommendations);
+
+    const recommendationsRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
+      `my-recommendations/${user.uid}`
+    );
+    recommendationsRef.set(recommendations);
+
+    let userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
     };
     return userRef.set(userData, {
       merge: true,

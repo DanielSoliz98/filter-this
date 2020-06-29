@@ -19,7 +19,7 @@ declare var google;
   styleUrls: ["./map.component.scss"],
 })
 export class MapComponent implements OnInit {
-  shares: boolean = false;
+  shared: boolean = false;
   showMap: boolean = false;
   @Output() ubication = new EventEmitter<string[]>();
   @ViewChild("map", { static: false }) mapElement: ElementRef;
@@ -31,6 +31,7 @@ export class MapComponent implements OnInit {
 
   async loadMap() {
     this.showMap = true;
+    this.shared = true;
     // let position = await Geolocation.getCurrentPosition();
     let latLng = new google.maps.LatLng("-17.402812", "-66.107563");
     //let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);

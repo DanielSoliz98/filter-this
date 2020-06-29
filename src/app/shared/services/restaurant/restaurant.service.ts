@@ -1,23 +1,27 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Restaurant } from '../../models/restaurant';
-import { AngularFirestoreCollection, AngularFirestore, DocumentReference } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { map, finalize } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Restaurant } from "../../models/restaurant";
+import {
+  AngularFirestoreCollection,
+  AngularFirestore,
+  DocumentReference,
+  AngularFirestoreDocument,
+} from "@angular/fire/firestore";
+import { AngularFireStorage } from "@angular/fire/storage";
+import { map, finalize, take } from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class RestaurantService {
-
-  private restaurant: Observable<Restaurant[]>;
+  private restaurants: Observable<Restaurant[]>;
   private restaurantCollection: AngularFirestoreCollection<Restaurant>;
   constructor(
     private storage: AngularFireStorage,
     private db: AngularFirestore
   ) {
     this.restaurantCollection = this.db.collection<Restaurant>("restaurants");
-    this.restaurant = this.restaurantCollection.snapshotChanges().pipe(
+    this.restaurants = this.restaurantCollection.snapshotChanges().pipe(
       map((actions) => {
         return actions.map((a) => {
           const data = a.payload.doc.data();
@@ -28,8 +32,8 @@ export class RestaurantService {
     );
   }
 
-  getRestaurant(): Observable<Restaurant[]> {
-    return this.restaurant;
+  getAllRestaurant(): Observable<Restaurant[]> {
+    return this.restaurants;
   }
 
   uploadImages(restaurantName: string, images: string[]): Promise<string[]> {
@@ -67,5 +71,32 @@ export class RestaurantService {
 
   addRestaurant(restaurant: Restaurant): Promise<DocumentReference> {
     return this.restaurantCollection.add(restaurant);
+  }
+
+  getRestaurants(user_uid: string): Observable<Restaurant[]> {
+    return this.db
+      .collection<Restaurant>("restaurants", (ref) =>
+        ref.where("user_uid", "==", user_uid)
+      )
+      .valueChanges();
+  }
+
+  searchRestaurant(uid: string): Observable<Restaurant> {
+    let restaurantDoc = this.db.doc<Restaurant>(`restaurants/${uid}`);
+    return restaurantDoc.valueChanges().pipe(
+      take(1),
+      map((collection) => {
+        return collection;
+      })
+    );
+  }
+
+  updateRestaurant(id: string, data: Restaurant) {
+    const restaurantRef: AngularFirestoreDocument<Restaurant> = this.db.doc(
+      `restaurants/${id}`
+    );
+    return restaurantRef.set(data, {
+      merge: true,
+    });
   }
 }

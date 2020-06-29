@@ -10,9 +10,21 @@
   <ion-card>
     <ion-card-header>
       <ion-chip outline color="tertiary" *ngIf="bookModel">
-        <ion-label *ngIf="bookModel.user_uid === authService.userData.uid"
+        <ion-label *ngIf="myRecommendation; else noMyRecommendation"
           >Mi Recomendacion</ion-label
         >
+        <ng-template #noMyRecommendation>
+          <ion-label *ngIf="user"
+            >Recomendado por: {{ user.displayName }}</ion-label
+          >
+        </ng-template>
+      </ion-chip>
+      <ion-chip
+        color="tertiary"
+        outline="true"
+        *ngIf="saved && !myRecommendation"
+      >
+        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
       </ion-chip>
       <ion-card-subtitle
         >Fecha de Publicacion:
@@ -59,9 +71,32 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
-  <ion-fab *ngIf="!bookModel" vertical="bottom" horizontal="end" slot="fixed">
+  <ng-container *ngIf="bookModel && showComments">
+    <app-comments
+      [comments]="bookModel.comments"
+      [user]="user"
+      category="books"
+      [idCategory]="book.id"
+    ></app-comments>
+  </ng-container>
+  <ion-fab
+    *ngIf="!bookModel && !showComments"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
     <ion-fab-button (click)="saveBookRecommendation()">
       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab
+    *ngIf="movieModel && !myRecommendation"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="saveToMyCollection()" *ngIf="!saved">
+      <ion-icon name="bookMark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

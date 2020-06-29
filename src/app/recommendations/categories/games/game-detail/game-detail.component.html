@@ -14,9 +14,21 @@
     ></ion-img>
     <ion-card-header>
       <ion-chip outline color="tertiary" *ngIf="gameModel">
-        <ion-label *ngIf="gameModel.user_uid === authService.userData.uid"
+        <ion-label *ngIf="myRecommendation; else noMyRecommendation"
           >Mi Recomendacion</ion-label
         >
+        <ng-template #noMyRecommendation>
+          <ion-label *ngIf="user"
+            >Recomendado por: {{ user.displayName }}</ion-label
+          >
+        </ng-template>
+      </ion-chip>
+      <ion-chip
+        color="tertiary"
+        outline="true"
+        *ngIf="saved && !myRecommendation"
+      >
+        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
       </ion-chip>
       <ion-card-subtitle
         >Fecha de Lanzamiento:
@@ -69,9 +81,27 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
+  <ng-container *ngIf="gameModel && showComments">
+    <app-comments
+      [comments]="gameModel.comments"
+      [user]="user"
+      category="games"
+      [idCategory]="gameModel.id"
+    ></app-comments>
+  </ng-container>
   <ion-fab *ngIf="!gameModel" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="saveGameRecommendation()">
       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab
+    *ngIf="!myRecommendation && gameModel"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="saveToMyCollection()" *ngIf="!saved">
+      <ion-icon name="bookMark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

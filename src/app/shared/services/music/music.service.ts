@@ -6,7 +6,9 @@ import {
   AngularFirestoreDocument,
 } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
-import { MUSIC_URL, HEADERS_MUSIC } from "../constants";
+import { MUSIC_URL, HEADERS_MUSIC, SEARCH_MUSIC } from "../constants";
+import { Music } from '../../models/music';
+import { take, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: "root",
@@ -22,7 +24,16 @@ export class MusicService {
 
   getMusic(id: string): Observable<Model> {
     this.musicDoc = this.afs.doc<Model>(`musics/${id}`);
-    return this.musicDoc.valueChanges();
+    return this.musicDoc.valueChanges().pipe(
+      take(1),
+      map((book) => {
+        return book;
+      })
+    );
+  }
+
+  searchMusic(id: string): Observable<Music> {
+    return this.http.get<any>(`${SEARCH_MUSIC}${id}`, HEADERS_MUSIC);
   }
 
   addMusic(data: Model): Promise<void> {

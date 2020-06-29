@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Producto</ion-title>
+    <ion-buttons slot="end" (click)="dismiss()">
+      <ion-icon name="close-circle"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header class="ion-text-center">
+      <ion-chip outline color="tertiary" *ngIf="product">
+        <ion-label *ngIf="myRecommendation; else noMyRecommendation"
+          >Mi Recomendacion</ion-label
+        >
+        <ng-template #noMyRecommendation>
+          <ion-label *ngIf="user"
+            >Recomendado por: {{ user.displayName }}</ion-label
+          >
+        </ng-template>
+      </ion-chip>
+      <ion-chip
+        color="tertiary"
+        outline="true"
+        *ngIf="saved && !myRecommendation"
+      >
+        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
+      </ion-chip>
+      <ion-card-title>Producto: {{ product.productName }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="8">
+            <ion-item>
+              <h6><b>Categoria:</b></h6>
+            </ion-item>
+            <ion-item>
+              <h6>{{ product.category }}</h6>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+            <ion-item>
+              <h6><b>Precio:</b></h6>
+            </ion-item>
+            <ion-item>
+              <h6>{{ product.price }} Bs.</h6>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <h6><b>Descripcion: </b>{{ product.description }}</h6>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-button [href]="product.link" expand="block" color="secondary">
+            Link del Producto
+          </ion-button>
+        </ion-row>
+      </ion-grid>
+      <ion-list *ngIf="product.imagesURL">
+        <ion-list-header>
+          Imagenes del Producto
+        </ion-list-header>
+        <ion-slides pager="true" [options]="sliderConfig">
+          <ion-slide *ngFor="let image of product.imagesURL">
+            <ion-row>
+              <ion-col size="12">
+                <ion-img [src]="image"></ion-img>
+              </ion-col>
+            </ion-row>
+          </ion-slide>
+        </ion-slides>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+  <ng-container *ngIf="showComments">
+    <app-comments
+      [comments]="product.comments"
+      [user]="user"
+      category="products"
+      [idCategory]="product.id"
+    ></app-comments>
+  </ng-container>
+  <ion-fab
+    *ngIf="!myRecommendation"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="saveToMyCollection()" *ngIf="!saved">
+      <ion-icon name="bookMark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

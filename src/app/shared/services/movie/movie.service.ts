@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { MovieModel } from "../../models/movie";
+import { MovieModel, Movie } from "../../models/movie";
 import {
   AngularFirestoreDocument,
   AngularFirestore,
   AngularFirestoreCollection,
 } from "@angular/fire/firestore";
-import { map } from "rxjs/operators";
-import { HEADERS, MOVIES_URL } from "../constants";
+import { map, take } from "rxjs/operators";
+import { HEADERS, MOVIES_URL, SEARCH_MOVIE } from "../constants";
 
 @Injectable({
   providedIn: "root",
@@ -27,7 +27,12 @@ export class MovieService {
 
   getMovie(id: string): Observable<MovieModel> {
     this.movieDoc = this.afs.doc<MovieModel>(`movies/${id}`);
-    return this.movieDoc.valueChanges();
+    return this.movieDoc.valueChanges().pipe(
+      take(1),
+      map((book) => {
+        return book;
+      })
+    );
   }
 
   getMoviesSaved(): Observable<MovieModel[]> {
@@ -40,6 +45,10 @@ export class MovieService {
         })
       )
     );
+  }
+
+  searchMovie(id: string): Observable<Movie> {
+    return this.http.get<any>(`${SEARCH_MOVIE}${id}?language=es`, HEADERS);
   }
 
   addMovie(data: MovieModel): Promise<void> {

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Restaurants</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <img src="../../../assets/restaurants-banner.jpg" alt="" />
+    <ion-card-content>
+      <ion-item
+        button
+        detail
+        *ngFor="let restaurant of restaurants"
+        (click)="openRestaurantDetail(restaurant)"
+      >
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="8">
+              <ion-text color="dark">
+                <h6>{{ restaurant.restaurantName }}</h6>
+              </ion-text>
+            </ion-col>
+            <ion-col size="4" class="ion-no-padding">
+              <ion-text color="dark">
+                <h6>Comida: {{ restaurant.food[0] }},...</h6>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

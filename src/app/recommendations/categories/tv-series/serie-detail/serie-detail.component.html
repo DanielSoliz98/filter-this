@@ -14,9 +14,21 @@
     ></ion-img>
     <ion-card-header>
       <ion-chip outline color="tertiary" *ngIf="serieModel">
-        <ion-label *ngIf="serieModel.user_uid === authService.userData.uid"
+        <ion-label *ngIf="myRecommendation; else noMyRecommendation"
           >Mi Recomendacion</ion-label
         >
+        <ng-template #noMyRecommendation>
+          <ion-label *ngIf="user"
+            >Recomendado por: {{ user.displayName }}</ion-label
+          >
+        </ng-template>
+      </ion-chip>
+      <ion-chip
+        color="tertiary"
+        outline="true"
+        *ngIf="saved && !myRecommendation"
+      >
+        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
       </ion-chip>
       <ion-card-subtitle
         >Fecha de Emision:
@@ -50,13 +62,22 @@
             <ion-item>
               <h6><b>Generos:</b></h6>
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="genres.length > 0; else genreBlock">
               <ion-label>
                 <h6 *ngFor="let genre of genres">
                   {{ genre.name }}
                 </h6>
               </ion-label>
             </ion-item>
+            <ng-template #genreBlock>
+              <ion-item>
+                <ion-label>
+                  <h6 *ngFor="let genre of serie.genres">
+                    {{ genre["name"] }}
+                  </h6>
+                </ion-label>
+              </ion-item>
+            </ng-template>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -67,9 +88,27 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
+  <ng-container *ngIf="serieModel && showComments">
+    <app-comments
+      [comments]="serieModel.comments"
+      [user]="user"
+      category="series"
+      [idCategory]="serieModel.id"
+    ></app-comments>
+  </ng-container>
   <ion-fab *ngIf="!serieModel" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="saveSerieRecommendation()">
       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab
+    *ngIf="!myRecommendation && serieModel"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="saveToMyCollection()" *ngIf="!saved">
+      <ion-icon name="bookMark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

@@ -1,0 +1,15 @@
+<ion-list>
+  <ion-list-header>
+    Ubicacion
+  </ion-list-header>
+  <div #map id="map"></div>
+  <ion-item *ngIf="!mapVisible">
+    <ion-grid>
+      <ion-row class="ion-justify-content-center" >
+        <ion-button (click)="loadMap()" color="secondary">
+          Ver ubicacion
+        </ion-button>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-list>

@@ -14,9 +14,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <ion-list>
+  <ion-card color="secondary">
+    <ion-card-content *ngIf="authService.userData" color="secondary">
+      <ion-list color="secondary">
         <ion-item>
           <ion-avatar slot="start">
             <img
@@ -30,11 +30,23 @@
             />
           </ion-avatar>
           <ion-label>
-            <h3>{{ authService.userData.displayName}}</h3>
+            <h2>{{ authService.userData.displayName}}</h2>
             <h3>{{ authService.userData.email}}</h3>
           </ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
+  </ion-card>
+  <ion-card color="secondary" button (click)="goMyRecommendations()">
+    <img src="../../assets/recommendations.jpg" alt="" />
+    <ion-card-header>
+      <ion-card-title>Mis Recomendaciones</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <ion-card color="secondary" button (click)="goMyCollection()">
+    <img src="../../assets/collection.jpg" alt="" />
+    <ion-card-header>
+      <ion-card-title>Mi Coleccion</ion-card-title>
+    </ion-card-header>
   </ion-card>
 </ion-content>

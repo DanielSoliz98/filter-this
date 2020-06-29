@@ -23,7 +23,6 @@ export class CategoriesPage implements OnInit {
   ngOnInit() {}
 
   async openMoviePage() {
-    //this.router.navigateByUrl("/app/tabs/recommendations/categories/movies");
     const modal = await this.modalController.create({
       component: SearchMoviePage,
     });

@@ -26,14 +26,23 @@ export const HEADERS_MUSIC = {
 export const MOVIES_URL: string =
   "https://api.themoviedb.org/3/search/movie?language=es&page=1&include_adult=false&query=";
 
+export const SEARCH_MOVIE: string = "https://api.themoviedb.org/3/movie/";
+
+export const SEARCH_SERIE: string = "https://api.themoviedb.org/3/tv/";
+
 export const SERIES_URL: string =
   "https://api.themoviedb.org/3/search/tv?language=es&page=1&include_adult=false&query=";
 
 export const MUSIC_URL: string =
   "https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/track?q=";
 
+export const SEARCH_MUSIC: string =
+  "https://cors-anywhere.herokuapp.com/https://api.deezer.com/track/";
+
 export const GAMES_URL: string =
   "https://api.rawg.io/api/games?page_size=3&search=";
+
+export const SEARCH_GAME: string = "https://api.rawg.io/api/games/";
 
 export const BOOK_URL: string =
   "https://www.googleapis.com/books/v1/volumes?projection=lite&orderBy=relevance&maxResults=5&key=AIzaSyCIxVoabVr89uPs-z_ZhtpQxAUoVAu1jX4&q=";

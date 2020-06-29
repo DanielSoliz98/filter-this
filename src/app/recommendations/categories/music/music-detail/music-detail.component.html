@@ -10,9 +10,21 @@
   <ion-card>
     <ion-card-header class="ion-text-center">
       <ion-chip outline color="tertiary" *ngIf="musicModel">
-        <ion-label *ngIf="musicModel.user_uid === authService.userData.uid"
+        <ion-label *ngIf="myRecommendation; else noMyRecommendation"
           >Mi Recomendacion</ion-label
         >
+        <ng-template #noMyRecommendation>
+          <ion-label *ngIf="user"
+            >Recomendado por: {{ user.displayName }}</ion-label
+          >
+        </ng-template>
+      </ion-chip>
+      <ion-chip
+        color="tertiary"
+        outline="true"
+        *ngIf="saved && !myRecommendation"
+      >
+        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
       </ion-chip>
       <ion-card-title>Cancion: {{ music.title }}</ion-card-title>
     </ion-card-header>
@@ -26,7 +38,7 @@
               </ion-col>
               <ion-col size="8">
                 <ion-label class="ion-text-center">
-                  <h2>Artista:</h2>
+                  <h2>Aruista:</h2>
                   <h3>{{ music.artist.name }}</h3>
                 </ion-label>
               </ion-col>
@@ -70,9 +82,27 @@
       </ion-list>
     </ion-card-content>
   </ion-card>
+  <ng-container *ngIf="musicModel && showComments">
+    <app-comments
+      [comments]="musicModel.comments"
+      [user]="user"
+      category="musics"
+      [idCategory]="musicModel.id"
+    ></app-comments>
+  </ng-container>
   <ion-fab *ngIf="!musicModel" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="saveMusicRecommendation()">
       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab
+    *ngIf="!myRecommendation && musicModel"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="saveToMyCollection()" *ngIf="!saved">
+      <ion-icon name="bookMark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

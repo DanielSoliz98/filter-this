@@ -1,5 +1,6 @@
 import { Rating } from "./rating";
 import { Comment } from './comment';
+import { Genre } from './genre';
 
 export interface Movie {
   id: string;
@@ -9,7 +10,8 @@ export interface Movie {
   release_date: Date;
   poster_path: string;
   backdrop_path: string;
-  genre_ids: number[];
+  genre_ids?: number[];
+  genres?: Genre[];
 }
 
 export interface MovieModel {

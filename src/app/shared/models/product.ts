@@ -1,4 +1,5 @@
 import { Rating } from './rating';
+import { Comment } from './comment';
 
 export interface Product {
   productName: string;

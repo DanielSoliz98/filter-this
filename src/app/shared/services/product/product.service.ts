@@ -5,9 +5,10 @@ import {
   AngularFirestoreCollection,
   AngularFirestore,
   DocumentReference,
+  AngularFirestoreDocument,
 } from "@angular/fire/firestore";
 import { AngularFireStorage } from "@angular/fire/storage";
-import { map, finalize } from "rxjs/operators";
+import { map, finalize, take } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -29,10 +30,6 @@ export class ProductService {
         });
       })
     );
-  }
-
-  getproducts(): Observable<Product[]> {
-    return this.products;
   }
 
   uploadImages(productName: string, images: string[]): Promise<string[]> {
@@ -70,5 +67,36 @@ export class ProductService {
 
   addProduct(product: Product): Promise<DocumentReference> {
     return this.productCollection.add(product);
+  }
+
+  getProducts(user_uid: string): Observable<Product[]> {
+    return this.db
+      .collection<Product>("products", (ref) =>
+        ref.where("user_uid", "==", user_uid)
+      )
+      .valueChanges();
+  }
+
+  searchProduct(uid: string): Observable<Product> {
+    let productDoc = this.db.doc<Product>(`products/${uid}`);
+    return productDoc.valueChanges().pipe(
+      take(1),
+      map((collection) => {
+        return collection;
+      })
+    );
+  }
+
+  getAllProducts(): Observable<Product[]> {
+    return this.products;
+  }
+
+  updateProduct(id: string, data: Product) {
+    const productRef: AngularFirestoreDocument<Product> = this.db.doc(
+      `products/${id}`
+    );
+    return productRef.set(data, {
+      merge: true,
+    });
   }
 }

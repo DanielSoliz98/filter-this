@@ -7,7 +7,6 @@ import { IonicModule } from "@ionic/angular";
 import { SearchBooksPageRoutingModule } from "./search-books-routing.module";
 
 import { SearchBooksPage } from "./search-books.page";
-import { BookDetailComponent } from "../book-detail/book-detail.component";
 
 @NgModule({
   imports: [
@@ -17,7 +16,6 @@ import { BookDetailComponent } from "../book-detail/book-detail.component";
     SearchBooksPageRoutingModule,
     ReactiveFormsModule,
   ],
-  declarations: [SearchBooksPage, BookDetailComponent],
-  entryComponents: [BookDetailComponent],
+  declarations: [SearchBooksPage],
 })
 export class SearchBooksPageModule {}

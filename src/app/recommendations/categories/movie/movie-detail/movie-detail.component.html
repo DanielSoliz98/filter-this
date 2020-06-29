@@ -14,9 +14,21 @@
     ></ion-img>
     <ion-card-header>
       <ion-chip outline color="tertiary" *ngIf="movieModel">
-        <ion-label *ngIf="movieModel.user_uid === authService.userData.uid"
+        <ion-label *ngIf="myRecommendation; else noMyRecommendation"
           >Mi Recomendacion</ion-label
         >
+        <ng-template #noMyRecommendation>
+          <ion-label *ngIf="user"
+            >Recomendado por: {{ user.displayName }}</ion-label
+          >
+        </ng-template>
+      </ion-chip>
+      <ion-chip
+        color="tertiary"
+        outline="true"
+        *ngIf="saved && !myRecommendation"
+      >
+        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
       </ion-chip>
       <ion-card-subtitle
         >Fecha de Estreno:
@@ -44,13 +56,22 @@
             <ion-item>
               <h6><b>Generos:</b></h6>
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="genres.length > 0; else genreBlock">
               <ion-label>
                 <h6 *ngFor="let genre of genres">
                   {{ genre.name }}
                 </h6>
               </ion-label>
             </ion-item>
+            <ng-template #genreBlock>
+              <ion-item>
+                <ion-label>
+                  <h6 *ngFor="let genre of movie.genres">
+                    {{ genre["name"] }}
+                  </h6>
+                </ion-label>
+              </ion-item>
+            </ng-template>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -61,9 +82,32 @@
       </ion-grid>
     </ion-card-content>
   </ion-card>
-  <ion-fab *ngIf="!movieModel" vertical="bottom" horizontal="end" slot="fixed">
+  <ng-container *ngIf="movieModel && showComments">
+    <app-comments
+      [comments]="movieModel.comments"
+      [user]="user"
+      category="movies"
+      [idCategory]="movieModel.id"
+    ></app-comments>
+  </ng-container>
+  <ion-fab
+    *ngIf="!movieModel && !showComments"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
     <ion-fab-button (click)="saveMovieRecommendation()">
       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-fab
+    *ngIf="!myRecommendation && movieModel"
+    vertical="bottom"
+    horizontal="end"
+    slot="fixed"
+  >
+    <ion-fab-button (click)="saveToMyCollection()" *ngIf="!saved">
+      <ion-icon name="bookMark"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

@@ -43,6 +43,7 @@ export class SearchMoviePage implements OnInit {
       component: MovieDetailComponent,
       componentProps: {
         movie: movie,
+        showComments: false,
       },
     });
     return await modal.present();

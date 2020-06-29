@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { IonicModule } from '@ionic/angular';
+import { IonicModule } from "@ionic/angular";
 
-import { SearchGamePageRoutingModule } from './search-game-routing.module';
+import { SearchGamePageRoutingModule } from "./search-game-routing.module";
 
-import { SearchGamePage } from './search-game.page';
-import { GameDetailComponent } from '../game-detail/game-detail.component';
+import { SearchGamePage } from "./search-game.page";
 
 @NgModule({
   imports: [
@@ -15,9 +14,8 @@ import { GameDetailComponent } from '../game-detail/game-detail.component';
     FormsModule,
     IonicModule,
     SearchGamePageRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  declarations: [SearchGamePage, GameDetailComponent],
-  entryComponents: [GameDetailComponent]
+  declarations: [SearchGamePage],
 })
 export class SearchGamePageModule {}
