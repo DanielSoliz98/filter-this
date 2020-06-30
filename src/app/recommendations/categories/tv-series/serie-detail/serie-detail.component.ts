@@ -68,7 +68,8 @@ export class SerieDetailComponent implements OnInit {
       user_uid: this.authService.userData.uid,
       id: this.serie.id,
       comments: [],
-      ratings: [],
+      scores: [],
+      score: 0,
     };
     this.serieService.addSerie(serie).then(
       () => {

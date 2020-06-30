@@ -60,7 +60,8 @@ export class MusicDetailComponent implements OnInit {
       user_uid: this.authService.userData.uid,
       id: this.music.id,
       comments: [],
-      ratings: [],
+      scores: [],
+      score: 0,
     };
     this.musicService.addMusic(music).then(
       () => {

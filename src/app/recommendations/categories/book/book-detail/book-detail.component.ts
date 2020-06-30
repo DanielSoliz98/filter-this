@@ -60,7 +60,8 @@ export class BookDetailComponent implements OnInit {
       user_uid: this.authService.userData.uid,
       id: this.book.id,
       comments: [],
-      ratings: [],
+      scores: [],
+      score: 0,
     };
     this.bookService.addBook(book).then(
       () => {

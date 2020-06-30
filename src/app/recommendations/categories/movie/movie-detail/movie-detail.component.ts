@@ -75,7 +75,8 @@ export class MovieDetailComponent implements OnInit {
       user_uid: this.authService.userData.uid,
       id: this.movie.id,
       comments: [],
-      ratings: [],
+      scores: [],
+      score: 0,
     };
     this.movieService.addMovie(movie).then(
       () => {

@@ -60,7 +60,8 @@ export class GameDetailComponent implements OnInit {
       user_uid: this.authService.userData.uid,
       id: this.game.id,
       comments: [],
-      ratings: [],
+      scores: [],
+      score: 0,
     };
     this.gameService.addGame(game).then(
       () => {

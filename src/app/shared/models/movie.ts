@@ -1,4 +1,4 @@
-import { Rating } from "./rating";
+import { Score } from "./score";
 import { Comment } from './comment';
 import { Genre } from './genre';
 
@@ -17,6 +17,7 @@ export interface Movie {
 export interface MovieModel {
   user_uid: string;
   comments: Comment[];
-  ratings: Rating[];
+  scores: Score[];
+  score: number;
   id?: string;
 }

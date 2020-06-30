@@ -70,7 +70,8 @@ export class ProductFormPage implements OnInit {
       price: this.price.value,
       link: this.link.value,
       comments: [],
-      ratings: [],
+      scores: [],
+      score: 0,
       user_uid: this.authService.userData.uid,
     };
 

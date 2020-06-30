@@ -1,4 +1,4 @@
-import { Rating } from './rating';
+import { Score } from './score';
 import { Comment } from './comment';
 
 export interface Product {
@@ -9,7 +9,8 @@ export interface Product {
   link: string;
   user_uid: string;
   comments: Comment[];
-  ratings: Rating[];
+  scores: Score[];
+  score: number;
   imagesURL?: string[];
   id?: string;
 }

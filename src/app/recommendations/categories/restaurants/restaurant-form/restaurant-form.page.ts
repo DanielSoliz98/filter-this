@@ -69,7 +69,8 @@ export class RestaurantFormPage implements OnInit {
       description: this.description.value,
       ubication: this.ubication.value,
       comments: [],
-      ratings: [],
+      scores: [],
+      score: 0,
       user_uid: this.authService.userData.uid,
     };
 
