@@ -17,6 +17,7 @@ import { CommentsComponent } from "../shared/components/comments/comments.compon
 import { RestaurantDetailComponent } from "../shared/components/restaurant-detail/restaurant-detail.component";
 import { ProductDetailComponent } from "../shared/components/product-detail/product-detail.component";
 import { MapViewComponent } from "../shared/components/map-view/map-view.component";
+import { ScoreComponent } from "../shared/components/score/score.component";
 
 @NgModule({
   imports: [
@@ -29,7 +30,7 @@ import { MapViewComponent } from "../shared/components/map-view/map-view.compone
     ProfilePageModule,
     ReactiveFormsModule,
   ],
-  exports: [CommentsComponent, MapViewComponent],
+  exports: [CommentsComponent, MapViewComponent, ScoreComponent],
   declarations: [
     HomePage,
     MovieDetailComponent,
@@ -38,6 +39,7 @@ import { MapViewComponent } from "../shared/components/map-view/map-view.compone
     BookDetailComponent,
     GameDetailComponent,
     CommentsComponent,
+    ScoreComponent,
     MapViewComponent,
     RestaurantDetailComponent,
     ProductDetailComponent,
