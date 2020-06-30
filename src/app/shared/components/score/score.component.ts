@@ -37,10 +37,10 @@ export class ScoreComponent implements OnInit {
     if (this.hasScored) {
       if (this.hasScored.like === 1) {
         this.like = "thumbs-up";
-        this.scoredLike = true;
+        this.scoredDislike = true;
       } else {
         this.dislike = "thumbs-down";
-        this.scoredDislike = true;
+        this.scoredLike = true;
       }
     }
   }
@@ -48,7 +48,7 @@ export class ScoreComponent implements OnInit {
   likeRecommendation() {
     if (!this.scoredLike && !this.scoredDislike) {
       this.like = "thumbs-up";
-      this.scoredLike = true;
+      this.scoredDislike = true;
       let newScore: Score = {
         user_uid: this.authService.userData.uid,
         like: 1,
@@ -62,7 +62,7 @@ export class ScoreComponent implements OnInit {
   dislikeRecommendation() {
     if (!this.scoredLike && !this.scoredDislike) {
       this.dislike = "thumbs-down";
-      this.scoredDislike = true;
+      this.scoredLike = true;
       let newScore: Score = {
         user_uid: this.authService.userData.uid,
         like: 0,
