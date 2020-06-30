@@ -1,0 +1,25 @@
+<ion-card>
+  <ion-card-content>
+    <ion-list>
+      <ion-list-header>
+        Calificacion:
+      </ion-list-header>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col class="ion-text-center">
+            <ion-button (click)="likeRecommendation()" [disabled]="!scoredLike">
+              <ion-icon [name]="like"></ion-icon>
+            </ion-button>
+            <ion-badge color="primary">{{ score.like }}</ion-badge>
+          </ion-col>
+          <ion-col class="ion-text-center">
+            <ion-button (click)="dislikeRecommendation()" [disabled]="!scoredDislike">
+              <ion-icon [name]="dislike"></ion-icon>
+            </ion-button>
+            <ion-badge color="primary">{{ score.dislike }}</ion-badge>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
