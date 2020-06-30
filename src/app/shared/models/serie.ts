@@ -19,6 +19,6 @@ export interface SerieModel {
   user_uid: string;
   comments: Comment[];
   scores: Score[];
-  score: number;
+  score: Score;
   id?: string;
 }

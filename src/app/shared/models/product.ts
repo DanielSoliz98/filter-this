@@ -10,7 +10,7 @@ export interface Product {
   user_uid: string;
   comments: Comment[];
   scores: Score[];
-  score: number;
+  score: Score;
   imagesURL?: string[];
   id?: string;
 }

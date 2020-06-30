@@ -9,7 +9,7 @@ export interface Restaurant {
   comments: Comment[];
   scores: Score[];
   user_uid: string;
-  score: number;
+  score: Score;
   imagesURL?: string[];
   id?: string;
 }

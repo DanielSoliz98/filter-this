@@ -1,5 +1,6 @@
 export interface Score {
-  user_uid: string;
-  score: string;
-  displayName: string;
+  user_uid?: string;
+  like: number;
+  dislike: number;
+  displayName?: string;
 }
