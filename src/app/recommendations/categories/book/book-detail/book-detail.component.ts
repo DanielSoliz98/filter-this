@@ -61,7 +61,7 @@ export class BookDetailComponent implements OnInit {
       id: this.book.id,
       comments: [],
       scores: [],
-      score: 0,
+      score: { like: 0, dislike: 0 },
     };
     this.bookService.addBook(book).then(
       () => {

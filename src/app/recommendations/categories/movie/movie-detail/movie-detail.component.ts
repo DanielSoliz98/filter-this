@@ -76,7 +76,7 @@ export class MovieDetailComponent implements OnInit {
       id: this.movie.id,
       comments: [],
       scores: [],
-      score: 0,
+      score: { like: 0, dislike: 0 },
     };
     this.movieService.addMovie(movie).then(
       () => {

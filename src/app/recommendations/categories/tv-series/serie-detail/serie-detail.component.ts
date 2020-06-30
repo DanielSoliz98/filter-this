@@ -69,7 +69,7 @@ export class SerieDetailComponent implements OnInit {
       id: this.serie.id,
       comments: [],
       scores: [],
-      score: 0,
+      score: { like: 0, dislike: 0 },
     };
     this.serieService.addSerie(serie).then(
       () => {

@@ -61,7 +61,7 @@ export class GameDetailComponent implements OnInit {
       id: this.game.id,
       comments: [],
       scores: [],
-      score: 0,
+      score: { like: 0, dislike: 0 },
     };
     this.gameService.addGame(game).then(
       () => {

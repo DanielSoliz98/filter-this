@@ -61,7 +61,7 @@ export class MusicDetailComponent implements OnInit {
       id: this.music.id,
       comments: [],
       scores: [],
-      score: 0,
+      score: { like: 0, dislike: 0 },
     };
     this.musicService.addMusic(music).then(
       () => {

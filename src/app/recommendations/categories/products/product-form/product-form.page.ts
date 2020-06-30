@@ -71,7 +71,7 @@ export class ProductFormPage implements OnInit {
       link: this.link.value,
       comments: [],
       scores: [],
-      score: 0,
+      score: { like: 0, dislike: 0 },
       user_uid: this.authService.userData.uid,
     };
 
