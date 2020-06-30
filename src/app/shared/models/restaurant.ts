@@ -1,5 +1,5 @@
 import { Comment } from './comment';
-import { Rating } from './rating';
+import { Score } from './score';
 
 export interface Restaurant {
   restaurantName: string;
@@ -7,8 +7,9 @@ export interface Restaurant {
   description: string[];
   ubication: string[];
   comments: Comment[];
-  ratings: Rating[];
+  scores: Score[];
   user_uid: string;
+  score: Score;
   imagesURL?: string[];
   id?: string;
 }

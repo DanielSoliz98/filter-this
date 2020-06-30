@@ -73,6 +73,12 @@
     </ion-card-content>
   </ion-card>
   <ng-container *ngIf="showComments">
+    <app-score
+      [score]="restaurant.score"
+      [scores]="restaurant.scores"
+      category="restaurants"
+      [idCategory]="restaurant.id"
+    ></app-score>
     <app-comments
       [comments]="restaurant.comments"
       [user]="user"

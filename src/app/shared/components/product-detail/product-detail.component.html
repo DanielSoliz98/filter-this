@@ -82,6 +82,12 @@
     </ion-card-content>
   </ion-card>
   <ng-container *ngIf="showComments">
+    <app-score
+      [score]="product.score"
+      [scores]="product.scores"
+      category="products"
+      [idCategory]="product.id"
+    ></app-score>
     <app-comments
       [comments]="product.comments"
       [user]="user"
