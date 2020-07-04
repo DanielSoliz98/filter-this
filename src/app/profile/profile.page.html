@@ -33,6 +33,9 @@
             <h2>{{ authService.userData.displayName}}</h2>
             <h3>{{ authService.userData.email}}</h3>
           </ion-label>
+          <ion-label *ngIf="!authService.userData.emailVerified">
+            <h4>Verifica tu cuenta, te enviamos un correo.</h4>
+          </ion-label>
         </ion-item>
       </ion-list>
     </ion-card-content>
