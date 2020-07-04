@@ -11,7 +11,7 @@
     <ion-card-header class="ion-text-center">
       <ion-chip outline color="tertiary" *ngIf="restaurant">
         <ion-label *ngIf="myRecommendation; else noMyRecommendation"
-          >Mi Recomendacion</ion-label
+          >Mi Recomendación</ion-label
         >
         <ng-template #noMyRecommendation>
           <ion-label *ngIf="user"
@@ -24,7 +24,7 @@
         outline="true"
         *ngIf="saved && !myRecommendation"
       >
-        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
+        <ion-label *ngIf="saved">Guardado en mi colección.</ion-label>
       </ion-chip>
       <ion-card-title
         >Restaurante: {{ restaurant.restaurantName }}</ion-card-title
@@ -50,14 +50,14 @@
         <ion-row>
           <ion-col size="12">
             <ion-item>
-              <h6><b>Descripcion: </b>{{ restaurant.description }}</h6>
+              <h6><b>Descripción: </b>{{ restaurant.description }}</h6>
             </ion-item>
           </ion-col>
         </ion-row>
       </ion-grid>
       <ion-list *ngIf="restaurant.imagesURL">
         <ion-list-header>
-          Imagenes del Restaurante
+          Imágenes del Restaurante
         </ion-list-header>
         <ion-slides pager="true" [options]="sliderConfig">
           <ion-slide *ngFor="let image of restaurant.imagesURL">

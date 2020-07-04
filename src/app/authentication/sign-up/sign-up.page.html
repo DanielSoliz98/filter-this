@@ -59,7 +59,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating"
-            >Correo <ion-text color="danger">*</ion-text></ion-label
+            >Correo electrónico<ion-text color="danger">*</ion-text></ion-label
           >
           <ion-input required formControlName="email" type="text"></ion-input>
           <div
@@ -75,7 +75,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating"
-            >Contrasena <ion-text color="danger">*</ion-text></ion-label
+            >Contraseña <ion-text color="danger">*</ion-text></ion-label
           >
           <ion-input
             required
@@ -88,12 +88,12 @@
           >
             <div *ngIf="password.errors['required']">
               <ion-text color="danger">
-                <h6>Contrasena es requerida</h6>
+                <h6>Contraseña es requerida</h6>
               </ion-text>
             </div>
             <div *ngIf="password.errors['minLength']">
               <ion-text color="danger">
-                <h6>Contrasena debe tener 8 caracteres minimo</h6>
+                <h6>Contraseña debe tener 8 caracteres mínimo</h6>
               </ion-text>
             </div>
           </div>

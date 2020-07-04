@@ -15,7 +15,7 @@
     <ion-card-header>
       <ion-chip outline color="tertiary" *ngIf="serieModel">
         <ion-label *ngIf="myRecommendation; else noMyRecommendation"
-          >Mi Recomendacion</ion-label
+          >Mi Recomendación</ion-label
         >
         <ng-template #noMyRecommendation>
           <ion-label *ngIf="user"
@@ -28,10 +28,10 @@
         outline="true"
         *ngIf="saved && !myRecommendation"
       >
-        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
+        <ion-label *ngIf="saved">Guardado en mi colección.</ion-label>
       </ion-chip>
       <ion-card-subtitle
-        >Fecha de Emision:
+        >Fecha de Emisión:
         {{ serie.first_air_date | date: "shortDate" }}</ion-card-subtitle
       >
       <ion-card-title>{{ serie.name }}</ion-card-title>
@@ -48,7 +48,7 @@
           </ion-col>
           <ion-col size="6">
             <ion-item>
-              <h6><b>Titulo Original:</b></h6>
+              <h6><b>Título Original:</b></h6>
             </ion-item>
             <ion-item>
               <h6>{{ serie.original_name }}</h6>
@@ -60,7 +60,7 @@
               <h6>{{ serie.origin_country }}</h6>
             </ion-item>
             <ion-item>
-              <h6><b>Generos:</b></h6>
+              <h6><b>Géneros:</b></h6>
             </ion-item>
             <ion-item *ngIf="genres.length > 0; else genreBlock">
               <ion-label>

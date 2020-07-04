@@ -34,14 +34,14 @@
                 *ngIf="book.volumeInfo.publishedDate; else noDate"
               >
                 <h6>
-                  Fecha de Publicacion:
+                  Fecha de Publicación:
                   {{ book.volumeInfo.publishedDate | date: "shortDate" }}
                 </h6>
               </ion-text>
               <ng-template #noDate>
                 <ion-text color="dark" ngtem>
                   <h6>
-                    Sin fecha de publicacion
+                    Sin fecha de publicación
                   </h6>
                 </ion-text>
               </ng-template>

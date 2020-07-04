@@ -10,7 +10,7 @@
 <ion-content fullscreen>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Anadir nuevo producto</ion-card-title>
+      <ion-card-title>Añadir nuevo producto</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
@@ -26,7 +26,7 @@
         </ion-item>
         <ion-item>
           <ion-label>
-            Categoria <ion-text color="danger">*</ion-text></ion-label
+            Categoría <ion-text color="danger">*</ion-text></ion-label
           >
           <ion-select interface="popover" formControlName="category">
             <ion-select-option *ngFor="let cat of categories" [value]="cat"
@@ -42,7 +42,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating"
-            >Descripcion<ion-text color="danger">*</ion-text></ion-label
+            >Descripción<ion-text color="danger">*</ion-text></ion-label
           >
           <ion-textarea required formControlName="description"></ion-textarea>
         </ion-item>
@@ -54,7 +54,7 @@
         </ion-item>
         <ion-list>
           <ion-list-header>
-            Imagenes del Producto
+            Imágenes del Producto
           </ion-list-header>
           <ion-slides *ngIf="images.length > 0" pager="true" [options]="sliderConfig">
             <ion-slide *ngFor="let image of images">
@@ -69,7 +69,7 @@
             <ion-grid>
               <ion-row class="ion-justify-content-center">
                 <ion-button (click)="uploadImage()" color="secondary">
-                  Subir imagen
+                  Subir imágen
                 </ion-button>
               </ion-row>
             </ion-grid>
