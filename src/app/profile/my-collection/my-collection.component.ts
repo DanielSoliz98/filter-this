@@ -37,6 +37,7 @@ export class MyCollectionComponent implements OnInit {
   products: Product[] = [];
   restaurants: Restaurant[] = [];
   collection: MyRecommendations;
+  hasCollections: boolean = false;
   constructor(
     private authService: AuthenticationService,
     private bookService: BookService,
@@ -61,6 +62,7 @@ export class MyCollectionComponent implements OnInit {
           if (this.collection.books) {
             this.collection.books.forEach((bookId) => {
               this.bookService.getBooks(bookId).subscribe((res) => {
+                this.hasCollections = true;
                 this.books.push(res.items[0]);
               });
             });
@@ -69,6 +71,7 @@ export class MyCollectionComponent implements OnInit {
           if (this.collection.movies) {
             this.collection.movies.forEach((movieId) => {
               this.movieService.searchMovie(movieId).subscribe((movie) => {
+                this.hasCollections = true;
                 this.movies.push(movie);
               });
             });
@@ -77,6 +80,7 @@ export class MyCollectionComponent implements OnInit {
           if (this.collection.series) {
             this.collection.series.forEach((serieId) => {
               this.serieService.searchSerie(serieId).subscribe((serie) => {
+                this.hasCollections = true;
                 this.series.push(serie);
               });
             });
@@ -85,6 +89,7 @@ export class MyCollectionComponent implements OnInit {
           if (this.collection.games) {
             this.collection.games.forEach((gameId) => {
               this.gameService.searchGame(gameId).subscribe((game) => {
+                this.hasCollections = true;
                 this.games.push(game);
               });
             });
@@ -93,6 +98,7 @@ export class MyCollectionComponent implements OnInit {
           if (this.collection.musics) {
             this.collection.musics.forEach((musicId) => {
               this.musicService.searchMusic(musicId).subscribe((music) => {
+                this.hasCollections = true;
                 this.musics.push(music);
               });
             });
@@ -103,6 +109,7 @@ export class MyCollectionComponent implements OnInit {
               this.restaurantService
                 .searchRestaurant(restaurantId)
                 .subscribe((restaurant) => {
+                  this.hasCollections = true;
                   this.restaurants.push(restaurant);
                 });
             });
@@ -113,6 +120,7 @@ export class MyCollectionComponent implements OnInit {
               this.productService
                 .searchProduct(productId)
                 .subscribe((product) => {
+                  this.hasCollections = true;
                   this.products.push(product);
                 });
             });

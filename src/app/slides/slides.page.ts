@@ -19,11 +19,7 @@ export class SlidesPage implements OnInit {
 
   ngOnInit() {
     if (this.authService.userData) {
-      if (this.authService.userData.emailVerified) {
-        this.router.navigate(["/app/tabs/recommendations"]);
-      } else {
-        this.router.navigate(["verify-email-address"]);
-      }
+      this.router.navigate(["/app/tabs/recommendations"]);
     }
   }
 

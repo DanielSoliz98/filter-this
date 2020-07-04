@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Musica</ion-title>
+    <ion-title>Música</ion-title>
     <ion-buttons slot="end" (click)="dismiss()">
       <ion-icon name="close-circle"></ion-icon>
     </ion-buttons>
@@ -11,7 +11,7 @@
     <ion-card-header class="ion-text-center">
       <ion-chip outline color="tertiary" *ngIf="musicModel">
         <ion-label *ngIf="myRecommendation; else noMyRecommendation"
-          >Mi Recomendacion</ion-label
+          >Mi Recomendación</ion-label
         >
         <ng-template #noMyRecommendation>
           <ion-label *ngIf="user"
@@ -24,9 +24,9 @@
         outline="true"
         *ngIf="saved && !myRecommendation"
       >
-        <ion-label *ngIf="saved">Guardado en mi coleccion.</ion-label>
+        <ion-label *ngIf="saved">Guardado en mi colección.</ion-label>
       </ion-chip>
-      <ion-card-title>Cancion: {{ music.title }}</ion-card-title>
+      <ion-card-title>Canción: {{ music.title }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
@@ -49,7 +49,7 @@
                   href="{{ music.artist.link }}"
                   size="small"
                   color="tertiary"
-                  >Mas informacion del artista</ion-button
+                  >Más información del artista</ion-button
                 >
               </ion-col>
             </ion-row>

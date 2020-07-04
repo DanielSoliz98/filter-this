@@ -35,13 +35,9 @@ export class SignInPage implements OnInit {
       .signIn(this.email.value, this.password.value)
       .then((result: any) => {
         this.ngZone.run(() => {
-          if (result.user.emailVerified) {
-            this.signinForm.reset();
-            this.presentToast("Se inicio sesion correctamente");
-            this.router.navigateByUrl("/app/tabs/recommendations");
-          } else {
-            this.router.navigate(["verify-email-address"]);
-          }
+          this.signinForm.reset();
+          this.presentToast("Se inicio sesion correctamente");
+          this.router.navigateByUrl("/app/tabs/recommendations");
         });
       })
       .catch((error: any) => {

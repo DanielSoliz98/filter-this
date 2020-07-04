@@ -10,7 +10,7 @@
 <ion-content fullscreen>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Anadir nuevo restaurante</ion-card-title>
+      <ion-card-title>Añadir nuevo restaurante</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="restaurantForm" (ngSubmit)="onSubmit()">
@@ -44,7 +44,7 @@
         </ion-item>
         <ion-item>
           <ion-label position="floating"
-            >Descripcion<ion-text color="danger">*</ion-text></ion-label
+            >Descripción<ion-text color="danger">*</ion-text></ion-label
           >
           <ion-textarea required formControlName="description"></ion-textarea>
         </ion-item>
@@ -58,7 +58,7 @@
           ></ion-input>
           <app-map (ubication)="saveUbication($event)"></app-map>
           <ion-list-header>
-            Imagenes
+            Imágenes
           </ion-list-header>
           <ion-slides *ngIf="images.length > 0" [options]="sliderConfig">
             <ion-slide *ngFor="let image of images">
@@ -73,7 +73,7 @@
             <ion-grid>
               <ion-row class="ion-justify-content-center">
                 <ion-button (click)="uploadImage()" color="secondary">
-                  Subir imagen
+                  Subir imágen
                 </ion-button>
               </ion-row>
             </ion-grid>

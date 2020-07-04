@@ -1,42 +1,45 @@
-<ion-content fullscreen class="ion-padding" scroll-y="false" color="primary">
+<ion-content fullscreen class="ion-padding" scroll-y="false" color="secondary">
   <ion-slides pager="true" [options]="slideOpts" #slides>
     <ion-slide>
       <div class="slide">
         <ion-text color="dark">
-          <h2>Bienvenido!!!</h2>
-          <p>
-            <b>FILTER THIS</b> es una aplicacion colaborativa de recomendaciones
-            de tus peliculas, series, videojuegos, libros, restaurantes
-            favoritos entre las distintas categorias disponibles.
-          </p>
+          <img src="../../assets/slide1.png" alt="" srcset="" />
+          <h1>Bienvenido!!!</h1>
+          <h6>
+            <b>FILTER THIS</b> es una aplicación colaborativa de recomendaciones
+            de tus películas, series, videojuegos, libros, restaurantes
+            favoritos entre las distintas categorías disponibles.
+          </h6>
         </ion-text>
       </div>
     </ion-slide>
 
     <ion-slide>
+      <img src="../../assets/slide2.png" alt="" srcset="" />
       <ion-text color="dark">
-        <h2>Descubre y Recomienda</h2>
-        <p>
-          Te mostramos las recomendaciones mas valoradas de nuestras distintas
-          categorias.
-        </p>
+        <h1>Descubre y Recomienda</h1>
+        <h6>
+          Te mostramos las recomendaciones más valoradas de nuestras distintas
+          categorías.
+        </h6>
       </ion-text>
     </ion-slide>
 
     <ion-slide>
+      <img src="../../assets/slide3.png" alt="" />
       <ion-text color="dark">
-        <h2>Busca y Publica</h2>
-        <p>
+        <h1>Busca y Publica</h1>
+        <h6>
           Publica tus recomendaciones, para sorprender a los demas usuarios para
           que valoren tus gustos.
-        </p>
+        </h6>
       </ion-text>
     </ion-slide>
 
     <ion-slide>
-      <h2>Listo para comenzar con esta experiencia?</h2>
-      <ion-button color="light" (click)="goToHome()"
-        >Continue <ion-icon slot="end" name="arrow-forward"></ion-icon
+      <h2>Listo para comenzar con esta experíencia?</h2>
+      <ion-button color="primary" (click)="goToHome()"
+        >Continuar <ion-icon slot="end" name="arrow-forward"></ion-icon
       ></ion-button>
     </ion-slide>
   </ion-slides>

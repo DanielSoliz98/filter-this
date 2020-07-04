@@ -14,13 +14,13 @@
         <ion-card class="card-browser center">
           <img src="../../../assets/icon/logo.png" class="center" />
           <ion-card-header class="ion-text-center" color="secondary">
-            <ion-card-title>Iniciar Sesion</ion-card-title>
+            <ion-card-title>Iniciar Sesión</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
               <ion-item>
                 <ion-label position="floating"
-                  >Correo <ion-text color="danger">*</ion-text>
+                  >Correo electrónico<ion-text color="danger">*</ion-text>
                 </ion-label>
                 <ion-input
                   required
@@ -40,7 +40,7 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating"
-                  >Contrasena <ion-text color="danger">*</ion-text>
+                  >Contraseña <ion-text color="danger">*</ion-text>
                 </ion-label>
                 <ion-input
                   required
@@ -53,7 +53,7 @@
                 >
                   <div *ngIf="password.errors['required']">
                     <ion-text color="danger">
-                      <h6>Contrasena es requerida</h6>
+                      <h6>Contraseña es requerida</h6>
                     </ion-text>
                   </div>
                 </div>
@@ -67,17 +67,17 @@
                 [disabled]="signinForm.invalid"
                 class="ion-text-capitalize"
               >
-                <h3>Iniciar Sesion</h3>
+                <h3>Iniciar Sesión</h3>
                 <ion-icon slot="end" name="log-in"></ion-icon>
               </ion-button>
             </form>
             <br />
             <ion-text color="tertiary" (click)="goToSignUp()">
-              <h6>No tiene una cuenta? Registrarse</h6>
+              <h6>No tiene una cuenta? Regístrarse</h6>
             </ion-text>
             <br />
             <ion-text color="dark">
-              <h6>Iniciar sesion con:</h6>
+              <h6>Iniciar sesión con:</h6>
             </ion-text>
             <br />
             <ion-button

@@ -9,6 +9,8 @@ import { NativeStorage } from "@ionic-native/native-storage/ngx";
 import { Router } from "@angular/router";
 import { User } from "../../models/user";
 import { MyRecommendations } from "../../models/my-recommendations";
+import { take, map } from "rxjs/operators";
+import { UserService } from "../user/user.service";
 
 @Injectable({
   providedIn: "root",
@@ -20,18 +22,15 @@ export class AuthenticationService {
     private angularAuth: AngularFireAuth,
     private nativeStorage: NativeStorage,
     private router: Router,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private userService: UserService
   ) {
     this.angularAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
         this.getUser(user.uid);
         this.nativeStorage.setItem("user", this.userData);
-        if (user.emailVerified) {
-          this.router.navigateByUrl("/app/tabs/recommendations");
-        } else {
-          this.router.navigate(["verify-email-address"]);
-        }
+        this.router.navigateByUrl("/app/tabs/recommendations");
       } else {
         this.nativeStorage.setItem("user", null);
       }
@@ -103,27 +102,45 @@ export class AuthenticationService {
   }
 
   setUserData(user: User) {
+    this.userService.getMyCollection(user.uid).subscribe((data) => {
+      if (data == undefined) {
+        let recommendations: MyRecommendations = {
+          books: [],
+          games: [],
+          movies: [],
+          musics: [],
+          products: [],
+          restaurants: [],
+          series: [],
+        };
+        const collectionRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
+          `my-collection/${user.uid}`
+        );
+        collectionRef.set(recommendations);
+      }
+    });
+
+    this.userService.getMyRecommendations(user.uid).subscribe((data) => {
+      if (data == undefined) {
+        let recommendations: MyRecommendations = {
+          books: [],
+          games: [],
+          movies: [],
+          musics: [],
+          products: [],
+          restaurants: [],
+          series: [],
+        };
+        const recommendationsRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
+          `my-recommendations/${user.uid}`
+        );
+        recommendationsRef.set(recommendations);
+      }
+    });
+
     const userRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
       `users/${user.uid}`
     );
-    let recommendations: MyRecommendations = {
-      books: [],
-      games: [],
-      movies: [],
-      musics: [],
-      products: [],
-      restaurants: [],
-      series: [],
-    };
-    const collectionRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
-      `my-collection/${user.uid}`
-    );
-    collectionRef.set(recommendations);
-
-    const recommendationsRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
-      `my-recommendations/${user.uid}`
-    );
-    recommendationsRef.set(recommendations);
 
     let userData: User = {
       uid: user.uid,
@@ -148,6 +165,7 @@ export class AuthenticationService {
 
   signOut() {
     return this.angularAuth.signOut().then(() => {
+      this.userData = undefined;
       this.nativeStorage.remove("user");
       this.router.navigate(["slides"]);
     });

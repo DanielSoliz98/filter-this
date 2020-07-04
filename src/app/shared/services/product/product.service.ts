@@ -22,6 +22,7 @@ export class ProductService {
   ) {
     this.productCollection = this.db.collection<Product>("products");
     this.products = this.productCollection.snapshotChanges().pipe(
+      take(1),
       map((actions) => {
         return actions.map((a) => {
           const data = a.payload.doc.data();
