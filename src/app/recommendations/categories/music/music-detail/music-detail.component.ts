@@ -7,6 +7,7 @@ import { MusicService } from "src/app/shared/services/music/music.service";
 import { AuthenticationService } from "src/app/shared/services/authentication/authentication.service";
 import { UserService } from "src/app/shared/services/user/user.service";
 import { MyRecommendations } from "src/app/shared/models/my-recommendations";
+import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
 
 @Component({
   selector: "app-music-detail",
@@ -26,7 +27,8 @@ export class MusicDetailComponent implements OnInit {
     private toastController: ToastController,
     private musicService: MusicService,
     private authService: AuthenticationService,
-    private userService: UserService
+    private userService: UserService,
+    private iab: InAppBrowser
   ) {}
 
   ngOnInit() {}
@@ -105,6 +107,10 @@ export class MusicDetailComponent implements OnInit {
       duration: 2000,
     });
     toast.present();
+  }
+  
+  openLink(link: string) {
+    this.iab.create(link, "_blank");
   }
 
   dismiss() {
