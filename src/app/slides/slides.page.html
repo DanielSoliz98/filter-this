@@ -1,8 +1,9 @@
-<ion-content fullscreen class="ion-padding" scroll-y="false" color="primary">
+<ion-content fullscreen class="ion-padding" scroll-y="false" color="secondary">
   <ion-slides pager="true" [options]="slideOpts" #slides>
     <ion-slide>
       <div class="slide">
         <ion-text color="dark">
+          <img src="../../assets/slide1.png" alt="" srcset="" />
           <h1>Bienvenido!!!</h1>
           <h6>
             <b>FILTER THIS</b> es una aplicación colaborativa de recomendaciones
@@ -14,6 +15,7 @@
     </ion-slide>
 
     <ion-slide>
+      <img src="../../assets/slide2.png" alt="" srcset="" />
       <ion-text color="dark">
         <h1>Descubre y Recomienda</h1>
         <h6>
@@ -24,6 +26,7 @@
     </ion-slide>
 
     <ion-slide>
+      <img src="../../assets/slide3.png" alt="" />
       <ion-text color="dark">
         <h1>Busca y Publica</h1>
         <h6>
@@ -35,7 +38,7 @@
 
     <ion-slide>
       <h2>Listo para comenzar con esta experíencia?</h2>
-      <ion-button color="light" (click)="goToHome()"
+      <ion-button color="primary" (click)="goToHome()"
         >Continuar <ion-icon slot="end" name="arrow-forward"></ion-icon
       ></ion-button>
     </ion-slide>
