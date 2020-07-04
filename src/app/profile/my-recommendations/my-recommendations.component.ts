@@ -39,6 +39,7 @@ export class MyRecommendationsComponent implements OnInit {
   products: Product[] = [];
   restaurants: Restaurant[] = [];
   recommendations: MyRecommendations;
+  hasRecommendations: boolean = false;
   constructor(
     private authService: AuthenticationService,
     private bookService: BookService,
@@ -59,59 +60,66 @@ export class MyRecommendationsComponent implements OnInit {
       .getMyRecommendations(this.authService.userData.uid)
       .subscribe((data) => {
         this.recommendations = data;
-        if (this.recommendations.books) {
+        if (this.recommendations.books.length > 0) {
           this.recommendations.books.forEach((bookId) => {
             this.bookService.getBooks(bookId).subscribe((res) => {
               this.books.push(res.items[0]);
+              this.hasRecommendations = true;
             });
           });
         }
 
-        if (this.recommendations.movies) {
+        if (this.recommendations.movies.length > 0) {
           this.recommendations.movies.forEach((movieId) => {
             this.movieService.searchMovie(movieId).subscribe((movie) => {
               this.movies.push(movie);
+              this.hasRecommendations = true;
             });
           });
         }
 
-        if (this.recommendations.series) {
+        if (this.recommendations.series.length > 0) {
           this.recommendations.series.forEach((serieId) => {
             this.serieService.searchSerie(serieId).subscribe((serie) => {
               this.series.push(serie);
+              this.hasRecommendations = true;
             });
           });
         }
 
-        if (this.recommendations.games) {
+        if (this.recommendations.games.length > 0) {
           this.recommendations.games.forEach((gameId) => {
             this.gameService.searchGame(gameId).subscribe((game) => {
               this.games.push(game);
+              this.hasRecommendations = true;
             });
           });
         }
 
-        if (this.recommendations.musics) {
+        if (this.recommendations.musics.length > 0) {
           this.recommendations.musics.forEach((musicId) => {
             this.musicService.searchMusic(musicId).subscribe((music) => {
               this.musics.push(music);
+              this.hasRecommendations = true;
             });
           });
         }
 
-        if (this.recommendations.restaurants) {
+        if (this.recommendations.restaurants.length > 0) {
           this.restaurantService
             .getRestaurants(this.authService.userData.uid)
             .subscribe((data) => {
               this.restaurants = data;
+              this.hasRecommendations = true;
             });
         }
 
-        if (this.recommendations.products) {
+        if (this.recommendations.products.length > 0) {
           this.productService
             .getProducts(this.authService.userData.uid)
             .subscribe((data) => {
               this.products = data;
+              this.hasRecommendations = true;
             });
         }
       });

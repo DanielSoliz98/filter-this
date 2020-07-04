@@ -41,7 +41,6 @@ export class RecommendationsPage implements OnInit {
 
   ionViewWillEnter() {
     this.movieService.getMoviesSaved().subscribe((data) => {
-      console.log(data);
       data.forEach((movie) => {
         if (movie.score.like > movie.score.dislike) {
           this.movieService.searchMovie(movie.id).subscribe((movieData) => {
@@ -50,12 +49,11 @@ export class RecommendationsPage implements OnInit {
         }
       });
     });
-    console.log(this.movies);
     this.modelService.getCollection("series").subscribe((data) => {
       data.forEach((serie) => {
         if (serie.score.like > serie.score.dislike) {
           this.serieService.searchSerie(serie.id).subscribe((serieData) => {
-            this.series.push(serieData);
+            this.series.push(serieData);    
           });
         }
       });
@@ -129,7 +127,14 @@ export class RecommendationsPage implements OnInit {
     this.restaurants = [];
   }
 
+  ionViewWillUnload() {
+    this.movies = [];
+    this.series = [];
+    this.products = [];
+    this.restaurants = [];
+  }
+
   goToCategories() {
-    this.router.navigateByUrl("/app/tabs/recommendations/categories");
+    this.router.navigate(["app/tabs/recommendations/categories"]);
   }
 }

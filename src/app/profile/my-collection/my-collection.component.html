@@ -10,6 +10,11 @@
   <ion-card>
     <ion-card-content>
       <ion-list *ngIf="collection">
+        <ion-list-header *ngIf="!hasCollections">
+          <ion-text color="tertiary">
+            <h4>No tiene recomendaciones en su coleccion.</h4>
+          </ion-text>
+        </ion-list-header>
         <ion-list-header *ngIf="collection.movies.length > 0">
           <ion-text color="tertiary">
             <h1>Peliculas</h1>
