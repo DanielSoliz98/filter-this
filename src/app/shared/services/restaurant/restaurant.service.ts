@@ -22,6 +22,7 @@ export class RestaurantService {
   ) {
     this.restaurantCollection = this.db.collection<Restaurant>("restaurants");
     this.restaurants = this.restaurantCollection.snapshotChanges().pipe(
+      take(1),
       map((actions) => {
         return actions.map((a) => {
           const data = a.payload.doc.data();
@@ -78,7 +79,13 @@ export class RestaurantService {
       .collection<Restaurant>("restaurants", (ref) =>
         ref.where("user_uid", "==", user_uid)
       )
-      .valueChanges();
+      .valueChanges()
+      .pipe(
+        take(1),
+        map((collection) => {
+          return collection;
+        })
+      );
   }
 
   searchRestaurant(uid: string): Observable<Restaurant> {

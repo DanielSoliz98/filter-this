@@ -37,6 +37,7 @@ export class MovieService {
 
   getMoviesSaved(): Observable<MovieModel[]> {
     return this.movieCollection.snapshotChanges().pipe(
+      take(1),
       map((actions) =>
         actions.map((a) => {
           const data = a.payload.doc.data() as MovieModel;

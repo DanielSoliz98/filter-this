@@ -17,6 +17,7 @@ export class ModelService {
   getCollection(collectionName: string): Observable<Model[]> {
     let collection = this.afs.collection<Model>(collectionName);
     return collection.snapshotChanges().pipe(
+      take(1),
       map((actions) => {
         return actions.map((a) => {
           const data = a.payload.doc.data();
