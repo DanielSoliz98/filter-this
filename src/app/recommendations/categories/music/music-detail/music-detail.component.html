@@ -45,7 +45,7 @@
             </ion-row>
             <ion-row class="ion-justify-content-center">
               <ion-button
-                (click)="openLink(music.artist.link)"
+                href="{{ music.artist.link }}"
                 size="small"
                 color="tertiary"
                 >Más información del artista</ion-button
@@ -80,10 +80,7 @@
               </ion-label>
             </ion-row>
             <ion-row class="ion-justify-content-center">
-              <ion-button
-                (click)="openLink(music.link)"
-                size="small"
-                color="tertiary"
+              <ion-button href="{{ music.link }}" size="small" color="tertiary"
                 >Más información de la canción</ion-button
               >
             </ion-row>

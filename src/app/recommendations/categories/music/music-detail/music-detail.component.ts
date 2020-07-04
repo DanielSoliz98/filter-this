@@ -27,8 +27,7 @@ export class MusicDetailComponent implements OnInit {
     private toastController: ToastController,
     private musicService: MusicService,
     private authService: AuthenticationService,
-    private userService: UserService,
-    private iab: InAppBrowser
+    private userService: UserService
   ) {}
 
   ngOnInit() {}
@@ -108,10 +107,7 @@ export class MusicDetailComponent implements OnInit {
     });
     toast.present();
   }
-  
-  openLink(link: string) {
-    this.iab.create(link, "_blank");
-  }
+
 
   dismiss() {
     this.modalController.dismiss({
