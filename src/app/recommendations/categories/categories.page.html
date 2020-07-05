@@ -6,52 +6,55 @@
     <ion-title>Añadir Recomendación</ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <ion-list-header  color="secondary" lines="none">
-    <h3>Categorías</h3>
-  </ion-list-header>
-  <ion-list lines="none">
-    <ion-item button detail (click)="openMoviePage()">
-      <ion-thumbnail slot="start">
-        <img src="../../../assets/cinema.png" />
-      </ion-thumbnail>
-      <ion-label>Películas</ion-label>
-    </ion-item>
-    <ion-item button detail (click)="openSeriePage()">
-      <ion-thumbnail slot="start">
-        <img src="../../../assets/series.png" />
-      </ion-thumbnail>
-      <ion-label>Series</ion-label>
-    </ion-item>
-    <ion-item button detail (click)="openGamePage()">
-      <ion-thumbnail slot="start">
-        <img src="../../../assets/vr-gaming.png" />
-      </ion-thumbnail>
-      <ion-label>Juegos</ion-label>
-    </ion-item>
-    <ion-item button detail (click)="openMusicPage()">
-      <ion-thumbnail slot="start">
-        <img src="../../../assets/cd-burning.png" />
-      </ion-thumbnail>
-      <ion-label>Músicas</ion-label>
-    </ion-item>
-    <ion-item button detail (click)="openBookPage()">
-      <ion-thumbnail slot="start">
-        <img src="../../../assets/book.png" />
-      </ion-thumbnail>
-      <ion-label>Libros</ion-label>
-    </ion-item>
-    <ion-item button detail (click)="openRestaurantPage()">
-      <ion-thumbnail slot="start">
-        <img src="../../../assets/restaurant.png" />
-      </ion-thumbnail>
-      <ion-label>Restaurantes</ion-label>
-    </ion-item>
-    <ion-item button detail (click)="openProductPage()">
-      <ion-thumbnail slot="start">
-        <img src="../../../assets/ecommerce.png" />
-      </ion-thumbnail>
-      <ion-label>Productos</ion-label>                            
-    </ion-item>
-  </ion-list>
+  <div class=web>
+    <ion-list-header color="secondary" lines="none">
+      <h3>Categorías</h3>
+    </ion-list-header>
+    <ion-list lines="none">
+      <ion-item button detail (click)="openMoviePage()">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/cinema.png" />
+        </ion-thumbnail>
+        <ion-label>Películas</ion-label>
+      </ion-item>
+      <ion-item button detail (click)="openSeriePage()">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/series.png" />
+        </ion-thumbnail>
+        <ion-label>Series</ion-label>
+      </ion-item>
+      <ion-item button detail (click)="openGamePage()">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/vr-gaming.png" />
+        </ion-thumbnail>
+        <ion-label>Juegos</ion-label>
+      </ion-item>
+      <ion-item button detail (click)="openMusicPage()">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/cd-burning.png" />
+        </ion-thumbnail>
+        <ion-label>Músicas</ion-label>
+      </ion-item>
+      <ion-item button detail (click)="openBookPage()">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/book.png" />
+        </ion-thumbnail>
+        <ion-label>Libros</ion-label>
+      </ion-item>
+      <ion-item button detail (click)="openRestaurantPage()">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/restaurant.png" />
+        </ion-thumbnail>
+        <ion-label>Restaurantes</ion-label>
+      </ion-item>
+      <ion-item button detail (click)="openProductPage()">
+        <ion-thumbnail slot="start">
+          <img src="../../../assets/ecommerce.png" />
+        </ion-thumbnail>
+        <ion-label>Productos</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
