@@ -31,9 +31,10 @@
     </form>
   </ion-toolbar>
 </ion-header>
+
 <ion-content fullscreen>
   <ion-list lines="none">
-    <ng-container *ngFor="let game of games">
+    <ion-card *ngFor="let game of games" color=light>
       <ion-item button detail (click)="openGameDetail(game)">
         <ion-grid fixed>
           <ion-row class="ion-align-items-center">
@@ -55,6 +56,6 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ng-container>
+    </ion-card>
   </ion-list>
 </ion-content>

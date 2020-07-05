@@ -31,9 +31,10 @@
     </form>
   </ion-toolbar>
 </ion-header>
+
 <ion-content fullscreen color=dark>
   <ion-list lines="none">
-    <ng-container *ngFor="let movie of movies">
+    <ion-card *ngFor="let movie of movies" color=light>
       <ion-item
         button-dark
         detail
@@ -62,6 +63,6 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ng-container>
+    </ion-card>
   </ion-list>
 </ion-content>
