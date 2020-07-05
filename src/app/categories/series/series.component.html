@@ -7,23 +7,18 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card>
-    <img src="../../../assets/series-banner.jpg" alt="" />
+  <ion-card class=web>
+    <ion-card-header color=secondary>
+      <img class=center src="../../../assets/series.png" />
+    </ion-card-header>
     <ion-card-content>
-      <ion-item
-        button
-        detail
-        *ngFor="let serie of series"
-        (click)="openSerieDetail(serie)"
-      >
+      <ion-item button detail *ngFor="let serie of series" (click)="openSerieDetail(serie)">
         <ion-grid fixed>
           <ion-row class="ion-align-items-center">
             <ion-col size="2" *ngIf="serie.poster_path" class="ion-no-padding">
-              <ion-img
-                src="{{
+              <ion-img src="{{
                   'https://image.tmdb.org/t/p/original/' + serie.poster_path
-                }}"
-              ></ion-img>
+                }}"></ion-img>
             </ion-col>
             <ion-col size="7">
               <ion-text color="dark">
