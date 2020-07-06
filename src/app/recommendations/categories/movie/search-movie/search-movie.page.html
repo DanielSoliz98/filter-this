@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header color=dark>
   <ion-toolbar color="primary">
     <ion-title>Buscar Película</ion-title>
     <ion-buttons slot="end" (click)="dismiss()">
@@ -31,11 +31,12 @@
     </form>
   </ion-toolbar>
 </ion-header>
-<ion-content fullscreen>
+
+<ion-content fullscreen color=dark>
   <ion-list lines="none">
-    <ng-container *ngFor="let movie of movies">
+    <ion-card *ngFor="let movie of movies" color=light>
       <ion-item
-        button
+        button-dark
         detail
         *ngIf="movie.poster_path"
         (click)="openMovieDetail(movie)"
@@ -62,6 +63,6 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ng-container>
+    </ion-card>
   </ion-list>
 </ion-content>

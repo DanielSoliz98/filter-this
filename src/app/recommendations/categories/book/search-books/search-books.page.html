@@ -31,10 +31,11 @@
     </form>
   </ion-toolbar>
 </ion-header>
+
 <ion-content fullscreen>
   <ion-list lines="none">
-    <ng-container *ngFor="let book of books">
-      <ion-item button detail (click)="openBookDetail(book)">
+    <ion-card *ngFor="let book of books">
+      <ion-item button detail (click)="openBookDetail(book)" color=light>
         <ion-grid fixed>
           <ion-row class="ion-align-items-center">
             <ion-col size="2">
@@ -68,6 +69,6 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ng-container>
+    </ion-card>
   </ion-list>
 </ion-content>

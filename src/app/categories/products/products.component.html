@@ -7,15 +7,12 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card>
-    <img src="../../../assets/products-banner.jpg" alt="" />
+  <ion-card class=web>
+    <ion-card-header color=secondary>
+      <img class=center src="../../../assets/products.png" />
+    </ion-card-header>
     <ion-card-content>
-      <ion-item
-        button
-        detail
-        *ngFor="let product of products"
-        (click)="openProductDetail(product)"
-      >
+      <ion-item button detail *ngFor="let product of products" (click)="openProductDetail(product)">
         <ion-grid fixed>
           <ion-row>
             <ion-col size="8">

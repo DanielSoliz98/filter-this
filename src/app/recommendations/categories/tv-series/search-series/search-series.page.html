@@ -33,7 +33,7 @@
 </ion-header>
 <ion-content fullscreen>
   <ion-list lines="none">
-    <ng-container *ngFor="let serie of series">
+    <ion-card *ngFor="let serie of series" color=light>
       <ion-item
         button
         detail
@@ -62,6 +62,6 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ng-container>
+    </ion-card>
   </ion-list>
 </ion-content>

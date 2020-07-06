@@ -5,101 +5,93 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="movies.length>0">
-    <img src="../../assets/movies-banner.jpg" alt="" />
-    <ion-list-header class="ion-text-center">
-      <ion-text>
-        Peliculas
-      </ion-text>
-    </ion-list-header>
-    <ion-slides pager="true" [options]="sliderConfig">
-      <ion-slide *ngFor="let movie of movies">
-        <ion-card button (click)="openMovieDetail(movie)">
-          <ion-card-header>
-            <img
-              src="{{ 'https://image.tmdb.org/t/p/original/' + movie.backdrop_path }}"
-              alt=""
-            />
-          </ion-card-header>
-          <ion-card-content>
-            <ion-text class="ion-text-center">
-              {{movie.title}}
-            </ion-text>
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
-  </ion-list>
-  <ion-list *ngIf="series.length>0">
-    <img src="../../assets/series-banner.jpg" alt="" />
-    <ion-list-header class="ion-text-center">
-      <ion-text>
-        Series
-      </ion-text>
-    </ion-list-header>
-    <ion-slides pager="true" [options]="sliderConfig">
-      <ion-slide *ngFor="let serie of series">
-        <ion-card button (click)="openSerieDetail(serie)">
-          <ion-card-header>
-            <img
-              src="{{ 'https://image.tmdb.org/t/p/original/' +
-            serie.backdrop_path }}"
-              alt=""
-            />
-            <ion-text class="ion-text-center">
-              {{serie.name}}
-            </ion-text>
-          </ion-card-header>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
-  </ion-list>
-  <ion-list *ngIf="restaurants.length>0">
-    <img src="../../assets/restaurants-banner.jpg" alt="" />
-    <ion-list-header class="ion-text-center">
-      <ion-text>
-        Restaurantes
-      </ion-text>
-    </ion-list-header>
-    <ion-slides pager="true" [options]="sliderConfig">
-      <ion-slide *ngFor="let restaurant of restaurants">
-        <ion-card button (click)="openRestaurantDetail(restaurant)">
-          <ion-card-header>
-            <ion-text class="ion-text-center">
-              {{restaurant.restaurantName}}
-            </ion-text>
-            <ion-text class="ion-text-center">
-              {{restaurant.foods[0]}}
-            </ion-text>
-          </ion-card-header>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
-  </ion-list>
-  <ion-list *ngIf="products.length>0">
-    <img src="../../assets/products-banner.jpg" alt="" />
-    <ion-list-header class="ion-text-center">
-      <ion-text>
-        Productos
-      </ion-text>
-    </ion-list-header>
-    <ion-slides pager="true" [options]="sliderConfig">
-      <ion-slide *ngFor="let product of products">
-        <ion-card button (click)="openProductDetail(product)">
-          <ion-card-header>
-            <ion-text class="ion-text-center">
-              {{product.productName}}
-            </ion-text>
-            <ion-text class="ion-text-center">
-              {{product.price}} Bs.
-            </ion-text>
-          </ion-card-header>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
-  </ion-list>
+  <div class=web>
+    <ion-list *ngIf="movies.length>0">
+      <ion-item class=border color=primary>
+        <div class=center>
+          <img class=center src="../../assets/cinema.png" />Peliculas
+        </div>
+      </ion-item>
+      <ion-slides pager="true" [options]="sliderConfig">
+        <ion-slide *ngFor="let movie of movies">
+          <ion-card button (click)="openMovieDetail(movie)">
+            <ion-card-header>
+              <img src="{{ 'https://image.tmdb.org/t/p/original/' + movie.backdrop_path }}" alt="" />
+            </ion-card-header>
+            <ion-card-content>
+              <ion-text class="ion-text-center">
+                {{movie.title}}
+              </ion-text>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </ion-list>
+    <ion-list *ngIf="series.length>0">
+      <ion-item class="ion-text-center border" color=primary>
+        <div class=center>
+          <img class=center src="../../assets/series.png" />Series
+        </div>
+      </ion-item>
+      <ion-slides pager="true" [options]="sliderConfig">
+        <ion-slide *ngFor="let serie of series">
+          <ion-card button (click)="openSerieDetail(serie)">
+            <ion-card-header>
+              <img src="{{ 'https://image.tmdb.org/t/p/original/' +
+            serie.backdrop_path }}" alt="" />
+              <ion-text class="ion-text-center">
+                {{serie.name}}
+              </ion-text>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </ion-list>
+    <ion-list *ngIf="restaurants.length>0">
+      <ion-item class="ion-text-center border" color=primary>
+        <div class=center>
+          <img class=center src="../../assets/restaurant.png" />Restaurantes
+        </div>
+      </ion-item>
+      <ion-slides pager="true" [options]="sliderConfig">
+        <ion-slide *ngFor="let restaurant of restaurants">
+          <ion-card button (click)="openRestaurantDetail(restaurant)">
+            <ion-card-header>
+              <ion-text class="ion-text-center">
+                {{restaurant.restaurantName}}
+              </ion-text>
+              <ion-text class="ion-text-center">
+                {{restaurant.foods[0]}}
+              </ion-text>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </ion-list>
+    <ion-list *ngIf="products.length>0">
+      <ion-item class="ion-text-center border" color=primary>
+        <div class=center>
+          <img class=center src="../../assets/products.png" />Productos
+        </div>
+      </ion-item>
+      <ion-slides pager="true" [options]="sliderConfig">
+        <ion-slide *ngFor="let product of products">
+          <ion-card button (click)="openProductDetail(product)">
+            <ion-card-header>
+              <ion-text class="ion-text-center">
+                {{product.productName}}
+              </ion-text>
+              <ion-text class="ion-text-center">
+                {{product.price}} Bs.
+              </ion-text>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </ion-list>
+  </div>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="goToCategories()">
+    <ion-fab-button color=success (click)="goToCategories()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

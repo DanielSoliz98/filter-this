@@ -33,7 +33,7 @@
 </ion-header>
 <ion-content fullscreen>
   <ion-list lines="none">
-    <ng-container *ngFor="let music of musics">
+    <ion-card *ngFor="let music of musics" color=light>
       <ion-item
         button
         detail
@@ -57,6 +57,6 @@
           </ion-row>
         </ion-grid>
       </ion-item>
-    </ng-container>
+    </ion-card>
   </ion-list>
 </ion-content>
