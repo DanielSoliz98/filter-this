@@ -3,29 +3,40 @@
     <ion-title>Mi Perfil</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="showOptions($event)">
-        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+        <ion-icon
+          slot="icon-only"
+          ios="ellipsis-horizontal"
+          md="ellipsis-vertical"
+        ></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class=web>
+  <div class="web">
     <ion-card color="secondary">
       <ion-card-content *ngIf="authService.userData" color="secondary">
         <ion-list color="secondary">
           <ion-item>
             <ion-avatar slot="start">
-              <img *ngIf="authService.userData.photoURL" [src]="authService.userData.photoURL" alt="" />
-              <img *ngIf="!authService.userData.photoURL" src="../../assets/user.png" />
+              <img
+                *ngIf="authService.userData.photoURL"
+                [src]="authService.userData.photoURL"
+                alt=""
+              />
+              <img
+                *ngIf="!authService.userData.photoURL"
+                src="../../assets/user.png"
+              />
             </ion-avatar>
             <ion-label>
               <h2>{{ authService.userData.displayName}}</h2>
               <h3>{{ authService.userData.email}}</h3>
             </ion-label>
-            <ion-label *ngIf="!authService.userData.emailVerified">
-              <h4>Verifica tu cuenta, te enviamos un correo.</h4>
-            </ion-label>
+          </ion-item>
+          <ion-item *ngIf="!authService.userData.emailVerified">
+            <p>Verifica tu cuenta, te enviamos un correo.</p>
           </ion-item>
         </ion-list>
       </ion-card-content>

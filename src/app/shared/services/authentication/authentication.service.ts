@@ -11,6 +11,7 @@ import { User } from "../../models/user";
 import { MyRecommendations } from "../../models/my-recommendations";
 import { take, map } from "rxjs/operators";
 import { UserService } from "../user/user.service";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -27,10 +28,16 @@ export class AuthenticationService {
   ) {
     this.angularAuth.authState.subscribe((user) => {
       if (user) {
-        this.userData = user;
-        this.getUser(user.uid);
-        this.nativeStorage.setItem("user", this.userData);
-        this.router.navigateByUrl("/app/tabs/recommendations");
+        this.getUser(user.uid).subscribe((data) => {
+          data.emailVerified = user.emailVerified;
+          this.updateUser(data).then(() => {
+            this.userData = data;
+            this.nativeStorage.setItem("user", this.userData);
+            if(data.emailVerified){
+              this.router.navigateByUrl("/app/tabs/recommendations");
+            }
+          });
+        });
       } else {
         this.nativeStorage.setItem("user", null);
       }
@@ -69,14 +76,6 @@ export class AuthenticationService {
 
   forgotPassword(passwordResetEmail: string) {
     return this.angularAuth.sendPasswordResetEmail(passwordResetEmail);
-  }
-
-  get isLoggedIn(): boolean {
-    let user: any;
-    this.nativeStorage.getItem("user").then((userStored) => {
-      user = JSON.parse(userStored);
-    });
-    return user !== null && user.emailVerified !== false ? true : false;
   }
 
   googleAuth() {
@@ -154,20 +153,33 @@ export class AuthenticationService {
     });
   }
 
-  getUser(id: string) {
-    let userRef: AngularFirestoreDocument<any> = this.angularFirestore.doc(
-      `users/${id}`
+  getUser(uid: string): Observable<User> {
+    let restaurantDoc = this.angularFirestore.doc<User>(`users/${uid}`);
+    return restaurantDoc.valueChanges().pipe(
+      take(1),
+      map((user) => {
+        user.uid = uid;
+        return user;
+      })
     );
-    userRef.get().subscribe((user) => {
-      this.userData = user.data() as User;
+  }
+
+  updateUser(data: User): Promise<void> {
+    const userRef: AngularFirestoreDocument<User> = this.angularFirestore.doc(
+      `users/${data.uid}`
+    );
+    return userRef.set(data, {
+      merge: true,
     });
   }
 
-  signOut() {
+  signOut(redirect: boolean) {
     return this.angularAuth.signOut().then(() => {
       this.userData = undefined;
       this.nativeStorage.remove("user");
-      this.router.navigate(["slides"]);
+      if (redirect) {
+        this.router.navigate(["slides"]);
+      }
     });
   }
 }

@@ -17,7 +17,7 @@ export class OptionsComponent implements OnInit {
 
   signOut() {
     this.closePopover();
-    this.authService.signOut();
+    this.authService.signOut(true);
   }
   closePopover() {
     this.popover.dismiss();
